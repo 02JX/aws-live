@@ -77,7 +77,7 @@ output = {}
 
 
 
-table = 'assignment'
+
 
 # Home page
 @app.route("/", methods=['GET', 'POST'])
