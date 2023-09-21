@@ -138,6 +138,7 @@ def signin_page():
     password = request.form.get('std_lg_pass')
 
     select_stmt = "SELECT std_password FROM studentInformation WHERE std_id = %(student_id)s"
+    cursor = db_conn.cursor()
     dbPassword = cursor.execute(select_stmt, { (student_id)})
 
 
@@ -147,7 +148,7 @@ def signin_page():
     else:
         return "Invalid student ID or password."
 
-    return render_template('StudentHomePage.html')
+    # return render_template('StudentHomePage.html')
 
     #     # Check if the student exists in the dictionary (for demonstration purposes)
     #     if student_id in students and students[student_id]['password'] == password:
