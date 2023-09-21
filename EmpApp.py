@@ -112,15 +112,17 @@ def signup():
         'password': password
     }
 
-
     
-    insert_sql = "INSERT INTO student VALUES (%s, %s, %s, %s, %s)"
+    
+    insert_sql = "INSERT INTO studentInformation VALUES (%s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
+    if emp_image_file.filename == "":
+        return "Please select a file"
 
     try:
 
-        cursor.execute(insert_sql, (student_id, first_name, last_name, password, confirm_password))
+        cursor.execute(insert_sql, (student_id, first_name, last_name, password))
         db_conn.commit()
         std_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
@@ -142,8 +144,8 @@ def signup():
         #         custombucket,
         #         emp_image_file_name_in_s3)
 
-    except Exception as e:
-        return str(e)
+        except Exception as e:
+            return str(e)
 
     finally:
         cursor.close()
@@ -153,19 +155,25 @@ def signup():
 
 
 #------------------------------------------------------------signin
-    # @app.route('/studlogin', methods=['POST', 'GET'])
-    # def signin():
-    # if request.method == 'POST':
-    #     student_id = request.form.get('std_lg_id')
-    #     password = request.form.get('std_lg_pass')
+    @app.route('/')
+    def index1():
+    return render_template('StudLogin.html')
 
-    #     # Check if the student exists in the dictionary (for demonstration purposes)
-    #     if student_id in students and students[student_id]['password'] == password:
-    #         return f"Welcome, Student with ID {student_id}!"
-    #     else:
-    #         return "Invalid student ID or password."
+    @app.route('/studlogin', methods=['POST', 'GET'])
+    def signin():
+    if request.method == 'POST':
+        student_id = request.form.get('std_lg_id')
+        password = request.form.get('std_lg_pass')
 
-    # return render_template('StudLogin.html')
+        # Check if the student exists in the dictionary (for demonstration purposes)
+        if student_id in students and students[student_id]['password'] == password:
+            return f"Welcome, Student with ID {student_id}!"
+        else:
+            return "Invalid student ID or password."
+
+    return render_template('StudLogin.html')
+
+#-------------------------------------------------------------------------------------------------------
 
 
 
