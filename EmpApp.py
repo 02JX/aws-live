@@ -154,19 +154,19 @@ def signup():
     return render_template('StudLogin.html')
 
 #------------------------------------------------------------signin
-    @app.route('/studlogin', methods=['POST', 'GET'])
-    def signin():
-    if request.method == 'POST':
-        student_id = request.form.get('std_lg_id')
-        password = request.form.get('std_lg_pass')
+    # @app.route('/studlogin', methods=['POST', 'GET'])
+    # def signin():
+    # if request.method == 'POST':
+    #     student_id = request.form.get('std_lg_id')
+    #     password = request.form.get('std_lg_pass')
 
-        # Check if the student exists in the dictionary (for demonstration purposes)
-        if student_id in students and students[student_id]['password'] == password:
-            return f"Welcome, Student with ID {student_id}!"
-        else:
-            return "Invalid student ID or password."
+    #     # Check if the student exists in the dictionary (for demonstration purposes)
+    #     if student_id in students and students[student_id]['password'] == password:
+    #         return f"Welcome, Student with ID {student_id}!"
+    #     else:
+    #         return "Invalid student ID or password."
 
-    return render_template('StudLogin.html')
+    # return render_template('StudLogin.html')
 
 #-------------------------------------------------------------------------------------------------------
 
