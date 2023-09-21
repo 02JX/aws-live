@@ -174,6 +174,35 @@ def signup():
 
 
 
+# Company sign up
+company = {}
+
+@app.route('/')
+def index():
+    return render_template('CompanyRegister.html')
+
+@app.route("/companyregister", methods=['POST'])
+def signup():
+    company_id = request.form.get('comp_id')
+    company_name = request.form.get('comp_name')
+    company_industry = request.form.get('comp_industry')
+    company_password = request.form.get('comp_password')
+    company_confirm_password = request.form.get('comp_confirm_password')
+    company_address = request.form.get('comp_address')
+
+    # Check if password matches
+    if company_password !=company_confirm_password:
+        return "Password does not match"
+    
+    # Store company data
+    company[company_id] {
+        'company_name' : company_name,
+        'company_industry' : company_industry,
+        'company_password' : company_password,
+        'company_address' : company_address
+    }
+
+    return f"Company {company_name} have signed up successfully!"
 
 
 
