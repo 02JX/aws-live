@@ -133,7 +133,7 @@ def signup():
 
 @app.route('/studloginpage')
 def signin_page():
-    return render_template('StudLogin.html')
+    # return render_template('StudLogin.html')
 
     # @app.route('/')
     # def index1():
