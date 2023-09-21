@@ -132,7 +132,7 @@ def signup():
 #------------------------------------------------------------signin
 
 # Redirect from signup to login
-@app.route('/StudLoginPage', methods=['POST'])
+@app.route('/StudLoginPage')
 def toLogin():
     return render_template('StudLogin.html')
 
