@@ -116,11 +116,11 @@ def signup():
     insert_sql = "INSERT INTO studentInformation VALUES (%s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
-<<<<<<< HEAD
-=======
+
+
     
 
->>>>>>> b8c61618c692d8d9fa9110f60cb10cb284da86f0
+
     try:
 
         cursor.execute(insert_sql, (student_id, first_name, last_name, password))
@@ -139,15 +139,15 @@ def signup():
 
 
 #------------------------------------------------------------signin
-<<<<<<< HEAD
+
     @app.route('/studloginpage')
     def signin_page():  
     return render_template('StudLogin.html')
-=======
+
     # @app.route('/')
     # def index1():
     # return render_template('StudLogin.html')
->>>>>>> b8c61618c692d8d9fa9110f60cb10cb284da86f0
+
 
     # @app.route('/studlogin', methods=['POST', 'GET'])
     # def signin():
@@ -155,7 +155,7 @@ def signup():
     #     student_id = request.form.get('std_lg_id')
     #     password = request.form.get('std_lg_pass')
 
-<<<<<<< HEAD
+
         
         select_stmt = "SELECT std_password FROM studentInformation WHERE std_id = %(student_id)s"
         dbPassword = cursor.execute(select_stmt, { (student_id)})
@@ -168,7 +168,7 @@ def signup():
             return "Invalid student ID or password."
 
     return render_template('StudentHomePage.html')
-=======
+
     #     # Check if the student exists in the dictionary (for demonstration purposes)
     #     if student_id in students and students[student_id]['password'] == password:
     #         return f"Welcome, Student with ID {student_id}!"
@@ -176,7 +176,6 @@ def signup():
     #         return "Invalid student ID or password."
 
     # return render_template('StudLogin.html')
->>>>>>> b8c61618c692d8d9fa9110f60cb10cb284da86f0
 
 #-------------------------------------------------------------------------------------------------------
 
