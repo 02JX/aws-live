@@ -82,10 +82,6 @@ output = {}
 #     return render_template('AddEmpOutput.html', name=emp_name)
 
 
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=80, debug=True)
-
-
 
 # Start coding here
 table = 'assignment'
@@ -94,3 +90,6 @@ table = 'assignment'
 @app.route("/", methods=['GET', 'POST'])
 def home():
     return render_template('index2.html')
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=80, debug=True)
