@@ -86,9 +86,50 @@ def home():
 
 # START CODING HERE
 
+#------------------------------------------------------------------------------Student Sign Up
+students = {}
 
+@app.route('/')
+def index():
+    return render_template('StudentSignUp.html')
 
+@app.route('/studentsignup', methods=['POST'])
+def signup():
+    student_id = request.form.get('std_id')
+    first_name = request.form.get('std_first_name')
+    last_name = request.form.get('std_last_name')
+    password = request.form.get('std_pass')
+    confirm_password = request.form.get('confirm_std_pass')
 
+    # Check if passwords match
+    if password != confirm_password:
+        return "Password confirmation does not match."
+
+    # Store student data in the dictionary
+    students[student_id] = {
+        'first_name': first_name,
+        'last_name': last_name,
+        'password': password
+    }
+
+    return f"Student with ID {student_id} signed up successfully."
+
+#------------------------------------------------------------signin
+    @app.route('/studlogin', methods=['POST', 'GET'])
+    def signin():
+    if request.method == 'POST':
+        student_id = request.form.get('std_lg_id')
+        password = request.form.get('std_lg_pass')
+
+        # Check if the student exists in the dictionary (for demonstration purposes)
+        if student_id in students and students[student_id]['password'] == password:
+            return f"Welcome, Student with ID {student_id}!"
+        else:
+            return "Invalid student ID or password."
+
+    return render_template('StudLogin.html')
+
+#-------------------------------------------------------------------------------------------------------
 
 
 

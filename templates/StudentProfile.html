@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Student Profile</title>
+</head>
+<center>
+	<font color="black" size="5" style="font-family: avenir">
+
+		<h1 style="color: DodgerBlue">Student Information</h1>
+
+		<body bgcolor="lightgrey">
+
+			<form action="StudLogin.html" autocomplete="on" method = "POST" enctype="multipart/form-data">  
+				<div>
+
+			  		Student ID:<br> {{ stdId }} <br><br>
+
+			  		First Name:<br> {{ stdFname }} <br><br>
+
+			  		Last Name:<br> {{ stdLname }} <br><br>
+
+                    Internship Status:<br> {{ internStatus }} <br><br>
+
+                    Please name your upload file with this format"yourname_CompanyAcceptanceLetter"<br><br>
+
+                    Upload your Company Acceptance Letter and Parent Acknowledgement form here:<br> <input type=file name="std_letter_A" style="height:25px;font-size:14pt;color:grey;"> <br><br>
+                    Upload your Internship Progress Report and Supervisor evaluation form here:<br> <input type=file name="std_letter_B" style="height:25px;font-size:14pt;color:grey;"> <br><br>
+
+
+			  		
+
+			  	</div>
+
+			</form>
+
+		</body>
+
+	</font>
+</center>
+</html>
+
