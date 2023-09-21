@@ -20,12 +20,6 @@ db_conn = connections.Connection(
 output = {}
 
 #Example code from template
-# table = 'employee'
-
-# @app.route("/", methods=['GET', 'POST'])
-# def home():
-#     return render_template('AddEmp.html')
-
 
 # @app.route("/about", methods=['POST'])
 # def about():
@@ -83,7 +77,6 @@ output = {}
 
 
 
-# Start coding here
 table = 'assignment'
 
 # Home page
@@ -91,5 +84,22 @@ table = 'assignment'
 def home():
     return render_template('index-2.html')
 
+# START CODING HERE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# END OF CODING
+# Establish connection
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
