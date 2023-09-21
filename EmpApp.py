@@ -131,21 +131,11 @@ def signup():
 
 #------------------------------------------------------------signin
 
-@app.route('/studloginpage')
+@app.route('/studlogin', methods=['POST'])
 def signin_page():
     # return render_template('StudLogin.html')
-
-    # @app.route('/')
-    # def index1():
-    # return render_template('StudLogin.html')
-
-
-    # @app.route('/studlogin', methods=['POST', 'GET'])
-    # def signin():
-    # if request.method == 'POST':
-    #     student_id = request.form.get('std_lg_id')
-    #     password = request.form.get('std_lg_pass')
-
+    student_id = request.form.get('std_lg_id')
+    password = request.form.get('std_lg_pass')
 
     select_stmt = "SELECT std_password FROM studentInformation WHERE std_id = %(student_id)s"
     dbPassword = cursor.execute(select_stmt, { (student_id)})
@@ -168,6 +158,8 @@ def signin_page():
     # return render_template('StudLogin.html')
 
 #-------------------------------------------------------------------------------------------------------
+
+
 
 
 
