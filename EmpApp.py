@@ -113,36 +113,15 @@ def signup():
     }
 
     
-    
     insert_sql = "INSERT INTO studentInformation VALUES (%s, %s, %s, %s)"
     cursor = db_conn.cursor()
-
-    if emp_image_file.filename == "":
-        return "Please select a file"
 
     try:
 
         cursor.execute(insert_sql, (student_id, first_name, last_name, password))
         db_conn.commit()
         std_name = "" + first_name + " " + last_name
-        # Uplaod image file in S3 #
-        
-
-        # try:
-        #     print("Data inserted in MySQL RDS... uploading image to S3...")
-        #     s3.Bucket(custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image_file)
-        #     bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
-        #     s3_location = (bucket_location['LocationConstraint'])
-
-        #     if s3_location is None:
-        #         s3_location = ''
-        #     else:
-        #         s3_location = '-' + s3_location
-
-        #     object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
-        #         s3_location,
-        #         custombucket,
-        #         emp_image_file_name_in_s3)
+    
 
     except Exception as e:
         return str(e)
@@ -155,8 +134,8 @@ def signup():
 
 
 #------------------------------------------------------------signin
-    @app.route('/')
-    def index1():
+    @app.route('/studloginpage')
+    def signin_page():  
     return render_template('StudLogin.html')
 
     @app.route('/studlogin', methods=['POST', 'GET'])
@@ -165,13 +144,18 @@ def signup():
         student_id = request.form.get('std_lg_id')
         password = request.form.get('std_lg_pass')
 
+        
+        select_stmt = "SELECT std_password FROM studentInformation WHERE std_id = %(student_id)s"
+        dbPassword = cursor.execute(select_stmt, { (student_id)})
+
+
         # Check if the student exists in the dictionary (for demonstration purposes)
-        if student_id in students and students[student_id]['password'] == password:
+        if dbPassword == password:
             return f"Welcome, Student with ID {student_id}!"
         else:
             return "Invalid student ID or password."
 
-    return render_template('StudLogin.html')
+    return render_template('StudentHomePage.html')
 
 #-------------------------------------------------------------------------------------------------------
 
