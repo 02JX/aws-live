@@ -173,9 +173,9 @@ def signup():
 # Company sign up
 company = {}
 
-@app.route('/')
-def index():
-    return render_template('CompanyRegister.html')
+# @app.route('/')
+# def index():
+#     return render_template('CompanyRegister.html')
 
 # @app.route("/companyregister", methods=['POST'])
 # def signup():
