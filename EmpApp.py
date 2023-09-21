@@ -82,7 +82,7 @@ table = 'assignment'
 # Home page
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('index-2.html')
+    return render_template('StudentSignUp.html')
 
 # START CODING HERE
 
