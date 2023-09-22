@@ -178,6 +178,11 @@ company = {}
 def toComLogin():
     return render_template('CompanyLogin.html')
 
+# Redirect to company register page
+@app.route('/toCompanyRegister')
+def toComRegister():
+    return render_template('CompanyRegister.html')
+
 @app.route("/companyRegis", methods=['POST'])
 def comp_signup():
     company_id = request.form.get('comp_id')
