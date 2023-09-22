@@ -231,16 +231,6 @@ def comp_signin_page():
     cursor.execute("SELECT company_id, company_name, company_industry, company_address, company_password, company_status FROM company")
     company = cursor.fetchall()
     cursor.close()
-    # Testing
-    company_info = f"Company ID: {company['company_id']}<br>" \
-                       f"Company Name: {company['company_name']}<br>" \
-                       f"Company Industry: {company['company_industry']}<br>" \
-                       f"Company Address: {company['company_address']}<br>" \
-                       f"Company Password: {company['company_password']}<br>" \
-                       f"Company Status: {company['company_status']}"
-
-    print(company_info)  # Print the company information to the console
-
 
     company_log_id = request.args.get('company_log_id')
     company_log_password = request.args.get('company_log_password')
