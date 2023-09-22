@@ -198,7 +198,7 @@ def comp_signup():
     #     return "Password does not match"
     
     # Store company data
-    company[company_id] = {
+    company[company_id] = { #rember to put = { }
         'company_name' : company_name,
         'company_industry' : company_industry,
         'company_address' : company_address,
@@ -224,15 +224,19 @@ def comp_signup():
     return render_template('CompanyLogin.html')
 
 # Company login function
-@app.route('/companyLogin', methods=['POST'])
+@app.route('/companyLogin', methods=['GET'])
 def comp_signin_page():
-    company_id = request.form.get('company_log_id')
-    company_password = request.form.get('company_log_password')
 
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT company_id, company_name, company_industry, company_address, company_password, company_status FROM company")
+    company = cursor.fetchall()
+    cursor.close()
 
-
-    if company_id in company and company_password == company[company_id]['company_password']:
-        if company[company_id]['company_status'] == 1:
+    company_log_id = request.form.get('company_log_id')
+    company_log_password = request.form.get('company_log_password')
+        
+    if company_log_id in company and company_log_password == company[company_log_id]['company_password']:
+        if company[company_log_id]['company_status'] == 1:
             return "Login successful"
         else:
             return "Account is not active"
