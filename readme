@@ -3,6 +3,9 @@
 # Amazon Linux 2023
 
 #!/bin/bash
+
+# RUN THOSE COMMAND TO DEPLOY THE WEB
+sudo su
 yum update -y
 yum install git -y
 git clone https://github.com/02JX/aws-live.git
