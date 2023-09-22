@@ -11,9 +11,13 @@
 		<body bgcolor="lightgrey">
 
 			<form action="/jobPosting" autocomplete="on" method = "POST" enctype="multipart/form-data">
+				
+				Company ID:<br>
+				{% if show_company_id %}
+				<input id="comp_id" style="height:25px; font-size: 14pt; color: grey;" type="text" name="comp_id" value="{{ company_log_id }}" readonly>
+				{% endif %}
+				<button type="button" style="background: grey; margin-top: 5px; height: 30px; width: 100px; color: white; size: 5; font:oblique;"">Reveal ID</button><br><br>
 
-				Company ID:<br><input id="comp_id" style="height:25px;font-size:14pt; color:grey;" type="text" name="comp_id" value="{{ company_log_id }}" readonly><br><br>
-			
                 Job Name:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="job_id"><br><br>
 
 		  		Job Name:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="job_name"><br><br>
@@ -27,12 +31,5 @@
 
 	</font>
 </center>
-<script>
-    // Retrieve the company_log_id from wherever it's available
-    var company_log_id = "{{ company_log_id }}";  // Replace with the actual source of company_log_id
-
-    // Set the value of the comp_id input field
-    document.getElementById("comp_id").value = company_log_id;
-</script>
 </html>
 
