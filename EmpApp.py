@@ -19,7 +19,7 @@ db_conn = connections.Connection(
 )
 output = {}
 
-#Example code from template
+# EXAMPLE CODE FROM TEMPLATE
 
 # @app.route("/about", methods=['POST'])
 # def about():
@@ -89,9 +89,9 @@ def home():
 #------------------------------------------------------------------------------Student Sign Up
 students = {}
 
-@app.route('/')
-def index():
-    return render_template('StudentSignUp.html')
+# @app.route('/')
+# def index():
+#     return render_template('StudentSignUp.html')
 
 @app.route('/studentsignup', methods=['POST'])
 def student_signup():
@@ -169,13 +169,13 @@ def student_signin():
 
     # return render_template('StudLogin.html')
 
-#-------------------------------------------------------------------------------------------------------
+#-----------------------------------------END OF STUDENT PAGE--------------------------------------------------------------
 
 
 
 
 
-# COMPANY PAGE
+#-----------------------------------------COMPANY PAGE---------------------------------------------
 # Company sign up
 company = {}
 
@@ -221,6 +221,7 @@ def toComLogin():
 
     #return
 
+#--------------------------------------------END OF COMPANY PAGE-----------------------------------
 
 
 
