@@ -235,6 +235,10 @@ def student_signin():
 def toStaffLogin():
     return render_template('StaffLogin.html')
 
+# Redirect to Staff register page
+@app.route("/toStaffRegister")
+def toStaffRegister():
+    return render_template('StaffRegister.html')
 
 
 
@@ -242,10 +246,58 @@ def toStaffLogin():
 
 #--------------------------------------------SUPERVISOR--------------------------------------------
 
+supervisorInfo = {}
+
 # Redirect to Supervisor login page
 @app.route("/toSupervisorLogin")
 def toSupervisorLogin():
     return render_template('SupervisorLogin.html')
+
+# Redirect to Supervisor register page
+@app.route("/toSupervisorRegister")
+def toSupervisorRegister():
+    return render_template('SupervisorRegister.html')
+
+# to register supervisor as staff
+@app.route('/supervisorregister', methods=['POST'])
+def student_signup():
+    supervisor_id = request.form.get('spv_id')
+    supervisor_name = request.form.get('spv_name')
+    supervisor_register_pass = request.form.get('spv_pass')
+    supervisor_register_confirm_pass = request.form.get('confirm_spv_pass')
+    supervisor_contact = request.form.get('spv_contact')
+    supervisor_email = request.form.get('spv_email')
+    supervisor_subject = request.form.get('spv_subject')    
+
+    # Check if passwords match
+    if supervisor_register_pass != supervisor_register_confirm_pass:
+        return "Password does not match."
+
+    # Store student data in the dictionary
+    supervisorInfo[supervisor_id] 
+    {
+        'spv_name': supervisor_name,
+        'spv_pass': supervisor_register_pass,
+        'spv_contact': supervisor_contact,
+        'spv_email': supervisor_email,
+        'spv_subject': supervisor_subject
+    }
+    insert_sql = "INSERT INTO supervisorInformation VALUES (%s, %s, %s, %s, %s, %s, %s)"
+    cursor = db_conn.cursor()
+
+    try:
+        cursor.execute(insert_sql, (supervisor_id, supervisor_name, supervisor_register_pass, supervisor_contact, supervisor_email, supervisor_subject))
+        db_conn.commit()
+    
+    except Exception as e:
+        return str(e)
+
+    finally:
+        cursor.close()
+
+    print("Register successfully!")
+    return render_template('StaffHomePage.html')
+
 
 #--------------------------------------------END OF SUPERVISOR-------------------------------------
 
