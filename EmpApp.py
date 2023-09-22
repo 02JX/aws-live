@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 from pymysql import connections
 import os
 import boto3
@@ -240,10 +240,26 @@ def comp_signin_page():
             if row[0] == company_log_id and row[4] == company_log_password: #If row starts at 1, it's actually 0 because Python :) 
                 if row[5] == "Approved":
                     print ("Login successful")
+                    session['company_id'] = company_log_id  # Store company_log_id in the session
                     return render_template('CompanyHome.html')
                 else:
                     return "Account is not active"
     return "Your login details are not correct lol"
+
+# Company post internship
+@app.route('/jobPosting', methods=['GET','POST'])
+def comp_add_job():
+    cursor = db_conn.cursor()
+    
+    cursor.execute("SELECT comp_id, comp_name, comp_industry, comp_address, comp_password, comp_status FROM company")
+    company_details = cursor.fetchall()
+
+    cursor.execute("SELECT comp_id, job_id, job_name, job_description FROM internship")
+    company_jobs = cursor.fetchall()
+
+    cursor.close()
+
+    company_log_id = session.get('company_id')
 
 #--------------------------------------------END OF COMPANY PAGE-----------------------------------
 
