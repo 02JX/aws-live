@@ -243,7 +243,7 @@ def comp_signin_page():
                     return render_template('HomePage.html') #Testing
                 else:
                     return "Account is not active"
-    return "Invalid credentials or missing data"
+    return company_log_id
 
 #--------------------------------------------END OF COMPANY PAGE-----------------------------------
 
