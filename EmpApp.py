@@ -200,7 +200,6 @@ def comp_signup():
     # Store company data
     company[company_id] 
     {
-
         'company_name' : company_name,
         'company_industry' : company_industry,
         'company_address' : company_address,
@@ -208,11 +207,11 @@ def comp_signup():
         'company_status' : company_status
     }
 
-    insert_sql_comp = "INSERT INTO company VALUES (%s, %s, %s, %s, %s)"
+    insert_sql_comp = "INSERT INTO company VALUES (%s, %s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
     try:
-        cursor.execute(insert_sql_comp, (company_name, company_industry, company_address, company_password, company_status))
+        cursor.execute(insert_sql_comp, (company_id, company_name, company_industry, company_address, company_password, company_status))
         db_conn.commit()
 
     except Exception as e:
