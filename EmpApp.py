@@ -238,7 +238,7 @@ def comp_signin_page():
     if company_log_id and company_log_password:
         for row in company:
             if row['comp_id'] == company_log_id and row['comp_password'] == company_log_password:
-                if row['compa_status'] == 1:
+                if row['compa_status'] == "1":
                     print ("Login successful")
                     return render_template('HomePage.html') #Testing
                 else:
