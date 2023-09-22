@@ -232,8 +232,8 @@ def comp_signin_page():
     company = cursor.fetchall()
     cursor.close()
 
-    company_log_id = request.args.get('company_log_id')
-    company_log_password = request.args.get('company_log_password')
+    company_log_id = request.form.get('company_log_id')
+    company_log_password = request.form.get('company_log_password')
         
     if company_log_id and company_log_password:
         for row in company:
@@ -243,7 +243,7 @@ def comp_signin_page():
                     return render_template('HomePage.html') #Testing
                 else:
                     return "Account is not active"
-    return company_log_id
+    return (company_log_id)
 
 #--------------------------------------------END OF COMPANY PAGE-----------------------------------
 
