@@ -82,16 +82,22 @@ output = {}
 # Home page
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('StudentSignUp.html')
+    return render_template('HomePage.html')
 
 # START CODING HERE
 
 #------------------------------------------------------------------------------Student Sign Up
 students = {}
 
-# @app.route('/')
-# def index():
-#     return render_template('StudentSignUp.html')
+# Redirect to student login page
+@app.route('/toStudLogin')
+def toLogin():
+    return render_template('StudLogin.html')
+
+# Redirect to student signup page
+@app.route('/toStudSignUp')
+def toSignup():
+    return render_template('StudentSignUp.html')
 
 @app.route('/studentsignup', methods=['POST'])
 def student_signup():
@@ -131,16 +137,6 @@ def student_signup():
 
 #------------------------------------------------------------signin
 
-# Redirect from signup to login
-@app.route('/StudLoginPage')
-def toLogin():
-    return render_template('StudLogin.html')
-
-# Redirect from login to signup
-@app.route('/toStudentSignUp')
-def toSignup():
-    return render_template('StudentSignUp.html')
-
 # Student login function
 @app.route('/studlogin', methods=['POST'])
 def student_signin():
@@ -179,15 +175,15 @@ def student_signin():
 # Company sign up
 company = {}
 
-# Redirect to company register page
-@app.route('/toCompanyRegister')
-def toComRegister():
-    return render_template('CompanyRegister.html')
-
 # Redirect to company login page
 @app.route('/toCompanyLogin')
 def toComLogin():
     return render_template('CompanyLogin.html')
+
+# Redirect to company register page
+@app.route('/toCompanyRegister')
+def toComRegister():
+    return render_template('CompanyRegister.html')
 
 # Run company register function
 # @app.route("/CompanyRegister", methods=['POST'])
