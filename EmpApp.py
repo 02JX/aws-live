@@ -255,7 +255,6 @@ def toStaffRegister():
     return render_template('StaffRegister.html')
 
 
-
 #--------------------------------------------END OF STAFF PAGE-------------------------------------
 
 #--------------------------------------------SUPERVISOR--------------------------------------------
@@ -274,7 +273,7 @@ def toSupervisorRegister():
 
 # to register supervisor as staff
 @app.route('/supervisorregister', methods=['POST'])
-def student_signup():
+def supervisorregister():
     supervisor_id = request.form.get('spv_id')
     supervisor_name = request.form.get('spv_name')
     supervisor_register_pass = request.form.get('spv_pass')
