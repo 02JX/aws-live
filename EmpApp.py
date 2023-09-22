@@ -190,16 +190,15 @@ def comp_signup():
     company_industry = request.form.get('comp_industry')
     company_address = request.form.get('comp_address')
     company_password = request.form.get('comp_password')
-    company_confirm_password = request.form.get('comp_confirm_password')
-    company_status = 0
+    # company_confirm_password = request.form.get('comp_confirm_password')
+    company_status = "Pending"
 
     # Check if password matches
-    if company_password !=company_confirm_password:
-        return "Password does not match"
+    # if company_password !=company_confirm_password:
+    #     return "Password does not match"
     
     # Store company data
-    company[company_id] 
-    {
+    company[company_id] = { #rember to put = { }
         'company_name' : company_name,
         'company_industry' : company_industry,
         'company_address' : company_address,
@@ -225,20 +224,26 @@ def comp_signup():
     return render_template('CompanyLogin.html')
 
 # Company login function
-@app.route('/companyLogin', methods=['POST'])
+@app.route('/companyLogin', methods=['GET'])
 def comp_signin_page():
-    company_id = request.form.get('company_log_id')
-    company_password = request.form.get('company_log_password')
 
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT comp_id, comp_name, comp_industry, comp_address, comp_password, comp_status FROM company")
+    company = cursor.fetchall()
+    cursor.close()
 
-
-    if company_id in company and company_password == company[company_id]['company_password']:
-        if company[company_id]['company_status'] == 1:
-            return "Login successful"
-        else:
-            return "Account is not active"
-    else:
-        return "Invalid login credentials"
+    company_log_id = request.args.get('company_id')
+    company_log_password = request.args.get('company_password')
+        
+    if company_log_id and company_log_password:
+        for row in company:
+            if row['comp_id'] == company_log_id and row['comp_password'] == company_log_password:
+                if row['comp_status'] == "Approved":
+                    print ("Login successful")
+                    return render_template('HomePage.html') #Testing
+                else:
+                    return "Account is not active"
+    return (company_log_id)
 
 #--------------------------------------------END OF COMPANY PAGE-----------------------------------
 
@@ -436,8 +441,7 @@ def supervisorregister():
         return "Password does not match."
 
     # Store student data in the dictionary
-    supervisorInfo[supervisor_id] 
-    {
+    supervisorInfo[supervisor_id] = {
         'spv_name': supervisor_name,
         'spv_pass': supervisor_register_pass,
         'spv_contact': supervisor_contact,
