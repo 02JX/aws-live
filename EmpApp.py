@@ -220,10 +220,6 @@ def comp_signup():
     print("Company {company_name} have signed up successfully!")
     return render_template('CompanyLogin.html')
 
-@app.route('/companyLogin')
-def toCompLogin():
-    return render_template('CompanyLogin.html')
-
 # Company login function
 @app.route('/companyLogin', methods=['POST'])
 def comp_signin_page():
