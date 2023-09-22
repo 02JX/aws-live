@@ -232,8 +232,8 @@ def comp_signin_page():
     company = cursor.fetchall()
     cursor.close()
 
-    company_log_id = request.form.get('company_id')
-    company_log_password = request.form.get('company_password')
+    company_log_id = request.args.get('company_id')
+    company_log_password = request.args.get('company_password')
         
     if company_log_id and company_log_password:
         for row in company:
