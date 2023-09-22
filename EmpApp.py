@@ -193,7 +193,8 @@ def comp_signup():
         return "Password does not match"
     
     # Store company data
-    company[company_id] {
+    company[company_id] 
+    {
 
         'company_name' : company_name,
         'company_industry' : company_industry,
