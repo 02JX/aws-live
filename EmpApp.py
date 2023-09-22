@@ -228,7 +228,7 @@ def comp_signup():
 def comp_signin_page():
 
     cursor = db_conn.cursor()
-    cursor.execute("SELECT company_id, company_name, company_industry, company_address, company_password, company_status FROM company")
+    cursor.execute("SELECT comp_id, comp_name, comp_industry, comp_address, comp_password, comp_status FROM company")
     company = cursor.fetchall()
     cursor.close()
 
@@ -237,8 +237,8 @@ def comp_signin_page():
         
     if company_log_id and company_log_password:
         for row in company:
-            if row['company_id'] == company_log_id and row['company_password'] == company_log_password:
-                if row['company_status'] == 1:
+            if row['comp_id'] == company_log_id and row['comp_password'] == company_log_password:
+                if row['compa_status'] == 1:
                     print ("Login successful")
                     return render_template('HomePage.html') #Testing
                 else:
