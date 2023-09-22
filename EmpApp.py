@@ -230,6 +230,16 @@ def comp_signin_page():
     company_id = request.form.get('company_log_id')
     company_password = request.form.get('company_log_password')
 
+
+
+    if company_id in company and company_password == company[company_id]['company_password']:
+        if company[company_id]['company_status'] == 1:
+            return "Login successful"
+        else:
+            return "Account is not active"
+    else:
+        return "Invalid login credentials"
+
 #--------------------------------------------END OF COMPANY PAGE-----------------------------------
 
 #--------------------------------------------STAFF-------------------------------------------------
