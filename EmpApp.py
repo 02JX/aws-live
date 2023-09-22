@@ -94,7 +94,7 @@ def index():
     return render_template('StudentSignUp.html')
 
 @app.route('/studentsignup', methods=['POST'])
-def signup():
+def student_signup():
     student_id = request.form.get('std_id')
     first_name = request.form.get('std_first_name')
     last_name = request.form.get('std_last_name')
@@ -136,9 +136,14 @@ def signup():
 def toLogin():
     return render_template('StudLogin.html')
 
+# Redirect from login to signup
+@app.route('/toStudentSignUp')
+def toSignup():
+    return render_template('StudentSignUp.html')
+
 # Student login function
 @app.route('/studlogin', methods=['POST'])
-def signin_page():
+def student_signin():
     # return render_template('StudLogin.html')
     student_id = request.form.get('std_lg_id')
     password = request.form.get('std_lg_pass')
@@ -170,16 +175,23 @@ def signin_page():
 
 
 
-
+# COMPANY PAGE
 # Company sign up
 company = {}
 
-# @app.route('/')
-# def index():
-#     return render_template('CompanyRegister.html')
+# Redirect to company register page
+@app.route('/toCompanyRegister')
+def toComRegister():
+    return render_template('CompanyRegister.html')
 
-# @app.route("/companyregister", methods=['POST'])
-# def signup():
+# Redirect to company login page
+@app.route('/toCompanyLogin')
+def toComLogin():
+    return render_template('CompanyLogin.html')
+
+# Run company register function
+# @app.route("/CompanyRegister", methods=['POST'])
+# def company_signup():
 #     company_id = request.form.get('comp_id')
 #     company_name = request.form.get('comp_name')
 #     company_industry = request.form.get('comp_industry')
@@ -201,6 +213,18 @@ company = {}
 #     }
 
 #     return f"Company {company_name} have signed up successfully!"
+
+# Company login function
+#@app.route("/CompanyLogin", methods=['POST'])
+#def company_login():
+    # Login function inside here
+
+    #return
+
+
+
+
+
 
 
 
