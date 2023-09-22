@@ -244,7 +244,7 @@ def toStaffLogin():
 
 # Redirect to Supervisor login page
 @app.route("/toSupervisorLogin")
-def toStaffLogin():
+def toSupervisorLogin():
     return render_template('SupervisorLogin.html')
 
 #--------------------------------------------END OF SUPERVISOR-------------------------------------
