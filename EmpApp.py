@@ -237,13 +237,13 @@ def comp_signin_page():
         
     if company_log_id and company_log_password:
         for row in company:
-            if row[0] == company_log_id and row[4] == company_log_password:
+            if row[0] == company_log_id and row[4] == company_log_password: #If row starts at 1, it's actually 0 because Python :) 
                 if row[5] == "Approved":
                     print ("Login successful")
-                    return render_template('HomePage.html') #Testing
+                    return render_template('CompanyHome.html')
                 else:
                     return "Account is not active"
-    return (company_log_id)
+    return "Your login details are not correct lol"
 
 #--------------------------------------------END OF COMPANY PAGE-----------------------------------
 
