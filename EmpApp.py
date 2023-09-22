@@ -286,8 +286,7 @@ def supervisorregister():
         return "Password does not match."
 
     # Store student data in the dictionary
-    supervisorInfo[supervisor_id] 
-    {
+    supervisorInfo[supervisor_id] = {
         'spv_name': supervisor_name,
         'spv_pass': supervisor_register_pass,
         'spv_contact': supervisor_contact,
