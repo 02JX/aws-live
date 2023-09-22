@@ -35,7 +35,7 @@
 
 		<body bgcolor="lightgrey">
 
-			<form action="StudentViewCompany.html" autocomplete="on" method="POST">
+			<form action="/std_homepage" autocomplete="on" method="POST">
 
 				<h2 style="color: grey">Enter Company ID</h2>
 
@@ -54,11 +54,28 @@
                         <th>Company Position Required</th>
 
                     </tr>
+                    {% for cmpname in std_cmpDetails %}
+                    <tr>
+                        <td>{{cmpname[0]}}</td>
+                        <td>{{cmpname[1]}}</td>
+                        <td>{std_jobDetails}</td>
+
+                    </tr>
                 </thead>
                 <tbody id="showCompanyTable">
                     <!-- Recorded data will be added here -->
                 </tbody>
             </table>
+
+            <form action="/viewProfile" autocomplete="on" method = "POST" enctype="multipart/form-data">  
+				<div>
+
+                    
+					<button type="submit" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">Profile Page</button><br><br>
+
+			  	</div>
+
+			</form>
 
 		</body>
 	</font>
