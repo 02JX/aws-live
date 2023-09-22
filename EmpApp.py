@@ -191,15 +191,14 @@ def comp_signup():
     company_address = request.form.get('comp_address')
     company_password = request.form.get('comp_password')
     # company_confirm_password = request.form.get('comp_confirm_password')
-    company_status = 0
+    company_status = "0"
 
     # Check if password matches
     # if company_password !=company_confirm_password:
     #     return "Password does not match"
     
     # Store company data
-    company[company_id] 
-    {
+    company[company_id] = {
         'company_name' : company_name,
         'company_industry' : company_industry,
         'company_address' : company_address,
