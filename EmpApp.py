@@ -170,61 +170,64 @@ def student_signin():
 
 #-----------------------------------------COMPANY-----------------------------------------------------
 
-# # Company sign up
-# company = {}
+# Company sign up
+company = {}
 
-# # Redirect to company login page
-# @app.route('/companyLogin')
-# def toComLogin():
-#     return render_template('CompanyLogin.html')
+# Redirect to company login page
+@app.route('/companyLogin')
+def toComLogin():
+    return render_template('CompanyLogin.html')
 
-# @app.route("/companyRegis", methods=['POST'])
-# def comp_signup():
-#     company_id = request.form.get('comp_id')
-#     company_name = request.form.get('comp_name')
-#     company_industry = request.form.get('comp_industry')
-#     company_address = request.form.get('comp_address')
-#     company_password = request.form.get('comp_password')
-#     company_confirm_password = request.form.get('comp_confirm_password')
+@app.route("/companyRegis", methods=['POST'])
+def comp_signup():
+    company_id = request.form.get('comp_id')
+    company_name = request.form.get('comp_name')
+    company_industry = request.form.get('comp_industry')
+    company_address = request.form.get('comp_address')
+    company_password = request.form.get('comp_password')
+    company_confirm_password = request.form.get('comp_confirm_password')
+    company_status = 0
 
-#     # Check if password matches
-#     if company_password !=company_confirm_password:
-#         return "Password does not match"
+    # Check if password matches
+    if company_password !=company_confirm_password:
+        return "Password does not match"
     
-#     # Store company data
-#     company[company_id] {
+    # Store company data
+    company[company_id] {
 
-#         'company_name' : company_name,
-#         'company_industry' : company_industry,
-#         'company_address' : company_address,
-#         'company_password' : company_password
-#     }
+        'company_name' : company_name,
+        'company_industry' : company_industry,
+        'company_address' : company_address,
+        'company_password' : company_password, 
+        'company_status' : company_status
+    }
 
-#     return f"Company {company_name} have signed up successfully!"
-#     insert_sql_comp = "INSERT INTO company VALUES (%s, %s, %s, %s)"
+    insert_sql_comp = "INSERT INTO company VALUES (%s, %s, %s, %s, %s)"
+    cursor = db_conn.cursor()
 
-#     try:
-#         cursor.execute(insert_sql_comp, (company_name, company_industry, company_address, company_password))
-#         db_conn.commit()
+    try:
+        cursor.execute(insert_sql_comp, (company_name, company_industry, company_address, company_password, company_status))
+        db_conn.commit()
 
-#     except Exception as e:
-#         return str(e)
+    except Exception as e:
+        return str(e)
 
-#     finally:
-#         cursor.close()
+    finally:
+        cursor.close()
 
-#     print("Information has been uploaded...")
-#     return render_template('CompanyLogin.html')
+    print("Information has been uploaded...")
+    print("Company {company_name} have signed up successfully!")
+    return render_template('CompanyLogin.html')
 
-# @app.route('/companyLogin')
-# def toCompLogin():
-#     return render_template('CompanyLogin.html')
+@app.route('/companyLogin')
+def toCompLogin():
+    return render_template('CompanyLogin.html')
 
-# # Company login function
-# @app.route('/companyLogin', methods=['POST'])
-# def comp_signin_page():
-#     company_id = request.form.get('company_log_id')
-#     company_password = request.form.get('company_log_password')
+# Company login function
+@app.route('/companyLogin', methods=['POST'])
+def comp_signin_page():
+    company_id = request.form.get('company_log_id')
+    company_password = request.form.get('company_log_password')
 
 #--------------------------------------------END OF COMPANY PAGE-----------------------------------
 
