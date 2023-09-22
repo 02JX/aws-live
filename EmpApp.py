@@ -231,17 +231,28 @@ def comp_signin_page():
     cursor.execute("SELECT company_id, company_name, company_industry, company_address, company_password, company_status FROM company")
     company = cursor.fetchall()
     cursor.close()
+    # Testing
+    company_info = f"Company ID: {company['company_id']}<br>" \
+                       f"Company Name: {company['company_name']}<br>" \
+                       f"Company Industry: {company['company_industry']}<br>" \
+                       f"Company Address: {company['company_address']}<br>" \
+                       f"Company Password: {company['company_password']}<br>" \
+                       f"Company Status: {company['company_status']}"
+
+    print(company_info)  # Print the company information to the console
+
 
     company_log_id = request.args.get('company_log_id')
     company_log_password = request.args.get('company_log_password')
         
-    if company_log_id in company and company_log_password == company[company_log_id]['company_password']:
-        if company[company_log_id]['company_status'] == 1:
-            return "Login successful"
-        else:
-            return "Account is not active"
-    else:
-        return "Invalid login credentials"
+    if company_log_id and company_log_password:
+        for row in company:
+            if row['company_id'] == company_log_id and row['company_password'] == company_log_password:
+                if row['company_status'] == 1:
+                    print ("Login successful")
+                    return render_template('HomePage.html') #Testing
+                else:
+                    return "Account is not active"
 
 #--------------------------------------------END OF COMPANY PAGE-----------------------------------
 
