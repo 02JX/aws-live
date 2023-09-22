@@ -19,7 +19,7 @@ db_conn = connections.Connection(
 )
 output = {}
 
-#Example code from template
+# EXAMPLE CODE FROM TEMPLATE
 
 # @app.route("/about", methods=['POST'])
 # def about():
@@ -82,19 +82,25 @@ output = {}
 # Home page
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('StudentSignUp.html')
+    return render_template('HomePage.html')
 
 # START CODING HERE
 
 #------------------------------------------------------------------------------Student Sign Up
 students = {}
 
-@app.route('/')
-def index():
+# Redirect to student login page
+@app.route('/toStudLogin')
+def toLogin():
+    return render_template('StudLogin.html')
+
+# Redirect to student signup page
+@app.route('/toStudSignUp')
+def toSignup():
     return render_template('StudentSignUp.html')
 
 @app.route('/studentsignup', methods=['POST'])
-def signup():
+def student_signup():
     student_id = request.form.get('std_id')
     first_name = request.form.get('std_first_name')
     last_name = request.form.get('std_last_name')
@@ -131,14 +137,9 @@ def signup():
 
 #------------------------------------------------------------signin
 
-# Redirect from signup to login
-@app.route('/StudLoginPage')
-def toLogin():
-    return render_template('StudLogin.html')
-
 # Student login function
 @app.route('/studlogin', methods=['POST'])
-def signin_page():
+def student_signin():
     # return render_template('StudLogin.html')
     student_id = request.form.get('std_lg_id')
     password = request.form.get('std_lg_pass')
@@ -164,28 +165,28 @@ def signin_page():
 
     # return render_template('StudLogin.html')
 
-#-------------------------------------------------------------------------------------------------------
+#-----------------------------------------END OF STUDENT PAGE--------------------------------------------------------------
 
 
 
 
 
+# # Company sign up
+# company = {}
 
-# Company sign up
-company = {}
+# # Redirect to company login page
+# @app.route('/companyLogin')
+# def toComLogin():
+#     return render_template('CompanyLogin.html')
 
-# @app.route('/')
-# def index():
-#     return render_template('CompanyRegister.html')
-
-# @app.route("/companyregister", methods=['POST'])
-# def signup():
+# @app.route("/companyRegis", methods=['POST'])
+# def comp_signup():
 #     company_id = request.form.get('comp_id')
 #     company_name = request.form.get('comp_name')
 #     company_industry = request.form.get('comp_industry')
+#     company_address = request.form.get('comp_address')
 #     company_password = request.form.get('comp_password')
 #     company_confirm_password = request.form.get('comp_confirm_password')
-#     company_address = request.form.get('comp_address')
 
 #     # Check if password matches
 #     if company_password !=company_confirm_password:
@@ -196,14 +197,37 @@ company = {}
 
 #         'company_name' : company_name,
 #         'company_industry' : company_industry,
-#         'company_password' : company_password,
-#         'company_address' : company_address
+#         'company_address' : company_address,
+#         'company_password' : company_password
 #     }
 
 #     return f"Company {company_name} have signed up successfully!"
+#     insert_sql_comp = "INSERT INTO company VALUES (%s, %s, %s, %s)"
 
+#     try:
+#         cursor.execute(insert_sql_comp, (company_name, company_industry, company_address, company_password))
+#         db_conn.commit()
 
+#     except Exception as e:
+#         return str(e)
 
+#     finally:
+#         cursor.close()
+
+#     print("Information has been uploaded...")
+#     return render_template('CompanyLogin.html')
+
+# @app.route('/companyLogin')
+# def toCompLogin():
+#     return render_template('CompanyLogin.html')
+
+# # Company login function
+# @app.route('/companyLogin', methods=['POST'])
+# def comp_signin_page():
+#     company_id = request.form.get('company_log_id')
+#     company_password = request.form.get('company_log_password')
+
+#--------------------------------------------END OF COMPANY PAGE-----------------------------------
 
 
 # END OF CODING
