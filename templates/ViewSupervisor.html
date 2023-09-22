@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Supervisor</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Click the button to View all Supervisor</h1>
+    
+    <button id="fetchStaffButton">Fetch Supervisor Data</button>
+    
+    <table class="table table-striped" id="supervisorTable">
+        <thead>
+            <tr>
+                <th>Supervisor ID</th>
+                <th>Supervisor Name</th>
+                <th>Supervisor Contact</th>
+                <th>Supervisor Email</th>
+                <th>Supervisor Subject</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be added here using JavaScript -->
+        </tbody>
+    </table>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#fetchSupervisorButton").click(function () {
+                $.ajax({
+                    url: '/get_supervisor',
+                    type: 'GET',
+                    success: function (data) {
+                        var tableBody = $('#supervisorTable tbody');
+                        
+                        data.forEach(function (staff) {
+                            var row = $('<tr>');
+                            row.append('<td>' + staff.staff_id + '</td>');
+                            row.append('<td>' + staff.staff_name + '</td>');
+                            tableBody.append(row);
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

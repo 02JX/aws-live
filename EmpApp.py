@@ -243,6 +243,17 @@ def comp_signin_page():
 #--------------------------------------------END OF COMPANY PAGE-----------------------------------
 
 #--------------------------------------------STAFF-------------------------------------------------
+staffInfo = {}
+
+# Redirect to Staff HomePage
+@app.route("/toStaffHomePage")
+def toStaffHomePage():
+    return render_template('StaffHomePage.html')
+
+# Redirect to View Staff page
+@app.route("/toViewStaff")
+def toViewStaff():
+    return render_template('ViewStaff.html')
 
 # Redirect to Staff login page
 @app.route("/toStaffLogin")
@@ -254,12 +265,150 @@ def toStaffLogin():
 def toStaffRegister():
     return render_template('StaffRegister.html')
 
+# Redirect to Validate Company page
+@app.route("/toValidateCompany")
+def toValidateCompany():
+    return render_template('ValidateCompany.html')
+
+# Redirect to Assign Student to Supervisors page
+@app.route("/toAssignStudents")
+def toAssignStudents():
+    return render_template('AssignStudents.html')
+
+# to retrieve all staff data to view
+@app.route('/get_staff', methods=['GET'])
+def get_staff():
+    try:
+        # Execute the SQL query to retrieve stf_id and stf_name
+        cursor = db_conn.cursor()        
+        cursor.execute("SELECT stf_id, stf_name FROM staffInformation")
+        staff_data = cursor.fetchall()
+
+        # Define the list to hold the results
+        staff_list = []
+
+        # Iterate through the results and create a list of dictionaries
+        for staff in staff_data:
+            stf_id, stf_name = staff
+            staff_list.append({
+                'stf_id': stf_id,
+                'stf_name': stf_name
+            })
+
+        # Serialize the data to JSON
+        response_data = json.dumps(staff_list)
+
+        # Create a JSON response
+        response = Response(response=response_data, status=200, content_type='application/json')
+
+        return response
+
+    except Exception as e:
+        error_message = {'error': str(e)}
+        response_data = json.dumps(error_message)
+        response = Response(response=response_data, status=500, content_type='application/json')
+        return response
+    
+# to retrieve all supervisor data to view
+@app.route('/get_supervisor', methods=['GET'])
+def get_supervisor():
+    try:
+        # Execute the SQL query to retrieve supervisor data
+        cursor = db_conn.cursor()        
+        cursor.execute("SELECT spv_id, spv_name, spv_contact, spv_email, spv_subject FROM supervisorInformation")
+        supervisor_data = cursor.fetchall()
+
+        # Define the list to hold the results
+        supervisor_list = []
+
+        # Iterate through the results and create a list of dictionaries
+        for supervisor in supervisor_data:
+            spv_id, spv_name, spv_contact, spv_email, spv_subject = supervisor
+            supervisor_list.append({
+                'spv_id': spv_id,
+                'spv_name': spv_name,
+                'spv_contact': spv_contact,
+                'spv_email': spv_email,
+                'spv_subject': spv_subject                            
+            })
+
+        # Serialize the data to JSON
+        response_data = json.dumps(supervisor_list)
+
+        # Create a JSON response
+        response = Response(response=response_data, status=200, content_type='application/json')
+
+        return response
+
+    except Exception as e:
+        error_message = {'error': str(e)}
+        response_data = json.dumps(error_message)
+        response = Response(response=response_data, status=500, content_type='application/json')
+        return response    
+
+# to login as staff
+@app.route('/stafflogin', methods=['GET'])
+def staffLogin():
+    # return render_template('StaffLogin.html')
+    staff_id = request.form.get('stf_lg_id')
+    staff_login_password = request.form.get('stf_lg_pass')
+
+    select_stmt = "SELECT stf_pass FROM staffInformation WHERE stf_id = %(staff_id)s"
+    cursor = db_conn.cursor()
+    staff_db_Password = cursor.execute(select_stmt, { (staff_id)})
+
+
+    # Check if the student exists in the dictionary (for demonstration purposes)
+    if staff_db_Password == staff_login_password:
+        return f"Welcome, Staff {staff_id}!"
+    else:
+        return "Invalid Staff ID or password."
+    
+
+# to register staff as staff
+@app.route('/staffregister', methods=['POST'])
+def staffregister():
+    staff_reg_id = request.form.get('stf_register_id')
+    staff_reg_name = request.form.get('stf_register_name')
+    staff_reg_pass = request.form.get('stf_register_pass')
+    staff_reg_confirm_pass = request.form.get('stf_register_confirm_pass')
+
+    # Check if passwords match
+    if staff_reg_pass != staff_reg_confirm_pass:
+        return "Password does not match."
+
+    # Store student data in the dictionary
+    staffInfo[staff_reg_id] = {
+        'stf_register_id': staff_reg_name,
+        'stf_register_name': staff_reg_pass,
+
+    }
+    insert_sql = "INSERT INTO staffInformation VALUES (%s, %s, %s)"
+    cursor = db_conn.cursor()
+
+    try:
+        cursor.execute(insert_sql, (staff_reg_id, staff_reg_name, staff_reg_pass))
+        db_conn.commit()
+    
+    except Exception as e:
+        return str(e)
+
+    finally:
+        cursor.close()
+
+    print("Register successfully!")
+    return render_template('StaffHomePage.html')
 
 #--------------------------------------------END OF STAFF PAGE-------------------------------------
 
 #--------------------------------------------SUPERVISOR--------------------------------------------
 
 supervisorInfo = {}
+
+# Redirect to View Supervisor page
+@app.route("/toViewSupervisor")
+def toViewSupervisor():
+    return render_template('ViewSupervisor.html')
 
 # Redirect to Supervisor login page
 @app.route("/toSupervisorLogin")
