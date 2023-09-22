@@ -14,7 +14,8 @@ yum install python-pip -y
 pip3 install flask pymysql boto3
 python3 EmpApp.py
 
-# After make changes, if you want to deploy again run these commands
+# AFTER MAKE CHANGES IN GITHUB
+# If you want to deploy with new changes, run these commands
 cd --
 rm -fr aws-live
 git clone https://github.com/02JX/aws-live.git
