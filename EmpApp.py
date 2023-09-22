@@ -191,7 +191,7 @@ def comp_signup():
     company_address = request.form.get('comp_address')
     company_password = request.form.get('comp_password')
     # company_confirm_password = request.form.get('comp_confirm_password')
-    company_status = "0"
+    company_status = "Pending"
 
     # Check if password matches
     # if company_password !=company_confirm_password:
@@ -238,7 +238,7 @@ def comp_signin_page():
     if company_log_id and company_log_password:
         for row in company:
             if row['comp_id'] == company_log_id and row['comp_password'] == company_log_password:
-                if row['compa_status'] == "1":
+                if row['comp_status'] == "Approved":
                     print ("Login successful")
                     return render_template('HomePage.html') #Testing
                 else:
