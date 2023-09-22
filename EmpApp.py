@@ -228,6 +228,26 @@ def student_signin():
 
 #--------------------------------------------END OF COMPANY PAGE-----------------------------------
 
+#--------------------------------------------STAFF-------------------------------------------------
+
+# Redirect to Staff login page
+@app.route("/toStaffLogin")
+def toStaffLogin():
+    return render_template('StaffLogin.html')
+
+
+
+
+#--------------------------------------------END OF STAFF PAGE-------------------------------------
+
+#--------------------------------------------SUPERVISOR--------------------------------------------
+
+# Redirect to Supervisor login page
+@app.route("/toSupervisorLogin")
+def toStaffLogin():
+    return render_template('SupervisorLogin.html')
+
+#--------------------------------------------END OF SUPERVISOR-------------------------------------
 
 # END OF CODING
 # Establish connection
