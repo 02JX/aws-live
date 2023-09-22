@@ -174,7 +174,7 @@ def student_signin():
 company = {}
 
 # Redirect to company login page
-@app.route('/companyLogin')
+@app.route('/toCompanyLogin')
 def toComLogin():
     return render_template('CompanyLogin.html')
 
