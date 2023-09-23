@@ -191,15 +191,6 @@ def toComLogin():
 def toComRegister():
     return render_template('CompanyRegister.html')
 
-# Redirect to company job posting page
-@app.route('/toJobPosting')
-def toJobPosting():
-    return render_template('CompanyJobPosts.html')
-
-# Redirect to company view job post page
-@app.route('/toViewJobs')
-def toViewJobs():
-    return render_template('CompanyViewJobs.html')
 
 @app.route("/companyRegis", methods=['POST'])
 def comp_signup():
@@ -265,6 +256,35 @@ def comp_signin_page():
     return "Your login details are not correct lol"
 
 job = {}
+
+# Redirect to company job posting page
+@app.route('/toJobPosting')
+def toJobPosting():
+    company_log_id = session.get('company_id')
+    return render_template('CompanyJobPosts.html', company_log_id=company_log_id)
+
+# # Redirect to company view job post page
+# @app.route('/toViewJobs')
+# def toViewJobs():
+#     company_log_id = session.get('company_id')
+#     return render_template('CompanyViewJobs.html', company_log_id=company_log_id)
+
+
+@app.route('/toViewJobs', methods=['GET'])
+def comp_view_job_page():
+    company_log_id = session.get('company_id')
+
+    cursor = db_conn.cursor()
+
+    # Modify the SQL query to filter by comp_id
+    sql_query = "SELECT comp_id, job_id, job_name, job_description FROM internship"
+    cursor.execute(sql_query)
+
+    company_job_data = cursor.fetchall()
+    cursor.close()
+
+    return render_template('CompanyViewJobs.html', company_log_id=company_log_id, company_job_data=company_job_data)
+
 
 @app.route('/jobPosting', methods=['GET', 'POST'])
 def job_posting():
@@ -567,7 +587,10 @@ def toSupervisorLogin():
 def toSupervisorRegister():
     return render_template('SupervisorRegister.html')
 
-
+# Redirect to SupervisorHomePage
+@app.route("/toSupervisorHomePage")
+def toSupervisorHomePage():
+    return render_template('SupervisorHomePage.html')
 
 # Redirect to Intern Application
 @app.route("/toInternApplication")
@@ -641,6 +664,18 @@ def supervisorregister():
 
     print("Register successfully!")
     return render_template('StaffHomePage.html')
+
+# Accept intern application
+@app.route('/acceptIntern', methods=['POST'])
+def accept_intern():
+    student_id = request.form.get('std_id')
+    accept_id = request.form.get('acceptID')
+
+# Reject intern application
+@app.route('/rejectIntern', methods=['POST'])
+def reject_intern():
+    student_id = request.form.get('std_id')
+    reject_id = request.form.get('acceptID')
 
 
 
