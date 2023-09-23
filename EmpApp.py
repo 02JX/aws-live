@@ -677,17 +677,7 @@ def supervisorregister():
     print("Register successfully!")
     return render_template('StaffHomePage.html')
 
-# Accept intern application
-@app.route('/acceptIntern', methods=['POST'])
-def accept_intern():
-    student_id = request.form.get('std_id')
-    accept_id = request.form.get('acceptID')
 
-# Reject intern application
-@app.route('/rejectIntern', methods=['POST'])
-def reject_intern():
-    student_id = request.form.get('std_id')
-    reject_id = request.form.get('acceptID')
 
 
 
