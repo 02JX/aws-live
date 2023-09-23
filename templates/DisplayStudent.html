@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Supervisor Home Page</title>
+    <title>View Students</title>
     <link rel="icon" type="image/x-icon" href="static/images/logo4.png">
     <!-- Bootstrap -->
 	<link href="static/css/bootstrap.css" rel="stylesheet">
@@ -31,21 +31,34 @@
 	<!-- Responsive CSS -->
 	<link href="static/css/responsive.css" rel="stylesheet">
 </head>
-<body>
-    <div class="iq_wrapper">
-		<div class="container">
-            <h2 style="padding-top: 20px; margin: 10px;">Welcome to the Supervisor Home Page</h2>
+<center>
+    <font color="black" size="4" style="font-family: avenir">
+        <h1 style="color: DodgerBlue">Students Information</h1>
+        <body bgcolor="lightgrey">
 
-            <h5 style="margin: 10px;">Please choose an action:</h5>
+            <table class="table table-bordered" autocomplete="on" method = "POST" enctype="multipart/form-data">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Name</th>
+                        <th>Password</th>
+                        <th>Supervisor Assignment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in students %}
+                        <tr>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] row[2] }}</td>
+                            <td>{{ row[3] }}</td>
+                            <td>{{ row[4] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
-    <!-- Buttons for different portals -->
-    <button class="iq_link_1"><a href="/toInternApplication"style="color: white;">Intern Application</a></button><br/><br/>
-    
-    
-
-    <a href="/toHomePage">Go Back to Login Portal</a>
-</div>
-</div>
-    
-</body>
+            <a href="toStaffHomePage">Go Back to Menu</a>
+        </body>
+    </font>
+</center>
 </html>
