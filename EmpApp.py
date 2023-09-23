@@ -162,6 +162,7 @@ def student_signin():
     if student_id and password:
         for row in dbPassword:
             if row[0] == student_id and row[1] == password:
+                session['std_id'] = student_id  # Store student_id in the session for future uses
                 return("Login Success!")
             else:
                 return("Wrong details 1")
