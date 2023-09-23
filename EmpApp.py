@@ -422,9 +422,9 @@ def staffregister():
 
 # Display Supervisors
 @app.route("/supervisorData", methods=['GET'])
-def supervisor_data(supervisors):
+def supervisor_data():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT * FROM supervisorInformation")
+    cursor.execute("SELECT spv_id, spv_name, spv_pass, spv_contact, spv_email, spv_subject FROM supervisorInformation")
     supervisors = cursor.fetchall()
 
     cursor.close()
