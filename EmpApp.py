@@ -299,6 +299,25 @@ def comp_view_job_page():
     return render_template('CompanyViewJobs.html', company_log_id=company_log_id, company_job_data=company_job_data)
 
 
+@app.route('/updateJobStatus', methods=['POST'])
+def update_job_status():
+    company_log_id = session.get('company_id')
+    job_id = request.form.get('job_id')
+    current_status = request.form.get('current_status')
+
+    cursor = db_conn.cursor()
+
+    # Determine the new status
+    new_status = 'INACTIVE' if current_status == 'HIRING' else 'HIRING'
+
+    # Update the job status in the database
+    sql_query = "UPDATE internship SET job_status = %s WHERE comp_id = %s AND job_id = %s"
+    cursor.execute(sql_query, (new_status, company_log_id, job_id))
+    db_conn.commit()
+
+    cursor.close()
+
+    return render_template('CompanyViewJobs.html', company_log_id=company_log_id)
 
 @app.route('/jobPosting', methods=['GET', 'POST'])
 def job_posting():
