@@ -405,21 +405,46 @@ def validate_comp_page():
 def viewAssignedStudents():
 
     cursor = db_conn.cursor()
-    cursor.execute("SELECT stf_id FROM staffInformation")
-    staff = cursor.fetchall()
+    cursor.execute("SELECT spv_id FROM supervisorInformation")
+    supervisor = cursor.fetchall()
     cursor.close()
 
-    staff_id = request.args.get('stf_id')
+    spv_id = request.args.get('spv_id')
         
-    if staff_id:
-        for row in staff:
-            if row[0] == staff_id :
-                    session['staff_id'] = staff_id  # Store staff_log_id in the session
-                    return render_template('DisplayAssignedStudent.html', staff_id=staff_id)
+    if spv_id:
+        for row in supervisor:
+            if row[0] == spv_id :
+                    session['spv_id'] = spv_id  # Store staff_log_id in the session
+                    return render_template('DisplayAssignedStudent.html', spv_id=spv_id)
             else:
                 return "Account is not active"
     return "No related staff found"
 
+
+supervisor = {}
+
+@app.route('/displayAssignedStudent/<string:supervisor_name_display>', methods=['GET', 'POST'])
+def displayAssignedStudent(supervisor_name_display):
+    # Retrieve spv_id from the session
+    supervisor_id = session.get('spv_id')
+
+    cursor = db_conn.cursor()
+    print(supervisor_id )
+    cursor.execute("SELECT spv_id, spv_name FROM supervisorInformation")
+    supervisor = cursor.fetchall()
+    cursor.close()
+
+    # cursor = db_conn.cursor()
+    # cursor.execute("SELECT comp_id, comp_name, comp_industry, comp_address, comp_password, comp_status FROM company")
+    # company = cursor.fetchall()
+    # cursor.close()
+
+    for row in supervisor:
+        if row[0] == supervisor_id:
+            return render_template(spv_name=supervisor_name_display)
+        else:
+            return "Incorrect login details"
+    return (supervisor_id)   
 
 #--------------------------------------------END OF STAFF PAGE-------------------------------------
 

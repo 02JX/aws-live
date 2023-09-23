@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Assigned Students</title>
+</head>
+<center>
+    <font color="black" size="4" style="font-family: avenir">
+        <h1 style="color: DodgerBlue">Students Assigned</h1>
+        <body bgcolor="lightgrey">
+            <form action="/displayAssignedStudent" autocomplete="on" method="POST" enctype="multipart/form-data">
+                <!-- Display the Supervisor ID immediately -->
+                Supervisor ID: 
+                <strong id="supervisor_id_display">{{ supervisor_id_display }}</strong><br><br>
+                Supervisor: 
+                <input type="hidden" name="supervisor_name_display" value="{{ supervisor_name_display }}"><br><br>
+                <!-- Job posting form fields -->
+                Student Name:<br>
+                <input style="height: 25px; font-size: 14pt; color: grey;" type="text" name="student_display_name" required readonly><br><br>
+
+            </form>
+
+            <a href="toStaffHomePage">Go Back to Menu</a>
+        </body>
+    </font>
+</center>
+</html>
