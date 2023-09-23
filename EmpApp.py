@@ -87,6 +87,11 @@ output = {}
 def home():
     return render_template('HomePage.html')
 
+# Home page
+@app.route("/toHomePage")
+def toHome():
+    return render_template('HomePage.html')
+
 # START CODING HERE
 
 #------------------------------------------------------------------------------Student Sign Up
@@ -366,6 +371,19 @@ def staffregister():
     print("Register successfully!")
     return render_template('StaffHomePage.html')
 
+# Validate Company function
+@app.route('/validateCompany', methods=['GET','POST'])
+def validate_comp_page():
+
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT comp_id, comp_name, comp_industry, comp_address, comp_password, comp_status FROM company WHERE comp_status = 'Pending'")
+    companyDetails = cursor.fetchall()
+    cursor.close()
+
+        # Render the HTML template with the fetched data
+    return render_template('ValidateCompany.html', pending_companies=companyDetails)
+
+
 #--------------------------------------------END OF STAFF PAGE-------------------------------------
 
 #--------------------------------------------SUPERVISOR--------------------------------------------
@@ -437,22 +455,22 @@ def toLJX():
 
 # Redirect to portfolio tanjunchuan
 @app.route("/toPFTanJunChuan")
-def toLJX():
+def toTJC():
     return render_template('PortfolioTanJunChuan.html')
 
 # Redirect to portfolio tamjiashun
 @app.route("/toPFTamJiaShun")
-def toLJX():
+def toTJS():
     return render_template('PortfolioTamJiaShun.html')
 
 # Redirect to portfolio nguyenquanghien
 @app.route("/toPFNguyenQuangHien")
-def toLJX():
+def toNQH():
     return render_template('PortfolioNguyenQuangHien.html')
 
 # Redirect to portfolio eric
 @app.route("/toPFEricTan")
-def toLJX():
+def toET():
     return render_template('PortfolioEricTan.html')
 
 # END OF CODING
