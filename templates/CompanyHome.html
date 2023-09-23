@@ -4,8 +4,8 @@
     <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Company Home Page</title>
-    <link rel="icon" type="image/x-icon" href="static/images/logo4.png">
+    <title>Staff Home Page</title>
+	<link rel="icon" type="image/x-icon" href="static/images/logo4.png">
     <!-- Bootstrap -->
 	<link href="static/css/bootstrap.css" rel="stylesheet">
 	<!-- DL Menu CSS -->
@@ -31,28 +31,22 @@
 	<!-- Responsive CSS -->
 	<link href="static/css/responsive.css" rel="stylesheet">
 </head>
-<center>
-    <font color="black" size="4" style="font-family: avenir">
-        <h1 style="color: DodgerBlue">Internship Job Post</h1>
-        <body bgcolor="lightgrey">
-            <form action="/jobPosting" autocomplete="on" method="POST" enctype="multipart/form-data">
-                <!-- Display the Company ID immediately -->
-                Company ID: 
-                <strong id="company_id_display">{{ company_log_id }}</strong><br><br>
+<body>
+    <div class="iq_wrapper">
+		<div class="container">
+            <h2 style="padding-top: 20px; margin: 10px;">Welcome to your Company Home Page</h2>
 
-                <!-- Job posting form fields -->
-                Job Name:<br>
-                <input style="height: 25px; font-size: 14pt; color: grey;" type="text" name="job_id"><br><br>
-                Job Name:<br>
-                <input style="height: 25px; font-size: 14pt; color: grey;" type="text" name="job_name"><br><br>
-                Job Description:<br>
-                <input style="height: 300px; font-size: 14pt; color: grey;" type="text" name="job_desc"><br><br>
-				Job Img:<br>
-				<input style="position: center; font-size: 10t; color: grey;" type="file" name="job_img"><br><br> <!-- Added name="job_img" -->
-                <!-- Submit button for posting the job -->
-                <button type="submit" name="submit_job" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font: oblique;">Post Job</button>
-            </form>
-        </body>
-    </font>
-</center>
+            <h5 style="margin: 10px;">Please choose an action:</h5>
+
+            <!-- Buttons for different portals -->
+            <button class="iq_link_1"><a href="/companyData" style="color: white;">View Company</a></button><br/><br/>
+            <button class="iq_link_1"><a href="/AssignStudents" style="color: white;">View Job Posts</a></button><br/><br/>
+			<button class="iq_link_1"><a href="/assignmentsDisplay" style="color: white;">Post a Job</a></button><br/><br/>
+
+			<br>
+			<a href="/toHomePage">Go Back to Login Portal</a>
+        </div>
+    </div>
+    
+</body>
 </html>
