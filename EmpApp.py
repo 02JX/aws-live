@@ -199,6 +199,11 @@ def toComLogin():
 def toComRegister():
     return render_template('CompanyRegister.html')
 
+# Redirect to company home page
+@app.route('/toCompanyHomePage')
+def toCompanyHome():
+    return render_template('CompanyHome.html')
+
 
 @app.route("/companyRegis", methods=['POST'])
 def comp_signup():
