@@ -45,16 +45,23 @@
 					<!-- Job ID:<br>
 					<input style="height: 25px; font-size: 14pt; color: grey;" type="text" name="job_id"><br><br> -->
 					Job Name:<br>
-					<input style="height: 25px; font-size: 14pt; color: grey;" type="text" name="job_name"><br><br>
+					<div class="iq-input">
+						<input class="first_input" style="height: 25px; font-size: 14pt; color: grey; text-transform: none;" type="text" name="job_name">
+					</div>
 					Job Description:<br>
-					<input style="height: 300px; font-size: 14pt; color: grey;" type="text" name="job_desc"><br><br>
+					<div class="iq-input">
+						<input class="first_input" style="height: 300px; font-size: 14pt; color: grey; text-transform: none;" type="text" name="job_desc">
+					</div>
+					
 					Accompanying Job Documents (Optional):<br>
-					<input style="position: center; font-size: 10t; color: grey;" type="file" name="job_files"><br><br> <!-- Added name="job_img" -->
+					<div>
+						<input style="position: center; font-size: 10t; color: grey; text-transform: none;" type="file" name="job_files"> <!-- Added name="job_img" -->
+					</div>
 					<!-- Submit button for posting the job -->
-					<button type="submit" name="submit_job" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font: oblique;">Post Job</button>
+					<button type="submit" name="submit_job" style="height: 45px; width: 200px; color: white; size: 5; text-transform: none;" class="iq_link_1">Post Job</button>
 				</div>
             </form>
-			<a href="/toCompanyHomePage">Go Back</a>
+			<a href="/toCompanyHomePage" style="margin-bottom: 20px;">Go Back</a>
         </body>
     </font>
 </center>
