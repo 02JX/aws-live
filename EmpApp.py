@@ -259,18 +259,6 @@ def comp_signin_page():
                     return "Account is not active"
     return "Your login details are not correct lol"
 
-
-# Company Home Page
-@app.route('/companyHome', methods=['GET', 'POST'])
-def comp_home_page():
-    company_log_id = session.get('company_id')
-
-    return render_template('CompanyHome.html', company_log_id=company_log_id)
- 
-
-
-# Company Job Posting
-
 job = {}
 
 @app.route('/jobPosting', methods=['GET', 'POST'])
@@ -343,6 +331,8 @@ def job_posting():
 
     # Render the template and pass the company_log_id and show_company_id to it
     return render_template('CompanyHome.html', company_log_id=company_log_id, show_company_id=show_company_id)
+
+
 
 #--------------------------------------------END OF COMPANY PAGE-----------------------------------
 
