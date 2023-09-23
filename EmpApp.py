@@ -607,8 +607,8 @@ def toPortfolioEricTan():
 def toDisplaySupervisors():
     return render_template('DisplaySupervisors.html')
 # Redirect to viewStudentList
-@app.route("/toDisplayStudent")
-def toDisplayStudent():
+@app.route("/toViewStudent")
+def toViewStudent():
     return render_template('DisplayStudent.html')
 # Redirect to viewStaffList
 @app.route("/toDisplayStaffs")
