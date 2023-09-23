@@ -146,22 +146,24 @@ def student_signup():
 #------------------------------------------------------------signin
 
 # Student login function
-@app.route('/studlogin', methods=['POST'])
+@app.route('/studlogin', methods=['GET'])
 def student_signin():
     # return render_template('StudLogin.html')
-    student_id = request.form.get('std_lg_id')
-    password = request.form.get('std_lg_pass')
 
-    select_stmt = "SELECT std_password FROM studentInformation WHERE std_id = %(student_id)s"
     cursor = db_conn.cursor()
-    dbPassword = cursor.execute(select_stmt, { (student_id)})
+    cursor.execute("SELECT std_id, std_password FROM studentInformation")
+    dbPassword = cursor.fetchall()
+    cursor.close()
+
+    student_id = request.args.get('std_lg_id')
+    password = request.args.get('std_lg_pass')
 
 
-    # Check if the student exists in the dictionary (for demonstration purposes)
-    if dbPassword == password:
-        return f"Welcome, Student with ID {student_id}!"
-    else:
-        return "Invalid student ID or password."
+    if student_id and dbPassword:
+        for row in students:
+            if row[0] == student_id and row[3] == password:
+                return("Login Success!")
+
 
     # return render_template('StudentHomePage.html')
 
@@ -626,13 +628,26 @@ def display_supervisors():
     return render_template('DisplaySupervisors.html', supervisors=supervisors)
 
 # Redirect to viewStudentList
-@app.route("/toViewStudent")
-def toViewStudent():
-    return render_template('DisplayStudent.html')
+@app.route("/toDisplayStudents", methods=['GET'])
+def display_students():
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT std_id, std_first_name, std_last_name, std_pass FROM studentInformation")
+    students = cursor.fetchall()
+
+    cursor.close()
+    print("Students:", students)
+    return render_template('DisplayStudents.html', students=students)
+
 # Redirect to viewStaffList
-@app.route("/toDisplayStaffs")
-def toDisplayStaffs():
-    return render_template('DisplayStaffs.html')
+@app.route("/toDisplayStaff", methods=['GET'])
+def display_staff():
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT stf_id, stf_name, stf_pass FROM staffInformation")
+    staff = cursor.fetchall()
+
+    cursor.close()
+    print("Staff:", staff)
+    return render_template('DisplayStaff.html', staff=staff)
 
 
 
