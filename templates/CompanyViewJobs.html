@@ -55,6 +55,7 @@
                             <!-- <td>{{ row[4] }}</td> -->
                             <td>
                                 <form method="POST" action="/updateJobStatus">
+                                    <input type="hidden" name="job_id" value="{{ row[1] }}">
                                     <input type="hidden" name="job_status" value="{{ row[4] }}">
                                     <button type="submit">
                                         {% if row[4] == 'HIRING' %}
