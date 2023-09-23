@@ -709,7 +709,7 @@ def intern_data():
     interns = cursor.fetchall()
 
     cursor.close()
-
+    print("Interns:", interns)
     return render_template('InternApplication.html', interns=interns)
 
 
