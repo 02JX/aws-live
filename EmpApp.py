@@ -627,13 +627,26 @@ def display_supervisors():
     return render_template('DisplaySupervisors.html', supervisors=supervisors)
 
 # Redirect to viewStudentList
-@app.route("/toViewStudent")
-def toViewStudent():
-    return render_template('DisplayStudent.html')
+@app.route("/toDisplayStudents", methods=['GET'])
+def display_students():
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT std_id, std_first_name, std_last_name, std_pass FROM studentInformation")
+    students = cursor.fetchall()
+
+    cursor.close()
+    print("Students:", students)
+    return render_template('DisplayStudents.html', students=students)
+
 # Redirect to viewStaffList
-@app.route("/toDisplayStaffs")
-def toDisplayStaffs():
-    return render_template('DisplayStaffs.html')
+@app.route("/toDisplayStaff", methods=['GET'])
+def display_staff():
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT stf_id, stf_name, stf_pass FROM staffInformation")
+    staff = cursor.fetchall()
+
+    cursor.close()
+    print("Staff:", staff)
+    return render_template('DisplayStaff.html', staff=staff)
 
 
 
