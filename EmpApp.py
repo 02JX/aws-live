@@ -552,7 +552,6 @@ def display_student_assignment():
 
     return render_template('DisplayStudentAssignment.html', assignments=assignments)
 
-
 @app.route("/assignStudents", methods=['GET', 'POST'])
 def assign_students():
     if request.method == 'POST':
