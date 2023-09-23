@@ -427,6 +427,8 @@ def supervisor_data():
     cursor.execute("SELECT * FROM supervisorInformation")
     supervisors = cursor.fetchall()
 
+    cursor.close()
+
     return render_template('DisplaySupervisors.html', supervisors=supervisors)
 
 
