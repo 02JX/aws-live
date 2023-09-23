@@ -541,7 +541,7 @@ def display_student_assignment():
             supervisorHandle.std_id, 
             studentInformation.std_first_name, 
             studentInformation.std_last_name, 
-            supervisorInformation.spv_name
+            supervisorInformation.spv_id
         FROM supervisorHandle
         LEFT JOIN studentInformation ON supervisorHandle.std_id = studentInformation.std_id
         LEFT JOIN supervisorInformation ON supervisorHandle.spv_id = supervisorInformation.spv_id
@@ -551,8 +551,6 @@ def display_student_assignment():
     cursor.close()
 
     return render_template('DisplayStudentAssignment.html', assignments=assignments)
-
-
 
 @app.route("/assignStudents", methods=['GET', 'POST'])
 def assign_students():
@@ -617,9 +615,16 @@ def toPortfolioEricTan():
     return render_template('PortfolioEricTan.html')
 
 # Redirect to viewSupervisorList
-@app.route("/toDisplaySupervisors")
-def toDisplaySupervisors():
-    return render_template('DisplaySupervisors.html')
+@app.route("/toDisplaySupervisors", methods=['GET'])
+def display_supervisors():
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT spv_id, spv_name, spv_pass, spv_contact, spv_email FROM supervisorInformation")
+    supervisors = cursor.fetchall()
+
+    cursor.close()
+    print("Supervisors:", supervisors)
+    return render_template('DisplaySupervisors.html', supervisors=supervisors)
+
 # Redirect to viewStudentList
 @app.route("/toViewStudent")
 def toViewStudent():
