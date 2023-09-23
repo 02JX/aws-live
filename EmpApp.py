@@ -546,9 +546,8 @@ def display_student_assignment():
         LEFT JOIN studentInformation ON supervisorHandle.std_id = studentInformation.std_id
         LEFT JOIN supervisorInformation ON supervisorHandle.spv_id = supervisorInformation.spv_id
     """)
-
     assignments = cursor.fetchall()
-    print(assignments)
+    print(assignments)  # Add this line for debugging
     cursor.close()
 
     return render_template('DisplayStudentAssignment.html', assignments=assignments)
