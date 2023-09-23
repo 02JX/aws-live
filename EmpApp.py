@@ -274,13 +274,16 @@ def job_posting():
             job_description = request.form.get('job_desc')
             job_img = request.files.get('job_img')
 
+            job_img_file_name = str(company_log_id) + str(job_id) + "_image.jpeg"
+
             job[company_log_id] = { #rember to put = { }
                 'job_id' : job_id,
                 'job_name' : job_name,
                 'job_description' : job_description,
+                'job_file_name' : job_img_file_name
             }
 
-            insert_sql_comp = "INSERT INTO internship VALUES (%s, %s, %s, %s)"
+            insert_sql_comp = "INSERT INTO internship VALUES (%s, %s, %s, %s, %s)"
             cursor = db_conn.cursor()
 
             if job_img.filename == "":
@@ -290,7 +293,7 @@ def job_posting():
                 cursor.execute(insert_sql_comp, (company_log_id, job_id, job_name, job_description))
                 db_conn.commit()
                 # Upload image file in S3 
-                job_img_in_s3 = str(company_log_id) + "_image_file"
+                job_img_in_s3 = job_img_file_name
                 s3 = boto3.resource('s3')
 
                 try:
