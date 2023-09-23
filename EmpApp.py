@@ -249,33 +249,37 @@ def comp_signin_page():
                     return "Account is not active"
     return "Your login details are not correct lol"
 
-# Show company details
-@app.route('/jobPosting', methods=['GET'])
-def company_home_get_id():
+@app.route('/jobPosting', methods=['GET', 'POST'])
+def job_posting():
     # Retrieve company_log_id from the session
     company_log_id = session.get('company_id')
 
-    # Determine whether to show the Company ID input field
-    show_company_id = session.get('show_company_id', False)
+    # Initialize a flag to track whether the Company ID has been revealed
+    show_company_id = False
+
+    if request.method == 'POST':
+        # Check if the "Reveal ID" button was clicked
+        if 'reveal_id' in request.form:
+            show_company_id = True
+
+        elif 'submit_job' in request.form:
+            job_id = request.form.get('job_id')
+            job_name = request.form.get('job_name')
+            job_description = request.form.get('job_desc')
+
+            # Now, you can process and insert this job posting data into your internship table
+            # Use the company_log_id from the session as the Company ID
+            # Insert the data into your database tables, execute SQL queries, etc.
+
+            # After successfully processing the form data, you can redirect to a confirmation page if needed
+            # For example, after successfully posting a job, you can redirect to a confirmation page
+            # return redirect('/jobPostingConfirmation')
+            return "Job posted successfully!"
 
     # Render the template and pass the company_log_id and show_company_id to it
     return render_template('CompanyHome.html', company_log_id=company_log_id, show_company_id=show_company_id)
 
 
-# Company post internship
-@app.route('/jobPosting', methods=['GET','POST'])
-def comp_add_job():
-    cursor = db_conn.cursor()
-
-    cursor.execute("SELECT comp_id, comp_name, comp_industry, comp_address, comp_password, comp_status FROM company")
-    company_details = cursor.fetchall()
-
-    cursor.execute("SELECT comp_id, job_id, job_name, job_description FROM internship")
-    company_jobs = cursor.fetchall()
-
-    cursor.close()
-
-    company_log_id = session.get('company_id')
 
 #--------------------------------------------END OF COMPANY PAGE-----------------------------------
 
