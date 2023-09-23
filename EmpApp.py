@@ -705,7 +705,7 @@ def supervisorregister():
 @app.route("/internData", methods=['GET'])
 def intern_data():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT std_id, std_first_name FROM studentInformation")
+    cursor.execute("SELECT std_id, std_first_name, std_last_name, std_pass, assign_status FROM studentInformation")
     interns = cursor.fetchall()
 
     cursor.close()
