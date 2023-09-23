@@ -367,6 +367,19 @@ def staffregister():
     print("Register successfully!")
     return render_template('StaffHomePage.html')
 
+# Validate Company function
+@app.route('/validateCompany', methods=['GET','POST'])
+def validate_comp_page():
+
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT comp_id, comp_name, comp_industry, comp_address, comp_password, comp_status FROM company WHERE comp_status = 'Pending'")
+    companyDetails = cursor.fetchall()
+    cursor.close()
+
+        # Render the HTML template with the fetched data
+    return render_template('ValidateCompany.html', pending_companies=companyDetails)
+
+
 #--------------------------------------------END OF STAFF PAGE-------------------------------------
 
 #--------------------------------------------SUPERVISOR--------------------------------------------
