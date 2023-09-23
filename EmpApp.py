@@ -473,6 +473,7 @@ def displayAssignedStudent(supervisor_name_display):
             return "Incorrect login details"
     return (supervisor_id)   
 
+
 #--------------------------------------------END OF STAFF PAGE-------------------------------------
 
 #--------------------------------------------SUPERVISOR--------------------------------------------
@@ -493,6 +494,18 @@ def toSupervisorRegister():
 @app.route("/toSupervisorHomePage")
 def toSupervisorHomePage():
     return render_template('SupervisorHomePage.html')
+
+# View InternApplication function
+@app.route('/viewInternApplication', methods=['GET','POST'])
+def view_intern_application():
+
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT spv_id, spv_name, spv_pass, spv_contact, spv_email, spv_subject FROM supervisorInformation")
+    supervisorInformation = cursor.fetchall()
+    cursor.close()
+    # Render the HTML template with the fetched data
+    return render_template('InternApplciation.html')
+
 
 # Supervisor login function
 @app.route('/supervisorLogin', methods=['GET'])
