@@ -48,9 +48,9 @@
                         </tr>
                         {% for job in company_job_data %}
                         <tr>
-                            <td>{{ job.job_id }}</td>
-                            <td>{{ job.job_name }}</td>
-                            <td>{{ job.job_description }}</td>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
                         </tr>
                         {% endfor %}
                     </table>
