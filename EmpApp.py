@@ -402,9 +402,9 @@ def toStaffLogin():
 def toStaffRegister():
     return render_template('StaffRegister.html')
 
-# Redirect to Staff register page
-@app.route("/toDisplayStudent")
-def toDisplayStudent():
+# Redirect to Display Student page
+@app.route("/studentData")
+def studentData():
     return render_template('DisplayStudent.html')
 
 # Redirect to Assign Student to Supervisors page
@@ -473,10 +473,10 @@ def student_data():
     cursor = db_conn.cursor()
     cursor.execute("SELECT std_id, std_first_name, std_last_name, std_pass, assign_status FROM studentInformation")
     students = cursor.fetchall()
-
     cursor.close()
 
     return render_template('DisplayStudent.html', students=students)
+
 
 # Display Supervisors
 @app.route("/supervisorData", methods=['GET'])
@@ -705,7 +705,7 @@ def supervisorregister():
 @app.route("/internData", methods=['GET'])
 def intern_data():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT std_id, std_first_name FROM studentInformation")
+    cursor.execute("SELECT std_id, std_first_name, std_last_name, std_pass, assign_status FROM studentInformation")
     interns = cursor.fetchall()
 
     cursor.close()
