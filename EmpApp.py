@@ -541,14 +541,13 @@ def display_student_assignment():
             supervisorHandle.std_id, 
             studentInformation.std_first_name, 
             studentInformation.std_last_name, 
-            COALESCE(supervisorInformation.spv_name, 'N/A') AS spv_name
+            supervisorInformation.spv_name
         FROM supervisorHandle
         LEFT JOIN studentInformation ON supervisorHandle.std_id = studentInformation.std_id
         LEFT JOIN supervisorInformation ON supervisorHandle.spv_id = supervisorInformation.spv_id
     """)
-
     assignments = cursor.fetchall()
-    print(assignments)
+    print(assignments)  # Add this line for debugging
     cursor.close()
 
     return render_template('DisplayStudentAssignment.html', assignments=assignments)
@@ -697,7 +696,7 @@ def supervisorregister():
 @app.route("/internData", methods=['GET'])
 def intern_data():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT std_id, cmp_id, cmp_name, student_letter_A, student_letter_B FROM student")
+    cursor.execute("SELECT std_id, cmp_id, cmp_name FROM student")
     interns = cursor.fetchall()
 
     cursor.close()
