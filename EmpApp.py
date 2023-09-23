@@ -702,7 +702,7 @@ def supervisorregister():
 
 
 # Display Intern Application
-@app.route("/internData", methods=['GET'])
+@app.route("/toInternApplication", methods=['GET'])
 def intern_data():
     cursor = db_conn.cursor()
     cursor.execute("SELECT std_id, cmp_id, cmp_name, intern_status, student_letter_A, student_letter_B FROM student")
@@ -711,8 +711,6 @@ def intern_data():
     cursor.close()
 
     return render_template('InternApplication.html', interns=interns)
-
-
 
 
 #--------------------------------------------END OF SUPERVISOR-------------------------------------
