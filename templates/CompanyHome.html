@@ -1,35 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Post Internship Jobs</title>
+    <title>Post Internship Jobs</title>
 </head>
 <center>
-	<font color="black" size="4" style="font-family: avenir">
+    <font color="black" size="4" style="font-family: avenir">
+        <h1 style="color: DodgerBlue">Internship Job Post</h1>
+        <body bgcolor="lightgrey">
+            <form action="/jobPosting" autocomplete="on" method="POST" enctype="multipart/form-data">
+                <!-- Display the Company ID immediately -->
+                Company ID: 
+                <strong id="company_id_display">{{ company_log_id }}</strong><br><br>
 
-		<h1 style="color: DodgerBlue">Internship Job Post</h1>
-
-		<body bgcolor="lightgrey">
-
-			<form action="/jobPosting" autocomplete="on" method = "POST" enctype="multipart/form-data">
-				
-				Company ID:<br>
-				{% if show_company_id %}
-				<input id="comp_id" style="height:25px; font-size: 14pt; color: grey;" type="text" name="comp_id" value="{{ company_log_id }}" readonly>
-				{% endif %}
-				<button type="button" style="background: grey; margin-top: 5px; height: 30px; width: 100px; color: white; size: 5; font:oblique;"">Reveal ID</button><br><br>
-
-                Job Name:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="job_id"><br><br>
-
-		  		Job Name:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="job_name"><br><br>
-
-		  		Job Description:<br> <input style="height:300px;font-size:14pt;color:grey;" type="text" name="std_pass"><br><br>
-
-		  		<button type="submit" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">Post Job</button>
-
-			</form>
-		</body>
-
-	</font>
+                <!-- Job posting form fields -->
+                Job Name:<br>
+                <input style="height: 25px; font-size: 14pt; color: grey;" type="text" name="job_id"><br><br>
+                Job Name:<br>
+                <input style="height: 25px; font-size: 14pt; color: grey;" type="text" name="job_name"><br><br>
+                Job Description:<br>
+                <input style="height: 300px; font-size: 14pt; color: grey;" type="text" name="job_desc"><br><br>
+                <!-- Submit button for posting the job -->
+                <button type="submit" name="submit_job" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font: oblique;">Post Job</button>
+            </form>
+        </body>
+    </font>
 </center>
 </html>
-
