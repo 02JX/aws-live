@@ -433,22 +433,22 @@ def toLJX():
 
 # Redirect to portfolio tanjunchuan
 @app.route("/toPFTanJunChuan")
-def toLJX():
+def toTJC():
     return render_template('PortfolioTanJunChuan.html')
 
 # Redirect to portfolio tamjiashun
 @app.route("/toPFTamJiaShun")
-def toLJX():
+def toTJS():
     return render_template('PortfolioTamJiaShun.html')
 
 # Redirect to portfolio nguyenquanghien
 @app.route("/toPFNguyenQuangHien")
-def toLJX():
+def toNQH():
     return render_template('PortfolioNguyenQuangHien.html')
 
 # Redirect to portfolio eric
 @app.route("/toPFEricTan")
-def toLJX():
+def toET():
     return render_template('PortfolioEricTan.html')
 
 # END OF CODING
