@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Company Validation</title>
+</head>
+<center>
+    <font color="black" size="4" style="font-family: avenir">
+
+        <h1 style="color: DodgerBlue">Company Validation</h1>
+
+        <body bgcolor="lightgrey">
+
+            <form action="/validateCompany" method="POST">
+                <label for="companyName">Company Name:</label><br/>
+                <input type="text" id="companyName" name="companyName" required readonly><br/><br/>
+        
+                <label for="industry">Industry:</label><br/>
+                <input type="text" id="industry" name="industry" required readonly><br/><br/>
+        
+                <label for="address">Address:</label><br/>
+                <textarea id="address" name="address" rows="4" required readonly></textarea><br/><br/>
+        
+                <!-- Approve and Reject buttons -->
+                <button type="submit" name="action" value="approve">Approve</button>
+                <button type="submit" name="action" value="reject">Reject</button>
+            </form>
+
+        </body>
+
+    </font>
+</center>
+</html>

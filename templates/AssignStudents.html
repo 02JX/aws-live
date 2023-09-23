@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assign Students</title>
+</head>
+<center>
+    <font color="black" size="4" style="font-family: avenir">
+
+        <h1 style="color: DodgerBlue">Assign Students to Supervisor</h1>
+
+        <body bgcolor="lightgrey">
+
+            <form action="/assignStudents" method="POST">
+                <label for="supervisor">Select Supervisor:</label><br/>
+                <select id="supervisor" name="supervisor" required>
+                    <option value="supervisor1">Supervisor 1</option>
+                    <option value="supervisor2">Supervisor 2</option>
+                    <option value="supervisor3">Supervisor 3</option>
+                    <!-- Add more supervisor options as needed -->
+                </select><br/><br/>
+        
+                <label for="studentList">Select Students:</label><br/>
+                <select id="studentList" name="studentList[]" multiple="multiple" required>
+                    <option value="student1">Student 1</option>
+                    <option value="student2">Student 2</option>
+                    <option value="student3">Student 3</option>
+                    <!-- Add more student options as needed -->
+                </select><br/><br/>
+        
+                <!-- Assign Students button -->
+                <button type="submit">Assign Students</button>
+            </form>
+
+        </body>
+
+    </font>
+</center>
+</html>
