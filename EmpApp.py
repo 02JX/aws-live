@@ -514,6 +514,16 @@ def assign_students():
             return redirect('/assignmentConfirmation')  # You can change this URL
         else:
             return "Student cannot be assigned. Please check the student's status."
+    
+    # Fetch students and supervisors for the dropdown lists
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT std_id, std_first_name, std_last_name FROM studentInformation")
+    students = cursor.fetchall()
+    cursor.execute("SELECT spv_id, spv_name FROM supervisorInformation")
+    supervisors = cursor.fetchall()
+    cursor.close()
+
+    return render_template('AssignStudents.html', students=students, supervisors=supervisors)
 
 #--------------------------------------------END OF STAFF PAGE-------------------------------------
 
