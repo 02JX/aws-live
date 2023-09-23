@@ -342,6 +342,10 @@ def toStaffHomePage():
 def toStaffLogin():
     return render_template('StaffLogin.html')
 
+@app.route("/toViewAssigned")
+def toViewAssigned():
+    return render_template('ViewAssign.html')
+
 # Redirect to Staff register page
 @app.route("/toStaffRegister")
 def toStaffRegister():
@@ -424,17 +428,57 @@ def validate_comp_page():
         # Render the HTML template with the fetched data
     return render_template('ValidateCompany.html', pending_companies=companyDetails)
 
+# View Student Assigned to SuperVisor
+@app.route('/viewAssignedStudents', methods=['GET', 'POST'])
+def viewAssignedStudents():
+
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT spv_id, spv_name, spv_pass, spv_contact, spv_email, spv_subject FROM supervisorInformation")
+    supervisor = cursor.fetchall()
+    cursor.close()
+
+    spv_id = request.args.get('spv_id')
+        
+    if spv_id:
+        for row in supervisor:
+            if row[0] == spv_id :
+                    session['spv_id'] = spv_id  # Store staff_log_id in the session
+                    return render_template('DisplayAssignedStudent.html', spv_id=spv_id)
+            else:
+                return "Account is not active"
+    return "No related staff found"
+
+
+supervisor = {}
+
+@app.route('/displayAssignedStudent/<string:supervisor_name_display>', methods=['GET', 'POST'])
+def displayAssignedStudent(supervisor_name_display):
+    # Retrieve spv_id from the session
+    supervisor_id = session.get('spv_id')
+
+    cursor = db_conn.cursor()
+    print(supervisor_id )
+    cursor.execute("SELECT spv_id, spv_name, spv_pass, spv_contact, spv_email, spv_subject FROM supervisorInformation")
+    supervisor = cursor.fetchall()
+    cursor.close()
+
+    # cursor = db_conn.cursor()
+    # cursor.execute("SELECT comp_id, comp_name, comp_industry, comp_address, comp_password, comp_status FROM company")
+    # company = cursor.fetchall()
+    # cursor.close()
+
+    for row in supervisor:
+        if row[0] == supervisor_id:
+            return render_template(spv_name=supervisor_name_display)
+        else:
+            return "Incorrect login details"
+    return (supervisor_id)   
 
 #--------------------------------------------END OF STAFF PAGE-------------------------------------
 
 #--------------------------------------------SUPERVISOR--------------------------------------------
 
 supervisorInfo = {}
-
-# Redirect to View Supervisor page
-@app.route("/toViewSupervisor")
-def toViewSupervisor():
-    return render_template('ViewSupervisor.html')
 
 # Redirect to Supervisor login page
 @app.route("/toSupervisorLogin")
@@ -446,20 +490,25 @@ def toSupervisorLogin():
 def toSupervisorRegister():
     return render_template('SupervisorRegister.html')
 
+# Redirect to Supervisor home page
+@app.route("/toSupervisorHomePage")
+def toSupervisorHomePage():
+    return render_template('SupervisorHomePage.html')
+
 # Supervisor login function
-@app.route('/supervisorlogin', methods=['GET'])
+@app.route('/supervisorLogin', methods=['GET'])
 def supervisorLogin():
 
     cursor = db_conn.cursor()
     cursor.execute("SELECT spv_id, spv_name, spv_pass, spv_contact, spv_email, spv_subject FROM supervisorInformation")
-    supervisor = cursor.fetchall()
+    supervisorInformation = cursor.fetchall()
     cursor.close()
 
     spv_id = request.args.get('spv_id')
     spv_pass = request.args.get('spv_pass')
         
     if spv_id and spv_pass:
-        for row in supervisor:
+        for row in supervisorInformation:
             if row[0] == spv_id and row[2] == spv_pass:
                 print ("Login successful")
                 return render_template('SupervisorHomePage.html')

@@ -31,7 +31,7 @@
 	<link href="static/css/responsive.css" rel="stylesheet">
 </head>
 <center>
-	<div class="iq_wrapper">
+	<div class="iq_wrapper" style="margin-top: 20px; margin-bottom: 20px;">
 		<div class="container">
 			<font color="black" size="4" style="font-family: avenir">
 
@@ -42,31 +42,31 @@
 						<form action="/companyRegis" autocomplete="on" method = "POST" enctype="multipart/form-data">
 							<div class="container" style="width: 40%; margin-top: 10px;">
 								<h5>Company ID:</h5>
-								<div>
+								<div class="iq-input">
 									<input class="first_input" style="height:20px;font-size:14pt; color:grey;" type="text"name="comp_id">
 								</div>
 								<br><br>
 
 								<h5>Company Name:</h5>
-								<div>
+								<div class="iq-input">
 									<input class="first_input" style="height:20px;font-size:14pt; color:grey;" type="text"name="comp_name">
 								</div>
 								<br><br>
 
 								<h5>Industry:</h5>
-								<div>
+								<div class="iq-input">
 									<input class="first_input" style="height:20px;font-size:14pt; color:grey;" type="text"name="comp_industry">
 								</div>
 								<br><br>
 								
 								<h5>Company Addess:</h5>
-								<div>
+								<div class="iq-input">
 									<input class="first_input" style="height:20px;font-size:14pt; color:grey;" type="text"name="comp_address">
 								</div>
 								<br><br>
 
 								<h5>Password:</h5>
-								<div>
+								<div class="iq-input">
 									<input class="first_input" style="height:20px;font-size:14pt; color:grey;" type="text"name="comp_password">
 								</div>
 								<br><br>
@@ -78,7 +78,15 @@
 
 						</form>
 						<br>
-					<a href="/toCompanyLogin">Sign In</a>
+						<div>
+							Already have an account?&nbsp;
+							<strong>
+								<a href="/toCompanyLogin">Sign In</a>
+							</strong>
+						</div>
+						<br><br>
+						<a href="/toHomePage">Go Back to Login Portal</a>
+						<br><br>
 					</body>
 
 			</font>
