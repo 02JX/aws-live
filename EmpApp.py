@@ -198,7 +198,7 @@ def toJobPosting():
 
 # Redirect to company view job post page
 @app.route('/toViewJobs')
-def toJobPosting():
+def toViewJobs():
     return render_template('CompanyViewJobs.html')
 
 @app.route("/companyRegis", methods=['POST'])
