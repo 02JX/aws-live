@@ -353,11 +353,6 @@ def toViewAssigned():
 def toStaffRegister():
     return render_template('StaffRegister.html')
 
-# Redirect to Assign Student to Supervisors page
-@app.route("/AssignStudents")
-def toAssignStudents():
-    return render_template('AssignStudents.html')
-    
 # Staff login function
 @app.route('/stafflogin', methods=['GET'])
 def staffLogin():
