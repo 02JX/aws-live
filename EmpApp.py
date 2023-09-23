@@ -312,7 +312,7 @@ def toValidateCompany():
     return render_template('ValidateCompany.html')
 
 # Redirect to Assign Student to Supervisors page
-@app.route("/toAssignStudents")
+@app.route("/toAssignStudent")
 def toAssignStudents():
     return render_template('AssignStudents.html')
     
@@ -415,7 +415,7 @@ def supervisorregister():
         'spv_email': supervisor_email,
         'spv_subject': supervisor_subject
     }
-    insert_sql = "INSERT INTO supervisorInformation VALUES (%s, %s, %s, %s, %s, %s, %s)"
+    insert_sql = "INSERT INTO supervisorInformation VALUES (%s, %s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
     try:
