@@ -277,8 +277,8 @@ def comp_view_job_page():
     cursor = db_conn.cursor()
 
     # Modify the SQL query to filter by comp_id
-    # sql_query = "SELECT comp_id, job_id, job_name, job_description FROM internship"
-    cursor.execute("SELECT comp_id, job_id, job_name, job_description FROM internship")
+    sql_query = "SELECT comp_id, job_id, job_name, job_description FROM internship"
+    cursor.execute(sql_query(company_log_id,))
 
     company_job_data = cursor.fetchall()
     cursor.close()
