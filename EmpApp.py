@@ -314,6 +314,7 @@ def job_posting():
             job_files = request.files.get('job_files')
 
             job_id = str(company_log_id) + "_" + str(job_name)
+            job_status = "HIRING"
 
             job_img_file_name = str(company_log_id) + "_" + str(job_id) + "_file.pdf"
 
@@ -321,16 +322,17 @@ def job_posting():
                 'job_id' : job_id,
                 'job_name' : job_name,
                 'job_description' : job_description,
-                'job_file_name' : job_img_file_name
+                'job_file_name' : job_img_file_name,
+                'job_status' : job_status
             }
 
-            insert_sql_comp = "INSERT INTO internship VALUES (%s, %s, %s, %s, %s)"
+            insert_sql_comp = "INSERT INTO internship VALUES (%s, %s, %s, %s, %s, %s)"
             cursor = db_conn.cursor()
 
             if job_files.filename == "":
                 job_img_file_name = None
                 try:
-                    cursor.execute(insert_sql_comp, (company_log_id, job_id, job_name, job_description, job_img_file_name))
+                    cursor.execute(insert_sql_comp, (company_log_id, job_id, job_name, job_description, job_img_file_name, job_status))
                     db_conn.commit()
 
                 except Exception as e:
@@ -343,7 +345,7 @@ def job_posting():
             
             else:
                 try:
-                    cursor.execute(insert_sql_comp, (company_log_id, job_id, job_name, job_description, job_img_file_name))
+                    cursor.execute(insert_sql_comp, (company_log_id, job_id, job_name, job_description, job_img_file_name, job_status))
                     db_conn.commit()
                     # Upload image file in S3 
                     job_img_in_s3 = job_img_file_name
