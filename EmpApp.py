@@ -645,12 +645,12 @@ def display_student():
 @app.route("/toDisplayStaffs", methods=['GET'])
 def display_staffs():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT stf_id, stf_name, stf_pass FROM staffInformation")
-    staff = cursor.fetchall()
+    cursor.execute("SELECT stf_id, stf_name, staff_pass FROM staffInformation")
+    staffs = cursor.fetchall()
 
     cursor.close()
-    print("Staff:", staff)
-    return render_template('DisplayStaff.html', staff=staff)
+    print("Staffs:", staffs)
+    return render_template('DisplayStaff.html', staffs=staffs)
 
 
 
