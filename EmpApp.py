@@ -428,7 +428,7 @@ def supervisor_data():
     supervisors = cursor.fetchall()
     cursor.close()
 
-    return render_template('supervisor_data.html', supervisors=supervisors)
+    return render_template('DisplaySupervisors.html', supervisors=supervisors)
 
 
 # Validate Company function
