@@ -3,6 +3,7 @@ from pymysql import connections
 import os
 import boto3
 import botocore
+from io import BytesIO
 from config import *
 
 app = Flask(__name__)
@@ -585,18 +586,16 @@ def download_job_file():
 
     try:
 
-        s3_client = boto3.client('s3')
-        url = s3_client.generate_presigned_url('get_object',
-                                              Params={'Bucket': s3_bucket, 'Key': s3_key},
-                                              ExpiresIn=3600)  # Set expiration time as needed
+        # Download the file from S3 into memory
+        s3_object = s3_resource.Object(s3_bucket, s3_key)
+        file_data = s3_object.get()['Body'].read()
 
-        # Set Content-Disposition header to suggest a download location
-        response = send_file(url, as_attachment=True)
+        # Create an in-memory stream to send the file as an attachment
+        file_stream = BytesIO(file_data)
 
-        # Add Content-Disposition header to suggest the Downloads folder
-        response.headers["Content-Disposition"] = f'attachment; filename="{job_file_name}"'
+        # Return the file to the user for download
+        return send_file(file_stream, as_attachment=True, attachment_filename=job_file_name)
 
-        return response
     except botocore.exceptions.NoCredentialsError:
         return "AWS credentials not found."
     except botocore.exceptions.ClientError as e:
