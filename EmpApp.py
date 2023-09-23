@@ -277,6 +277,26 @@ def comp_signin_page():
                     return render_template('CompanyLogin.html', error_message="Your Company account has not been activated! Please contact Admin")
     return render_template('CompanyLogin.html', error_message="Wrong Login Details or No Accounts With Such Details")
 
+
+# View Company Details
+@app.route('/viewCompanyDetails', methods=['GET'])
+def view_company_details():
+    # Check if the user is logged in as a company
+    if 'company_id' in session:
+        company_id = session['company_id']
+
+        cursor = db_conn.cursor()
+        cursor.execute("SELECT comp_id, comp_name, comp_industry, comp_address, comp_status FROM company WHERE comp_id = %s", (company_id,))
+        company = cursor.fetchone()  # Assuming comp_id is unique
+        cursor.close()
+
+        if company:
+            # Render the CompanyDetails.html template with company details
+            return render_template('CompanyDetails.html', company=company)
+    
+    # If not logged in or company not found, redirect to login page
+    return render_template('CompanyLogin.html', error_message="Please log in to view company details")
+
 job = {}
 
 # Redirect to company job posting page

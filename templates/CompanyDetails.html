@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .company-details {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .detail-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .detail-value {
+            margin-bottom: 15px;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="company-details">
+        <h1>Company Details</h1>
+
+        <div class="detail-label">Company ID:</div>
+        <div class="detail-value">{{ company[0] }}</div>
+
+        <div class="detail-label">Company Name:</div>
+        <div class="detail-value">{{ company[1] }}</div>
+
+        <div class="detail-label">Industry:</div>
+        <div class="detail-value">{{ company[2] }}</div>
+
+        <div class="detail-label">Address:</div>
+        <div class="detail-value">{{ company[3] }}</div>
+
+        <div class="detail-label">Status:</div>
+        <div class="detail-value">{{ company[4] }}</div>
+
+    </div>
+
+</body>
+</html>
