@@ -448,7 +448,7 @@ def staffregister():
 @app.route("/studentData", methods=['GET'])
 def student_data():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT std_id, std_first_name, std_last_name, std_pass, assign_status FROM staffInformation")
+    cursor.execute("SELECT std_id, std_first_name, std_last_name, std_pass, assign_status FROM studentInformation")
     students = cursor.fetchall()
 
     cursor.close()
