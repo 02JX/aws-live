@@ -350,12 +350,6 @@ def toViewAssigned():
 def toStaffRegister():
     return render_template('StaffRegister.html')
 
-# Redirect to Validation Company page
-@app.route("/validateCompany")
-def validateCompany():
-    return render_template('ValidateCompany.html')
-
-
 # Redirect to Assign Student to Supervisors page
 @app.route("/toAssignStudent")
 def toAssignStudents():

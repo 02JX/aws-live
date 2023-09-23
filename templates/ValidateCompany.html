@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Company Validation</title>
     <link rel="icon" type="image/x-icon" href="static/images/logo4.png">
-	<!-- Bootstrap -->
-	<link href="static/css/bootstrap.css" rel="stylesheet">
-	<!-- DL Menu CSS -->
-	<link href="static/js/dl-menu/component.css" rel="stylesheet">
-	<!--SLICK SLIDER CSS-->
-	<link rel="stylesheet" type="text/css" href="static/css/slick.css" />
-	<!-- Font Awesome StyleSheet CSS -->
-	<link href="static/css/font-awesome.min.css" rel="stylesheet">
-	<!-- Font Awesome StyleSheet CSS -->
-	<link href="static/css/svg.css" rel="stylesheet">
-	<!-- Pretty Photo CSS -->
-	<link href="static/css/prettyPhoto.css" rel="stylesheet">
-	<!-- Shortcodes CSS -->
-	<link href="static/css/shortcodes.css" rel="stylesheet">
-	<!-- Widget CSS -->
-	<link href="static/css/widget.css" rel="stylesheet">
-	<!-- Typography CSS -->
-	<link href="static/css/typography.css" rel="stylesheet">
-	<!-- Custom Main StyleSheet CSS -->
-	<link href="static/style.css" rel="stylesheet">
-	<!-- Color CSS -->
-	<link href="static/css/color.css" rel="stylesheet">
-	<!-- Responsive CSS -->
-	<link href="static/css/responsive.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="static/css/bootstrap.css" rel="stylesheet">
+    <!-- DL Menu CSS -->
+    <link href="static/js/dl-menu/component.css" rel="stylesheet">
+    <!--SLICK SLIDER CSS-->
+    <link rel="stylesheet" type="text/css" href="static/css/slick.css" />
+    <!-- Font Awesome StyleSheet CSS -->
+    <link href="static/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Font Awesome StyleSheet CSS -->
+    <link href="static/css/svg.css" rel="stylesheet">
+    <!-- Pretty Photo CSS -->
+    <link href="static/css/prettyPhoto.css" rel="stylesheet">
+    <!-- Shortcodes CSS -->
+    <link href="static/css/shortcodes.css" rel="stylesheet">
+    <!-- Widget CSS -->
+    <link href="static/css/widget.css" rel="stylesheet">
+    <!-- Typography CSS -->
+    <link href="static/css/typography.css" rel="stylesheet">
+    <!-- Custom Main StyleSheet CSS -->
+    <link href="static/style.css" rel="stylesheet">
+    <!-- Color CSS -->
+    <link href="static/css/color.css" rel="stylesheet">
+    <!-- Responsive CSS -->
+    <link href="static/css/responsive.css" rel="stylesheet">
 </head>
 <center>
     <font color="black" size="4" style="font-family: avenir">
@@ -37,18 +38,6 @@
         <h1 style="color: DodgerBlue">Company Validation</h1>
 
         <body bgcolor="lightgrey">
-
-                <!-- Company selection form -->
-    <form action="{{ url_for('approve_company') }}" method="post">
-        <label for="company_select">Select a Company:</label>
-        <select name="company_id" id="company_select">
-            {% for company in pending_companies %}
-                <option value="{{ company[0] }}">{{ company[1] }}</option>
-            {% endfor %}
-        </select>
-        <button type="submit" name="action" value="approve" class="btn btn-success">Approve</button>
-        <button type="submit" name="action" value="reject" class="btn btn-danger">Reject</button>
-    </form>
 
             <table class="table table-striped table-hover table-bordered" style="width:100%">
                 <thead>
@@ -62,20 +51,33 @@
                 </thead>
                 <tbody>
                     {% for company in pending_companies %}
-                        <tr>
-                            <td>{{ company[0] }}</td>
-                            <td>{{ company[1] }}</td>
-                            <td>{{ company[2] }}</td>
-                            <td>{{ company[3] }}</td>
-                            <td>{{ company[5] }}</td>
-                        </tr>
+                    <tr>
+                        <td>{{ company[0] }}</td>
+                        <td>{{ company[1] }}</td>
+                        <td>{{ company[2] }}</td>
+                        <td>{{ company[3] }}</td>
+                        <td>{{ company[5] }}</td>
+                    </tr>
                     {% endfor %}
                 </tbody>
             </table>
+
+            <!-- Company selection form -->
+            <form action="{{ url_for('approve_company') }}" method="post">
+                <label for="company_select">Select a Company:</label>
+                <select name="company_id" id="company_select">
+                    {% for company in pending_companies %}
+                    <option value="{{ company[0] }}">{{ company[1] }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" name="action" value="approve" class="btn btn-success">Approve</button>
+                <button type="submit" name="action" value="reject" class="btn btn-danger">Reject</button>
+            </form>
 
             <a href="toStaffHomePage">Go Back to Menu</a>
         </body>
 
     </font>
 </center>
+
 </html>
