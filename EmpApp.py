@@ -514,9 +514,9 @@ def toInternApplication():
     return render_template('InternApplication.html')
 
 # Redirect to PortFolioEricTan
-@app.route("/toPortFolioEricTan")
-def toPortFolioEricTan():
-    return render_template('PortFolioEricTan.html')
+@app.route("/toPortfolioEricTan")
+def toPortfolioEricTan():
+    return render_template('PortfolioEricTan.html')
 
 
 
