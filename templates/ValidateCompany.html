@@ -33,47 +33,47 @@
     <link href="static/css/responsive.css" rel="stylesheet">
 </head>
 <center>
-    <font color="black" size="4" style="font-family: avenir">
+    <font color="black" size="4" style="font-family: avenir; margin-top: 20px;">
 
         <h1 style="color: DodgerBlue">Company Validation</h1>
 
         <body bgcolor="lightgrey">
-
-            <table class="table table-striped table-hover table-bordered" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Company ID</th>
-                        <th>Name</th>
-                        <th>Industry</th>
-                        <th>Address</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for company in pending_companies %}
-                    <tr>
-                        <td>{{ company[0] }}</td>
-                        <td>{{ company[1] }}</td>
-                        <td>{{ company[2] }}</td>
-                        <td>{{ company[3] }}</td>
-                        <td>{{ company[5] }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table><br/>
-
-            <!-- Company selection form -->
-            <form action="{{ url_for('approve_company') }}" method="post">
-                <label for="company_select">Select a Company:</label>
-                <select name="company_id" id="company_select">
-                    {% for company in pending_companies %}
-                    <option value="{{ company[0] }}">{{ company[1] }}</option>
-                    {% endfor %}
-                </select>
-                <br/>
-                <button type="submit" name="action" value="approve" class="btn btn-success">Approve</button>
-                <button type="submit" name="action" value="reject" class="btn btn-danger">Reject</button>
-            </form><br/>
+            <div class="container" style="margin: 20px 0; width: 80%;">
+                <table class="table table-striped table-hover table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Company ID</th>
+                            <th>Name</th>
+                            <th>Industry</th>
+                            <th>Address</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for company in pending_companies %}
+                        <tr>
+                            <td>{{ company[0] }}</td>
+                            <td>{{ company[1] }}</td>
+                            <td>{{ company[2] }}</td>
+                            <td>{{ company[3] }}</td>
+                            <td>{{ company[5] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <!-- Company selection form -->
+                <form action="{{ url_for('approve_company') }}" method="post">
+                    <label for="company_select">Select a Company:</label>
+                    <select name="company_id" id="company_select">
+                        {% for company in pending_companies %}
+                        <option value="{{ company[0] }}">{{ company[1] }}</option>
+                        {% endfor %}
+                    </select>
+                    <br/>
+                    <button type="submit" name="action" value="approve" class="btn btn-success">Approve</button>
+                    <button type="submit" name="action" value="reject" class="btn btn-danger">Reject</button>
+                </form><br/>
+            </div>
 
             <a href="toStaffHomePage">Go Back to Menu</a>
         </body>

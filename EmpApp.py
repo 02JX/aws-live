@@ -159,8 +159,8 @@ def student_signin():
     password = request.args.get('std_lg_pass')
 
 
-    if student_id and dbPassword:
-        for row in students:
+    if student_id and password:
+        for row in dbPassword:
             if row[0] == student_id and row[3] == password:
                 return("Login Success!")
             else:
