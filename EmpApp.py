@@ -354,7 +354,7 @@ def toStaffRegister():
     return render_template('StaffRegister.html')
 
 # Redirect to Assign Student to Supervisors page
-@app.route("/AssignStudents")
+@app.route("/assignStudents")
 def toAssignStudents():
     return render_template('AssignStudents.html')
     
@@ -483,16 +483,6 @@ def display_assignments():
     cursor.close()
 
     return render_template('DisplayStudentAssignment.html', assignments=assignments)
-
-# Function to fetch students and supervisors
-def fetch_students_and_supervisors():
-    cursor = db_conn.cursor()
-    cursor.execute("SELECT std_id, std_first_name, std_last_name FROM studentInformation")
-    students = cursor.fetchall()
-    cursor.execute("SELECT spv_id, spv_name FROM supervisorInformation")
-    supervisors = cursor.fetchall()
-    cursor.close()
-    return students, supervisors
 
 # Route for assigning students to supervisors
 @app.route("/assignStudents", methods=['GET', 'POST'])
