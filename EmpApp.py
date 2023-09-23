@@ -278,7 +278,7 @@ def comp_view_job_page():
     
     company_job_data = cursor.fetchall()
 
-    return render_template('CompanyViewJobs.html', company_job_data=company_job_data)
+    return render_template('CompanyViewJobs.html', company_log_id=company_log_id, company_job_data=company_job_data)
 
 
 @app.route('/jobPosting', methods=['GET', 'POST'])
