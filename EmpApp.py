@@ -316,8 +316,8 @@ def job_posting():
             insert_sql_comp = "INSERT INTO internship VALUES (%s, %s, %s, %s, %s)"
             cursor = db_conn.cursor()
 
-            if job_files.filename == "":
-                return "ples selec file name lol"
+            # if job_files.filename == "":
+            #     return "ples selec file name lol"
 
             try:
                 cursor.execute(insert_sql_comp, (company_log_id, job_id, job_name, job_description, job_img_file_name))
