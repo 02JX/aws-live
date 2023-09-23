@@ -302,9 +302,9 @@ def job_posting():
             job_id = request.form.get('job_id')
             job_name = request.form.get('job_name')
             job_description = request.form.get('job_desc')
-            job_img = request.files.get('job_img')
+            job_files = request.files.get('job_files')
 
-            job_img_file_name = str(company_log_id) + "_" + str(job_id) + "_image.jpeg"
+            job_img_file_name = str(company_log_id) + "_" + str(job_id) + "_file.pdf"
 
             job[company_log_id] = { #rember to put = { }
                 'job_id' : job_id,
@@ -316,8 +316,8 @@ def job_posting():
             insert_sql_comp = "INSERT INTO internship VALUES (%s, %s, %s, %s, %s)"
             cursor = db_conn.cursor()
 
-            if job_img.filename == "":
-                return "ples selec file name lol"
+            # if job_files.filename == "":
+            #     return "ples selec file name lol"
 
             try:
                 cursor.execute(insert_sql_comp, (company_log_id, job_id, job_name, job_description, job_img_file_name))
@@ -328,7 +328,7 @@ def job_posting():
 
                 try:
                     print("Data inserted...Uploaded to S3")
-                    s3.Bucket(custombucket).put_object(Key=job_img_in_s3, Body=job_img)
+                    s3.Bucket(custombucket).put_object(Key=job_img_in_s3, Body=job_files)
                     bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
                     s3_location = (bucket_location['LocationConstraint'])
 
@@ -381,7 +381,7 @@ def toStaffRegister():
 
 # Redirect to Staff register page
 @app.route("/toDisplayStudent")
-def toViewStudent():
+def toDisplayStudent():
     return render_template('DisplayStudent.html')
 
 # Redirect to Assign Student to Supervisors page
@@ -448,12 +448,12 @@ def staffregister():
 @app.route("/studentData", methods=['GET'])
 def student_data():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT std_id, std_first_name, std_last_name, std_pass, assign_status FROM staffInformation")
+    cursor.execute("SELECT std_id, std_first_name, std_last_name, std_pass, assign_status FROM studentInformation")
     students = cursor.fetchall()
 
     cursor.close()
 
-    return render_template('DisplayStaffs.html', students=students)
+    return render_template('DisplayStudent.html', students=students)
 
 # Display Supervisors
 @app.route("/supervisorData", methods=['GET'])
@@ -607,8 +607,8 @@ def toPortfolioEricTan():
 def toDisplaySupervisors():
     return render_template('DisplaySupervisors.html')
 # Redirect to viewStudentList
-@app.route("/toDisplayStudent")
-def toDisplayStudent():
+@app.route("/toViewStudent")
+def toViewStudent():
     return render_template('DisplayStudent.html')
 # Redirect to viewStaffList
 @app.route("/toDisplayStaffs")
