@@ -593,8 +593,9 @@ def download_job_file():
         # Create an in-memory stream to send the file as an attachment
         file_stream = BytesIO(file_data)
 
-        # Return the file to the user for download
-        return send_file(file_stream, as_attachment=True, attachment_filename=job_file_name)
+        # Return the file to the user for download with the specified filename
+        return send_file(file_stream, as_attachment=True, download_name=job_file_name)
+
 
     except botocore.exceptions.NoCredentialsError:
         return "AWS credentials not found."
