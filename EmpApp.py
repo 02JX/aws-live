@@ -419,19 +419,19 @@ def toSupervisorRegister():
     return render_template('SupervisorRegister.html')
 
 # Supervisor login function
-@app.route('/supervisorlogin', methods=['GET'])
+@app.route('/supervisorLogin', methods=['GET'])
 def supervisorLogin():
 
     cursor = db_conn.cursor()
     cursor.execute("SELECT spv_id, spv_name, spv_pass, spv_contact, spv_email, spv_subject FROM supervisorInformation")
-    supervisor = cursor.fetchall()
+    supervisorInformation = cursor.fetchall()
     cursor.close()
 
     spv_id = request.args.get('spv_id')
     spv_pass = request.args.get('spv_pass')
         
     if spv_id and spv_pass:
-        for row in supervisor:
+        for row in supervisorInformation:
             if row[0] == spv_id and row[2] == spv_pass:
                 print ("Login successful")
                 return render_template('SupervisorHomePage.html')
