@@ -32,37 +32,39 @@
 	<link href="static/css/responsive.css" rel="stylesheet">
 </head>
 <center>
-    <font color="black" size="4" style="font-family: avenir">
-        <h1 style="color: DodgerBlue">Internship Job Post</h1>
-        <body bgcolor="lightgrey">
-            <form action="/jobPosting" autocomplete="on" method="POST" enctype="multipart/form-data">
-				<div>
-					<!-- Display the Company ID immediately -->
-					Company ID: 
-					<strong id="company_id_display">{{ company_log_id }}</strong><br><br>
-	
-					<!-- Job posting form fields -->
-					<!-- Job ID:<br>
-					<input style="height: 25px; font-size: 14pt; color: grey;" type="text" name="job_id"><br><br> -->
-					Job Name:<br>
-					<div class="iq-input">
-						<input class="first_input" style="height: 25px; font-size: 14pt; color: grey; text-transform: none;" type="text" name="job_name">
+	<div class="iq_wrapper" style="margin-top: 20px; margin-bottom: 20px;">
+		<font color="black" size="4" style="font-family: avenir">
+			<h1 style="color: DodgerBlue">Internship Job Post</h1>
+			<body bgcolor="lightgrey">
+				<form action="/jobPosting" autocomplete="on" method="POST" enctype="multipart/form-data">
+					<div class="container" style="width: 40%; margin-top: 10px;">
+						<!-- Display the Company ID immediately -->
+						Company ID: 
+						<strong id="company_id_display">{{ company_log_id }}</strong><br><br>
+		
+						<!-- Job posting form fields -->
+						<!-- Job ID:<br>
+						<input style="height: 25px; font-size: 14pt; color: grey;" type="text" name="job_id"><br><br> -->
+						Job Name:<br>
+						<div class="iq-input">
+							<input class="first_input" style="height: 25px; font-size: 14pt; color: grey; text-transform: none;" type="text" name="job_name">
+						</div>
+						Job Description:<br>
+						<div class="iq-input">
+							<input class="first_input" style="height: 300px; font-size: 14pt; color: grey; text-transform: none;" type="text" name="job_desc">
+						</div>
+						
+						Accompanying Job Documents (Optional):<br>
+						<div style="margin-bottom: 20px;">
+							<input style="position: center; font-size: 10t; color: grey; text-transform: none;" type="file" name="job_files"> <!-- Added name="job_img" -->
+						</div>
+						<!-- Submit button for posting the job -->
+						<button type="submit" name="submit_job" style="height: 45px; width: 200px; color: white; size: 5; text-transform: none; margin: 20px 0;" class="iq_link_1">Post Job</button>
 					</div>
-					Job Description:<br>
-					<div class="iq-input">
-						<input class="first_input" style="height: 300px; font-size: 14pt; color: grey; text-transform: none;" type="text" name="job_desc">
-					</div>
-					
-					Accompanying Job Documents (Optional):<br>
-					<div>
-						<input style="position: center; font-size: 10t; color: grey; text-transform: none;" type="file" name="job_files"> <!-- Added name="job_img" -->
-					</div>
-					<!-- Submit button for posting the job -->
-					<button type="submit" name="submit_job" style="height: 45px; width: 200px; color: white; size: 5; text-transform: none;" class="iq_link_1">Post Job</button>
-				</div>
-            </form>
-			<a href="/toCompanyHomePage" style="margin-bottom: 20px;">Go Back</a>
-        </body>
-    </font>
+				</form>
+				<a href="/toCompanyHomePage" style="margin-bottom: 20px;">Go Back</a>
+			</body>
+		</font>
+	</div>
 </center>
 </html>
