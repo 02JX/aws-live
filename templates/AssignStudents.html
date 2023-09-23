@@ -39,19 +39,11 @@
         <body bgcolor="lightgrey">
 
             <form action="{{ url_for('assign_students') }}" method="post" style="text-align: center;">
-                <label for="student_select">Select a Student:</label>
-                <select name="student_id" id="student_select">
-                    {% for student in students %}
-                        <option value="{{ student[0] }}">{{ student[1] }} {{ student[2] }}</option>
-                    {% endfor %}
-                </select>
-    
-                <label for="supervisor_select">Select a Supervisor:</label>
-                <select name="supervisor_id" id="supervisor_select">
-                    {% for supervisor in supervisors %}
-                        <option value="{{ supervisor[0] }}">{{ supervisor[1] }}</option>
-                    {% endfor %}
-                </select>
+                <label for="student_id">Enter Student ID:</label>
+                <input type="text" name="student_id" id="student_id">
+                
+                <label for="supervisor_id">Enter Supervisor ID:</label>
+                <input type="text" name="supervisor_id" id="supervisor_id">
                 <br>
                 <br>
                 <br>
