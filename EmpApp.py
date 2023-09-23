@@ -642,7 +642,7 @@ def display_student():
 @app.route("/toDisplayStaffs", methods=['GET'])
 def display_staffs():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT stf_id, stf_name, stf_pass FROM staffInformation")
+    cursor.execute("SELECT stf_id, stf_name, staff_pass FROM staffInformation")
     staff = cursor.fetchall()
 
     cursor.close()
