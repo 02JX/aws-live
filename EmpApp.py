@@ -146,22 +146,24 @@ def student_signup():
 #------------------------------------------------------------signin
 
 # Student login function
-@app.route('/studlogin', methods=['POST'])
+@app.route('/studlogin', methods=['GET'])
 def student_signin():
     # return render_template('StudLogin.html')
-    student_id = request.form.get('std_lg_id')
-    password = request.form.get('std_lg_pass')
 
-    select_stmt = "SELECT std_password FROM studentInformation WHERE std_id = %(student_id)s"
     cursor = db_conn.cursor()
-    dbPassword = cursor.execute(select_stmt, { (student_id)})
+    cursor.execute("SELECT std_id, std_password FROM studentInformation")
+    dbPassword = cursor.fetchall()
+    cursor.close()
+
+    student_id = request.args.get('std_lg_id')
+    password = request.args.get('std_lg_pass')
 
 
-    # Check if the student exists in the dictionary (for demonstration purposes)
-    if dbPassword == password:
-        return f"Welcome, Student with ID {student_id}!"
-    else:
-        return "Invalid student ID or password."
+    if student_id and dbPassword:
+        for row in students:
+            if row[0] == student_id and row[3] == password:
+                return("Login Success!")
+
 
     # return render_template('StudentHomePage.html')
 
@@ -551,7 +553,6 @@ def display_student_assignment():
     cursor.close()
 
     return render_template('DisplayStudentAssignment.html', assignments=assignments)
-
 
 @app.route("/assignStudents", methods=['GET', 'POST'])
 def assign_students():
