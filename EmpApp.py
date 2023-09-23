@@ -696,7 +696,7 @@ def supervisorregister():
 @app.route("/internData", methods=['GET'])
 def intern_data():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT stf_id, stf_name FROM staffInformation")
+    cursor.execute("SELECT std_id, cmp_id, cmp_name, student_letter_A, student_letter_B FROM student")
     interns = cursor.fetchall()
 
     cursor.close()
@@ -705,6 +705,12 @@ def intern_data():
 
 # Accept Intern
 @app.route("/acceptIntern/<string:id>", methods=['GET'])
+def accept_intern(id): 
+    print(id)
+    return render_template('SupervisorHomePage.html')
+
+# Reject Intern
+@app.route("/rejectIntern/<string:id>", methods=['GET'])
 def accept_intern(id): 
     print(id)
     return render_template('SupervisorHomePage.html')
