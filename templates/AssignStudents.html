@@ -34,24 +34,28 @@
 <center>
     <font color="black" size="4" style="font-family: avenir">
 
-        <h1 style="color: DodgerBlue">Assign Students to Supervisor</h1>
+        <div>
+            <h1 style="color: DodgerBlue; margin-top: 20px;">Assign Students to Supervisor</h1>
 
-        <body bgcolor="lightgrey">
-
-            <form action="{{ url_for('assign_students') }}" method="post" style="text-align: center;">
-                <label for="student_id">Enter Student ID:</label>
-                <input type="text" name="student_id" id="student_id">
-                
-                <label for="supervisor_id">Enter Supervisor ID:</label>
-                <input type="text" name="supervisor_id" id="supervisor_id">
+            <body bgcolor="lightgrey">
+                <div>
+                    <form action="{{ url_for('assign_students') }}" method="post" style="text-align: center;">
+                        <label for="student_id">Enter Student ID:</label>
+                        <input type="text" name="student_id" id="student_id">
+                        
+                        <label for="supervisor_id">Enter Supervisor ID:</label>
+                        <input type="text" name="supervisor_id" id="supervisor_id">
+                        <br>
+                        <br>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Assign</button>
+                    </form>
+                </div>
                 <br>
-                <br>
-                <br>
-                <button type="submit" class="btn btn-primary">Assign</button>
-            </form>
-            <br>
-            <a href="toStaffHomePage">Go Back to Menu</a>
-        </body>
+                <a href="toStaffHomePage">Go Back to Menu</a>
+            </body>
+        </div>
+        
 
     </font>
 </center>
