@@ -36,7 +36,6 @@
         <h1 style="color: DodgerBlue">Supervisor Information</h1>
         <body bgcolor="lightgrey">
 
-        <form action="/supervisorData" autocomplete="on" method="GET" enctype="multipart/form-data">
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -49,19 +48,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for supervisor in supervisors %}
+                    {% for row in supervisors %}
                         <tr>
-                            <td>{{ supervisor[0] }}</td>
-                            <td>{{ supervisor[1] }}</td>
-                            <td>{{ supervisor[2] }}</td>
-                            <td>{{ supervisor[3] }}</td>
-                            <td>{{ supervisor[4] }}</td>
-                            <td>{{ supervisor[5] }}</td>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                            <td>{{ row[3] }}</td>
+                            <td>{{ row[4] }}</td>
+                            <td>{{ row[5] }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-        </form>
 
             <a href="toStaffHomePage">Go Back to Menu</a>
         </body>
