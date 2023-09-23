@@ -318,9 +318,14 @@ def update_job_status():
     cursor.execute(sql_query, (new_status, company_log_id, job_id))
     db_conn.commit()
 
+    # Modify the SQL query to filter by comp_id
+    sql_query = "SELECT comp_id, job_id, job_name, job_description, job_status FROM internship WHERE comp_id = %s"
+    cursor.execute(sql_query, (company_log_id,))
+
+    company_job_data = cursor.fetchall()
     cursor.close()
 
-    return render_template('CompanyViewJobs.html', company_log_id=company_log_id)
+    return render_template('CompanyViewJobs.html', company_log_id=company_log_id, company_job_data=company_job_data)
 
 @app.route('/jobPosting', methods=['GET', 'POST'])
 def job_posting():
