@@ -475,11 +475,10 @@ def download_job_file():
 
     try:
         s3_resource.Bucket(s3_bucket).download_file(s3_key, 'test_file')
-
-
+        return "Success Download"
     except Exception as e:
-        return str(e)
-    return "File downloaded successfully"
+        print(f"Error downloading file: {str(e)}")
+        return "File download failed"
 
 #--------------------------------------------END OF COMPANY PAGE-----------------------------------
 
