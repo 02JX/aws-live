@@ -96,50 +96,76 @@ def toHome():
 
 #------------------------------------------------------------------------------Student Sign Up
 students = {}
+# # Redirect index
+# @app.route('/toIndex')
+# def toIndex():
+#     return render_template('index.html')
 
-# Redirect to student login page
-@app.route('/toStudLogin')
-def toLogin():
-    return render_template('StudLogin.html')
-
-# Redirect to student signup page
-@app.route('/toStudSignUp')
-def toSignup():
+# Redirect index (signup)
+@app.route('/toStdSignUp')
+def toStdSignUp():
     return render_template('StudentSignUp.html')
 
-@app.route('/studentsignup', methods=['POST'])
-def student_signup():
+# Redirect to login
+@app.route('/toStdLogin')
+def toStdLogin():
+    return render_template('StudLogin.html')
+    
+# Redirect to StudentHomePage
+@app.route('/toStdHomePage')
+def toStdHomePage():
+    return render_template('StudentHomePage.html')
+
+# Redirect to StudentHomePage
+@app.route('/toStdViewCompPage')
+def toStdViewCompPage():
+    return render_template('StudentViewCompany.html')
+
+# Redirect to StudentHomePage
+@app.route('/toStdViewProfilePage')
+def toStdViewProfilePage():
+    return render_template('StudentProfile.html')
+
+    
+#----------------------------------------------------------------------------global variable
+
+student_id = ""
+student_password = ""
+std_company_id = ""
+std_cmpDetails = ""
+std_jobDetails = ""
+
+
+
+#-----------------------------------------------------------------------------
+#database route
+
+@app.route('/studentsignup', methods=['GET', 'POST'])
+def signup():
+    global student_password
     student_id = request.form.get('std_id')
     first_name = request.form.get('std_first_name')
     last_name = request.form.get('std_last_name')
-    password = request.form.get('std_pass')
+    student_password = request.form.get('std_pass')
     confirm_password = request.form.get('confirm_std_pass')
 
+
     # Check if passwords match
-    if password != confirm_password:
+    if student_password != confirm_password:
         return "Password confirmation does not match."
 
     # Store student data in the dictionary
     students[student_id] = {
         'first_name': first_name,
         'last_name': last_name,
-        'password': password
+        'password': student_password
     }
-    insert_sql = "INSERT INTO studentInformation VALUES (%s, %s, %s, %s)"
+    insert_sql = "INSERT INTO studentInformation VALUES (%s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
+    cursor.execute(insert_sql, (student_id, first_name, last_name, student_password, ""))
+    db_conn.commit()
+    cursor.close()
 
-    try:
-        cursor.execute(insert_sql, (student_id, first_name, last_name, password))
-        db_conn.commit()
-        std_name = "" + first_name + " " + last_name
-    
-    except Exception as e:
-        return str(e)
-
-    finally:
-        cursor.close()
-
-    print("all modification done...")
     return render_template('StudLogin.html')
 
 
@@ -148,7 +174,8 @@ def student_signup():
 # Student login function
 @app.route('/studlogin', methods=['GET'])
 def student_signin():
-    # return render_template('StudLogin.html')
+
+    
 
     cursor = db_conn.cursor()
     cursor.execute("SELECT std_id, std_pass FROM studentInformation")
@@ -157,29 +184,110 @@ def student_signin():
 
     student_id = request.args.get('std_lg_id')
     password = request.args.get('std_lg_pass')
+    
+  
+
+    show_job = "SELECT comp_id, job_id, job_name, job_description FROM internship"
+    cursor = db_conn.cursor()
+    cursor.execute(show_job)
+    jobName = cursor.fetchall()
+    cursor.close()
 
 
     if student_id and password:
         for row in dbPassword:
             if row[0] == student_id and row[1] == password:
-                session['std_id'] = student_id  # Store student_id in the session for future uses
-                return("Login Success!")
-            else: 
-                return("Wrong data 1")
-    return("Wrong data 2")
+                # session['std_id'] = student_id  # Store student_id in the session for future uses
+                session['student_id'] = student_id  
+                return render_template('StudentHomePage.html', jobName = jobName, student_id = student_id)
+        
+        # If none of the rows matched, return an error message
+        return "Wrong username or password"
+    
+    # If student_id or password is missing, return an error message
+    return "Please provide both username and password"
+
+
+
+    #------------------------StudentHome Page
+
+    # Student home function
+@app.route('/std_homepage', methods=['GET', 'POST'])
+def std_home_page():
+    student_id = session.get('student_id')
+    std_company_id = request.form.get('cmp_id')
+    session['std_company_id'] = std_company_id 
+    
+
+    search_cmp = "SELECT comp_name, comp_industry, comp_address FROM company WHERE comp_id=%s"
+    cursor = db_conn.cursor()
+    cursor.execute(search_cmp, (std_company_id))
+    cmpdetails = cursor.fetchall()
+    cursor.close()
+
+
+    return render_template('StudentViewCompany.html', cmpdetails = cmpdetails, student_id = student_id, std_company_id = std_company_id)
+
+
+
+        #------------------------Student View Company Page
+
+    # Student apply intern function
+@app.route('/stdapplyintern', methods=['GET', 'POST'])
+def std_viewCompany():
+    student_id = session.get('student_id')
+    std_company_id = session.get('std_company_id')
+  
+
+    search_cmp = "SELECT comp_name FROM company WHERE comp_id=%s"
+    cursor = db_conn.cursor()
+    cursor.execute(search_cmp, (std_company_id))
+    cmpName = cursor.fetchall()
+    cursor.close()
+
+    company_name = cmpName[0]
+    intern_status = "pending"
+
+
+
+
+    apply_intern = "INSERT INTO student VALUES (%s, %s, %s, %s ,%s, %s)"
+    cursor = db_conn.cursor()
+    cursor.execute(apply_intern, (student_id, std_company_id, company_name, intern_status, "", ""))
+    db_conn.commit()
+    cursor.close()
 
 
     
 
-    # return render_template('StudentHomePage.html')
+    return "You are succeessful to apply!"
 
-    #     # Check if the student exists in the dictionary (for demonstration purposes)
-    #     if student_id in students and students[student_id]['password'] == password:
-    #         return f"Welcome, Student with ID {student_id}!"
-    #     else:
-    #         return "Invalid student ID or password."
+            #------------------------Student View Profile Page
 
-    # return render_template('StudLogin.html')
+    # Student View Profile function
+@app.route('/viewProfile', methods=['GET', 'POST'])
+def std_viewProfile():
+    student_id = session.get('student_id')
+
+    std_company_id = session.get('std_company_id')
+
+
+    search_std_name = "SELECT std_first_name, std_last_name FROM studentInformation WHERE std_id=%s"
+    cursor = db_conn.cursor()
+    cursor.execute(search_std_name, (student_id))
+    stdInfor = cursor.fetchall()
+    cursor.close()
+
+    
+
+    search_cmp = "SELECT cmp_name, intern_status FROM student WHERE std_id =%s"
+    cursor = db_conn.cursor()
+    cursor.execute(search_cmp, (student_id))
+    cmpName = cursor.fetchall()
+    cursor.close()
+
+    return render_template('StudentProfile.html', stdInfor = stdInfor, student_id = student_id, cmpName = cmpName, std_company_id = std_company_id)
+
 
 #-----------------------------------------END OF STUDENT PAGE--------------------------------------------------------------
 
