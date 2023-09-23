@@ -646,7 +646,7 @@ def display_staffs():
     cursor = db_conn.cursor()
     cursor.execute("SELECT stf_id, stf_name, staff_pass FROM staffInformation")
     staffs = cursor.fetchall()
-
+ 
     cursor.close()
     print("Staff:", staffs)
     return render_template('DisplayStaffs.html', staffs=staffs)
