@@ -301,7 +301,25 @@ def comp_view_job_page():
 
     return render_template('CompanyViewJobs.html', company_log_id=company_log_id, company_job_data=company_job_data)
 
+# Filter Job Status
+@app.route('/filterJobStatus', methods=['POST'])
+def filter_job_status():
+    company_log_id = request.form.get('company_id')
+    status_filter = request.form.get('status_filter')
 
+    cursor = db_conn.cursor()
+
+    # Modify the SQL query to filter by comp_id and job_status
+    sql_query = "SELECT comp_id, job_id, job_name, job_description, job_status FROM internship WHERE comp_id = %s AND job_status = %s"
+    cursor.execute(sql_query, (company_log_id, status_filter))
+
+    filtered_job_data = cursor.fetchall()
+    cursor.close()
+
+    return render_template('CompanyViewJobs.html', company_log_id=company_log_id, company_job_data=filtered_job_data)
+
+
+# Change Job Status from ACTIVE to INACTIVE and vice versa
 @app.route('/updateJobStatus', methods=['POST'])
 def update_job_status():
     company_log_id = session.get('company_id')

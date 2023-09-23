@@ -39,6 +39,12 @@
                 <font color="black" size="4" style="font-family: avenir">
                     Company ID: 
                     <strong id="company_id_display">{{ company_log_id }}</strong><br><br>
+                    
+                    <form method="POST" action="/filterJobStatus">
+                        <input type="hidden" name="company_id" value="{{ company_log_id }}">
+                        <button type="submit" name="status_filter" value="ACTIVE">Show ACTIVE Jobs</button>
+                        <button type="submit" name="status_filter" value="INACTIVE">Show INACTIVE Jobs</button>
+                    </form>
 
                     <table border="1">
                         <tr>
