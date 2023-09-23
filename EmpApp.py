@@ -275,7 +275,7 @@ def comp_signin_page():
                     return render_template('CompanyHome.html', company_log_id=company_log_id)
                 else:
                     return render_template('CompanyLogin.html', error_message="Your Company account has not been activated! Please contact Admin")
-    return render_template('CompanyLogin.html', error_message="Wrong Login Details or No Accounts With ID: {company_log_id}")
+    return render_template('CompanyLogin.html', error_message="Wrong Login Details or No Accounts With Such Details")
 
 job = {}
 
