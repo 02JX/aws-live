@@ -32,34 +32,38 @@
     <link href="static/css/responsive.css" rel="stylesheet">
 </head>
 <center>
-    <font color="black" size="4" style="font-family: avenir">
+    <div style="margin-top: 20px;">
+        <font color="black" size="4" style="font-family: avenir">
 
-        <h1 style="color: DodgerBlue">Student Assignments</h1>
-
-        <body bgcolor="lightgrey">
-
-            <table class="table table-striped table-hover table-bordered" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Student ID</th>
-                        <th>Student Name</th>
-                        <th>Supervisor Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for assignment in assignments %}
+            <h1 style="color: DodgerBlue">Student Assignments</h1>
+    
+            <body bgcolor="lightgrey">
+                <div class="container" style="width: 80%; margin-top: 20px;">
+                    <table class="table table-striped table-hover table-bordered" style="width:100%">
+                    <thead>
                         <tr>
-                            <td>{{ assignment[0] }}</td>
-                            <td>{{ assignment[1] }} {{ assignment[2] }}</td>
-                            <td>{{ assignment[3] }}</td>
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Supervisor Name</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            <br>
-            <a href="toStaffHomePage">Go Back to Menu</a>
-        </body>
-
-    </font>
+                    </thead>
+                    <tbody>
+                        {% for assignment in assignments %}
+                            <tr>
+                                <td>{{ assignment[0] }}</td>
+                                <td>{{ assignment[1] }} {{ assignment[2] }}</td>
+                                <td>{{ assignment[3] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <a href="toStaffHomePage">Go Back to Menu</a>
+                </div>
+            </body>
+    
+        </font>
+    </div>
 </center>
 </html>
