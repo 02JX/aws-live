@@ -224,7 +224,7 @@ def comp_signup():
         existing_company = cursor.fetchone()
 
         if existing_company:
-            return render_template('CompanyRegistration.html', error_message="Company ID already exists. Please choose a different ID.")
+            return render_template('CompanyRegister.html', error_message="Company ID already exists. Please choose a different ID.")
 
         # If the company ID is unique, proceed with registration
         insert_sql_comp = "INSERT INTO company VALUES (%s, %s, %s, %s, %s, %s)"
