@@ -490,10 +490,7 @@ def toSupervisorLogin():
 def toSupervisorRegister():
     return render_template('SupervisorRegister.html')
 
-# Redirect to Supervisor home page
-@app.route("/toSupervisorHomePage")
-def toSupervisorHomePage():
-    return render_template('SupervisorHomePage.html')
+
 
 # Redirect to Intern Application
 @app.route("/toInternApplication")
