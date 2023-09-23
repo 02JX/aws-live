@@ -164,7 +164,9 @@ def student_signin():
             if row[0] == student_id and row[1] == password:
                 session['std_id'] = student_id  # Store student_id in the session for future uses
                 return("Login Success!")
-
+            else: 
+                return("Wrong data 1")
+    return("Wrong data 2")
 
     # return render_template('StudentHomePage.html')
 
