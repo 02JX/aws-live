@@ -1,10 +1,13 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, redirect
 from pymysql import connections
 import os
 import boto3
 from config import *
 
 app = Flask(__name__)
+
+# Set a secret key for your Flask application
+app.secret_key = 'never_gonna_give_you_up_never_gonna_let_you_down_never_gonna_run_around_and_hurt_you'  # Replace with a long and secure secret key
 
 bucket = custombucket
 region = customregion
@@ -237,13 +240,51 @@ def comp_signin_page():
         
     if company_log_id and company_log_password:
         for row in company:
-            if row['comp_id'] == company_log_id and row['comp_password'] == company_log_password:
-                if row['comp_status'] == "Approved":
+            if row[0] == company_log_id and row[4] == company_log_password: #If row starts at 1, it's actually 0 because Python :) 
+                if row[5] == "Approved":
                     print ("Login successful")
-                    return render_template('HomePage.html') #Testing
+                    session['company_id'] = company_log_id  # Store company_log_id in the session
+                    return render_template('CompanyHome.html')
                 else:
                     return "Account is not active"
-    return (company_log_id)
+    return "Your login details are not correct lol"
+
+# Show company details
+@app.route('/jobPosting', methods=['GET'])
+def company_home_get_id():
+    # Retrieve company_log_id from the session
+    company_log_id = session.get('company_id')
+
+    # Determine whether to show the Company ID input field
+    show_company_id = session.get('show_company_id', False)
+
+    # Render the template and pass the company_log_id and show_company_id to it
+    return render_template('CompanyHome.html', company_log_id=company_log_id, show_company_id=show_company_id)
+
+# Route to reveal the Company ID
+@app.route('/revealCompanyID', methods=['POST'])
+def reveal_company_id():
+    # Set a session variable to indicate that the Company ID should be shown
+    session['show_company_id'] = True
+
+    # Redirect back to the Company Home page
+    return redirect('/jobPosting')
+
+
+# Company post internship
+@app.route('/jobPosting', methods=['GET','POST'])
+def comp_add_job():
+    cursor = db_conn.cursor()
+
+    cursor.execute("SELECT comp_id, comp_name, comp_industry, comp_address, comp_password, comp_status FROM company")
+    company_details = cursor.fetchall()
+
+    cursor.execute("SELECT comp_id, job_id, job_name, job_description FROM internship")
+    company_jobs = cursor.fetchall()
+
+    cursor.close()
+
+    company_log_id = session.get('company_id')
 
 #--------------------------------------------END OF COMPANY PAGE-----------------------------------
 

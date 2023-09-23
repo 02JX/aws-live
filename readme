@@ -4,6 +4,7 @@
 
 #!/bin/bash
 
+# Commands to be run inside linux (after create and connect to instance)
 # RUN THESE COMMANDS TO DEPLOY THE WEB (Initial deploy)
 sudo su
 yum update -y
@@ -13,11 +14,15 @@ cd aws-live
 yum install python-pip -y
 pip3 install flask pymysql boto3
 python3 EmpApp.py
+# Web should be running now, get public IP at left bottom
 
 # AFTER MAKE CHANGES IN GITHUB
 # If you want to deploy with new changes, run these commands
+# Keep the same instance, don't delete it
+# Everytime after connected to the instance, run 'sudo su' then below code
 cd --
 rm -fr aws-live
 git clone https://github.com/02JX/aws-live.git
 cd aws-live
 python3 EmpApp.py
+[ctrl+C] to stop the current deploy
