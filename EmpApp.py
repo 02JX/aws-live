@@ -315,24 +315,6 @@ def toValidateCompany():
 @app.route("/toAssignStudents")
 def toAssignStudents():
     return render_template('AssignStudents.html')
-
-# to login as staff
-@app.route('/stafflogin', methods=['GET'])
-def staffLogin():
-    # return render_template('StaffLogin.html')
-    staff_id = request.form.get('stf_lg_id')
-    staff_login_password = request.form.get('stf_lg_pass')
-
-    select_stmt = "SELECT stf_pass FROM staffInformation WHERE stf_id = %(staff_id)s"
-    cursor = db_conn.cursor()
-    staff_db_Password = cursor.execute(select_stmt, { (staff_id)})
-
-
-    # Check if the student exists in the dictionary (for demonstration purposes)
-    if staff_db_Password == staff_login_password:
-        return f"Welcome, Staff {staff_id}!"
-    else:
-        return "Invalid Staff ID or password."
     
 # Staff login function
 @app.route('/stafflogin', methods=['GET'])
