@@ -1,32 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Sign In Internship</title>
+	<link rel="icon" type="image/x-icon" href="static/images/logo4.png">
+    <!-- Bootstrap -->
+	<link href="static/css/bootstrap.css" rel="stylesheet">
+	<!-- DL Menu CSS -->
+	<link href="static/js/dl-menu/component.css" rel="stylesheet">
+	<!--SLICK SLIDER CSS-->
+	<link rel="stylesheet" type="text/css" href="static/css/slick.css" />
+	<!-- Font Awesome StyleSheet CSS -->
+	<link href="static/css/font-awesome.min.css" rel="stylesheet">
+	<!-- Font Awesome StyleSheet CSS -->
+	<link href="static/css/svg.css" rel="stylesheet">
+	<!-- Pretty Photo CSS -->
+	<link href="static/css/prettyPhoto.css" rel="stylesheet">
+	<!-- Shortcodes CSS -->
+	<link href="static/css/shortcodes.css" rel="stylesheet">
+	<!-- Widget CSS -->
+	<link href="static/css/widget.css" rel="stylesheet">
+	<!-- Typography CSS -->
+	<link href="static/css/typography.css" rel="stylesheet">
+	<!-- Custom Main StyleSheet CSS -->
+	<link href="static/style.css" rel="stylesheet">
+	<!-- Color CSS -->
+	<link href="static/css/color.css" rel="stylesheet">
+	<!-- Responsive CSS -->
+	<link href="static/css/responsive.css" rel="stylesheet">
 </head>
 <center>
-	<font color="black" size="4" style="font-family: avenir">
+	<div class="iq_wrapper">
+		<div class="container">
+			<font color="black" size="4" style="font-family: avenir">
 
-		<h1 style="color: DodgerBlue">Student Sign In</h1>
+				<h1 style="color: DodgerBlue">Student Sign In</h1>
+		
+				<body bgcolor="lightgrey">
+		
+					<form action="/studlogin" autocomplete="on" method = "GET" enctype="multipart/form-data">
+		
+						<div class="container" style="width: 40%; margin-top: 10px;">
+							<h5>Student ID:</h5>
+						<div class="iq-input">
+							<input class="first_input" style="height:20px;font-size:14pt;color:grey; text-transform: none;" type="text"name="std_lg_id">
+						</div>
+						<br><br>
 
-		<body bgcolor="lightgrey">
+						<h5>Password:</h5>
+						<div class="iq-input">
+							<input class="first_input" style="height:20px;font-size:14pt;color:grey; text-transform: none;" type="text"name="std_lg_pass">
+						</div>
+						<br><br>
+						  
+						<button type="submit"class="iq_link_1"  style="background: grey; height: 45px; width: 200px; color: white; size: 5;">Sign In</button>
+						</div>
+		
+					</form>
+					
+					<div>
+						Not registered yet?&nbsp;
+						<strong>
+							<a href="{{url_for('toStdSignUp')}}"><button class="btn btn--primary btn--small u-fullwidth">SignUp here</button></a>
+						</strong>
+					</div>
 
-			<form action="/studlogin" autocomplete="on" method = "GET" enctype="multipart/form-data">
-
-				
-
-		  		Student ID:<br> <input style="height:25px;font-size:14pt; color:grey;" type="text" name="std_lg_id"><br><br>
-
-		  		Password:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="std_lg_pass"><br><br>
-
-		  		
-
-		  		<button type="submit" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">Sign In</button>
-
-			</form>
-			<a href="{{url_for('toStdSignUp')}}"><button class="btn btn--primary btn--small u-fullwidth">SignUp here</button></a>
-		</body>
-
-	</font>
+					<a href="/toHomePage" style="margin-bottom: 20px;">Go Back to Login Portal</a>
+				</body>
+		
+			</font>
+		</div>
+	</div>
 </center>
 </html>
 
