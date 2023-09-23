@@ -37,14 +37,16 @@
         <body>
             <center>
                 <font color="black" size="4" style="font-family: avenir">
-                    <h1 style="color: DodgerBlue">View Job Details</h1>
+                    Company ID: 
+                    <strong id="company_id_display">{{ company_log_id }}</strong><br><br>
+
                     <table border="1">
                         <tr>
                             <th>Job ID</th>
                             <th>Job Name</th>
                             <th>Job Description</th>
                         </tr>
-                        {% for job in job_data %}
+                        {% for job in company_job_data %}
                         <tr>
                             <td>{{ job.job_id }}</td>
                             <td>{{ job.job_name }}</td>
