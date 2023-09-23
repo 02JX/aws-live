@@ -453,7 +453,7 @@ def student_data():
 
     cursor.close()
 
-    return render_template('DisplayStaffs.html', students=students)
+    return render_template('DisplayStudent.html', students=students)
 
 # Display Supervisors
 @app.route("/supervisorData", methods=['GET'])
