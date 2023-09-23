@@ -274,7 +274,7 @@ def job_posting():
             job_description = request.form.get('job_desc')
             job_img = request.files.get('job_img')
 
-            job_img_file_name = str(company_log_id) + str(job_id) + "_image.jpeg"
+            job_img_file_name = str(company_log_id) + "_" + str(job_id) + "_image.jpeg"
 
             job[company_log_id] = { #rember to put = { }
                 'job_id' : job_id,
