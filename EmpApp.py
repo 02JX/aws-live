@@ -254,6 +254,8 @@ def comp_signin_page():
                     return "Account is not active"
     return "Your login details are not correct lol"
 
+job = {}
+
 @app.route('/jobPosting', methods=['GET', 'POST'])
 def job_posting():
     # Retrieve company_log_id from the session
@@ -263,7 +265,6 @@ def job_posting():
     show_company_id = False
 
     if request.method == 'POST':
-        # Check if the "Reveal ID" button was clicked
         if 'reveal_id' in request.form:
             show_company_id = True
 
@@ -272,13 +273,25 @@ def job_posting():
             job_name = request.form.get('job_name')
             job_description = request.form.get('job_desc')
 
-            # Now, you can process and insert this job posting data into your internship table
-            # Use the company_log_id from the session as the Company ID
-            # Insert the data into your database tables, execute SQL queries, etc.
+            job[company_log_id] = { #rember to put = { }
+                'job_id' : job_id,
+                'job_name' : job_name,
+                'job_description' : job_description,
+            }
 
-            # After successfully processing the form data, you can redirect to a confirmation page if needed
-            # For example, after successfully posting a job, you can redirect to a confirmation page
-            # return redirect('/jobPostingConfirmation')
+            insert_sql_comp = "INSERT INTO internship VALUES (%s, %s, %s, %s)"
+            cursor = db_conn.cursor()
+
+            try:
+                cursor.execute(insert_sql_comp, (company_log_id, job_id, job_name, job_description))
+                db_conn.commit()
+
+            except Exception as e:
+                return str(e)
+
+            finally:
+                cursor.close()
+
             return "Job posted successfully!"
 
     # Render the template and pass the company_log_id and show_company_id to it
