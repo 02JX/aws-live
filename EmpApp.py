@@ -191,11 +191,6 @@ def toComLogin():
 def toComRegister():
     return render_template('CompanyRegister.html')
 
-# Redirect to company job posting page
-@app.route('/toJobPosting')
-def toJobPosting():
-    return render_template('CompanyJob.html')
-
 @app.route("/companyRegis", methods=['POST'])
 def comp_signup():
     company_id = request.form.get('comp_id')
@@ -489,8 +484,19 @@ def display_assignments():
 
     return render_template('DisplayStudentAssignment.html', assignments=assignments)
 
+# Route for assigning students to supervisors
 @app.route("/assignStudents", methods=['GET', 'POST'])
 def assign_students():
+    # Fetch students for the dropdown list
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT std_id, std_first_name, std_last_name FROM studentInformation")
+    students = cursor.fetchall()
+    
+    # Fetch supervisors for the dropdown list
+    cursor.execute("SELECT spv_id, spv_name FROM supervisorInformation")
+    supervisors = cursor.fetchall()
+    cursor.close()
+
     if request.method == 'POST':
         student_id = request.form.get('student_id')
         supervisor_id = request.form.get('supervisor_id')
@@ -522,8 +528,7 @@ def assign_students():
         else:
             return "Student cannot be assigned. Please check the student's status."
     
-    return render_template('AssignStudents.html')
-
+    return render_template('AssignStudents.html', students=students, supervisors=supervisors)
 
 
 
