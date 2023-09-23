@@ -164,9 +164,7 @@ def student_signin():
             if row[0] == student_id and row[1] == password:
                 session['std_id'] = student_id  # Store student_id in the session for future uses
                 return("Login Success!")
-            else:
-                return("Wrong details 1")
-    return("Wrong details 2")
+
 
     # return render_template('StudentHomePage.html')
 
@@ -543,11 +541,10 @@ def display_student_assignment():
     # Fetch data from supervisorHandle and join with studentInformation and supervisorInformation
     cursor.execute("""
         SELECT 
-            supervisorInformation.spv_id,
-            supervisorInformation.spv_name,
-            studentInformation.std_id,
+            supervisorHandle.std_id, 
             studentInformation.std_first_name, 
-            studentInformation.std_last_name
+            studentInformation.std_last_name, 
+            supervisorInformation.spv_id
         FROM supervisorHandle
         LEFT JOIN studentInformation ON supervisorHandle.std_id = studentInformation.std_id
         LEFT JOIN supervisorInformation ON supervisorHandle.spv_id = supervisorInformation.spv_id
@@ -557,7 +554,6 @@ def display_student_assignment():
     cursor.close()
 
     return render_template('DisplayStudentAssignment.html', assignments=assignments)
-
 
 @app.route("/assignStudents", methods=['GET', 'POST'])
 def assign_students():
@@ -647,12 +643,12 @@ def display_student():
 @app.route("/toDisplayStaffs", methods=['GET'])
 def display_staffs():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT stf_id, stf_name, staff_pass FROM staffInformation")
-    staffs = cursor.fetchall()
+    cursor.execute("SELECT stf_id, stf_name, stf_pass FROM staffInformation")
+    staff = cursor.fetchall()
 
     cursor.close()
-    print("Staff:", staffs)
-    return render_template('DisplayStaffs.html', staffs=staffs)
+    print("Staff:", staff)
+    return render_template('DisplayStaff.html', staff=staff)
 
 
 
