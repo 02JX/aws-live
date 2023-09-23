@@ -330,7 +330,7 @@ def staffLogin():
         
     if staff_log_id and staff_log_password:
         for row in staff:
-            if row['stf_id'] == staff_log_id and row['staff_pass'] == staff_log_password:
+            if row[0] == staff_log_id and row[2] == staff_log_password:
                 print ("Login successful")
                 return render_template('StaffHomePage.html')
             else:
