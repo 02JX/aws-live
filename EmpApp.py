@@ -488,31 +488,32 @@ def assign_students():
         student_id = request.form.get('student_id')
         supervisor_id = request.form.get('supervisor_id')
 
-        # Perform the assignment by inserting a new record in the supervisorHandle table
+        # Check if the student's assign_status is "Pending" before assigning
         cursor = db_conn.cursor()
-        insert_sql = "INSERT INTO supervisorHandle (spv_id, std_id) VALUES (%s, %s)"
-        
-        try:
-            cursor.execute(insert_sql, (supervisor_id, student_id))
-            db_conn.commit()
-        except Exception as e:
-            db_conn.rollback()
-            return str(e)
-        finally:
-            cursor.close()
+        select_sql = "SELECT assign_status FROM studentInformation WHERE std_id = %s"
+        cursor.execute(select_sql, (student_id,))
+        status = cursor.fetchone()
 
-        # Redirect to a confirmation page or another relevant page
-        return redirect('/assignmentsDisplay')  # You can change this URL
-    
-    # Fetch students and supervisors for the dropdown lists
-    cursor = db_conn.cursor()
-    cursor.execute("SELECT std_id, std_first_name, std_last_name FROM studentInformation")
-    students = cursor.fetchall()
-    cursor.execute("SELECT spv_id, spv_name FROM supervisorInformation")
-    supervisors = cursor.fetchall()
-    cursor.close()
+        if status and status[0] == 'Pending':
+            # Perform the assignment by inserting a new record in the supervisorHandle table
+            insert_sql = "INSERT INTO supervisorHandle (spv_id, std_id) VALUES (%s, %s)"
+            
+            try:
+                cursor.execute(insert_sql, (supervisor_id, student_id))
+                # Update the student's assign_status to "Assigned"
+                update_sql = "UPDATE studentInformation SET assign_status = 'Assigned' WHERE std_id = %s"
+                cursor.execute(update_sql, (student_id,))
+                db_conn.commit()
+            except Exception as e:
+                db_conn.rollback()
+                return str(e)
+            finally:
+                cursor.close()
 
-    return render_template('AssignStudents.html', students=students, supervisors=supervisors)
+            # Redirect to a confirmation page or another relevant page
+            return redirect('/assignmentConfirmation')  # You can change this URL
+        else:
+            return "Student cannot be assigned. Please check the student's status."
 
 #--------------------------------------------END OF STAFF PAGE-------------------------------------
 
