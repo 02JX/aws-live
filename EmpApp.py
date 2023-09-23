@@ -474,6 +474,7 @@ def displayAssignedStudent(supervisor_name_display):
             return "Incorrect login details"
     return (supervisor_id)   
 
+
 #--------------------------------------------END OF STAFF PAGE-------------------------------------
 
 #--------------------------------------------SUPERVISOR--------------------------------------------
