@@ -76,10 +76,15 @@
                                 </form>
                             </td>
                             <td> 
-                                <form method="GET" action="/downloadJobFile">
-                                    <input type="hidden" name="job_file_name" value="{{ row[5] }}">
-                                    <button type="submit">Download</button>
-                                </form>
+                                <div style="display: flex; align-items: center;">
+                                    <!-- Display related file name -->
+                                    <span>{{ row[5] }}</span>
+                                    <!-- Download button -->
+                                    <form method="GET" action="/downloadJobFile">
+                                        <input type="hidden" name="job_file_name" value="{{ row[5] }}">
+                                        <button type="submit">Download</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                         {% endfor %}
