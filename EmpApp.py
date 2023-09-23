@@ -434,6 +434,32 @@ def supervisorregister():
 
 #--------------------------------------------END OF SUPERVISOR-------------------------------------
 
+#--------------------------------------------PORTFOLIO---------------------------------------------
+# Redirect to portfolio leejiaxuan
+@app.route("/toPFLeeJiaXuan")
+def toLJX():
+    return render_template('PortfolioLeeJiaXuan.html')
+
+# Redirect to portfolio tanjunchuan
+@app.route("/toPFTanJunChuan")
+def toLJX():
+    return render_template('PortfolioTanJunChuan.html')
+
+# Redirect to portfolio tamjiashun
+@app.route("/toPFTamJiaShun")
+def toLJX():
+    return render_template('PortfolioTamJiaShun.html')
+
+# Redirect to portfolio nguyenquanghien
+@app.route("/toPFNguyenQuangHien")
+def toLJX():
+    return render_template('PortfolioNguyenQuangHien.html')
+
+# Redirect to portfolio eric
+@app.route("/toPFEricTan")
+def toLJX():
+    return render_template('PortfolioEricTan.html')
+
 # END OF CODING
 # Establish connection
 if __name__ == '__main__':
