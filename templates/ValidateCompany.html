@@ -11,14 +11,16 @@
         <body bgcolor="lightgrey">
 
             <form action="/validateCompany" method="POST">
+                {% for company in pending_companies %}
                 <label for="companyName">Company Name:</label><br/>
-                <input type="text" id="companyName" name="companyName" required readonly><br/><br/>
+                <input type="text" id="companyName" name="companyName" value="{{ company['comp_name'] }}" required readonly><br/><br/>
         
                 <label for="industry">Industry:</label><br/>
-                <input type="text" id="industry" name="industry" required readonly><br/><br/>
+                <input type="text" id="industry" name="industry" value="{{ company['comp_industry'] }}" required readonly><br/><br/>
         
                 <label for="address">Address:</label><br/>
-                <textarea id="address" name="address" rows="4" required readonly></textarea><br/><br/>
+                <textarea id="address" name="address" rows="4" required readonly>{{ company['comp_address'] }}</textarea><br/><br/>
+                {% endfor %}
         
                 <!-- Approve and Reject buttons -->
                 <button type="submit" name="action" value="approve">Approve</button>
