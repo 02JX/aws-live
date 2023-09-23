@@ -484,16 +484,17 @@ def display_assignments():
 
     return render_template('DisplayStudentAssignment.html', assignments=assignments)
 
+# Fetch students and supervisors for the dropdown lists
+cursor = db_conn.cursor()
+cursor.execute("SELECT std_id, std_first_name, std_last_name FROM studentInformation")
+students = cursor.fetchall()
+cursor.execute("SELECT spv_id, spv_name FROM supervisorInformation")
+supervisors = cursor.fetchall()
+cursor.close()
+
 # Route for assigning students to supervisors
 @app.route("/assignStudents", methods=['GET', 'POST'])
 def assign_students():
-    # Fetch students and supervisors for the dropdown lists
-    cursor = db_conn.cursor()
-    cursor.execute("SELECT std_id, std_first_name, std_last_name FROM studentInformation")
-    students = cursor.fetchall()
-    cursor.execute("SELECT spv_id, spv_name FROM supervisorInformation")
-    supervisors = cursor.fetchall()
-    cursor.close()
 
     if request.method == 'POST':
         student_id = request.form.get('student_id')
@@ -522,7 +523,7 @@ def assign_students():
                 cursor.close()
 
             # Redirect to a confirmation page or another relevant page
-            return redirect('/assignmentConfirmation')  # You can change this URL
+            return redirect('/assignmentsDisplay')
         else:
             return "Student cannot be assigned. Please check the student's status."
     
