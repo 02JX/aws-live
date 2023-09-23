@@ -290,7 +290,7 @@ def job_posting():
                 return "ples selec file name lol"
 
             try:
-                cursor.execute(insert_sql_comp, (company_log_id, job_id, job_name, job_description))
+                cursor.execute(insert_sql_comp, (company_log_id, job_id, job_name, job_description, job_img_file_name))
                 db_conn.commit()
                 # Upload image file in S3 
                 job_img_in_s3 = job_img_file_name
