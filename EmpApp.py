@@ -350,11 +350,6 @@ def toViewAssigned():
 def toStaffRegister():
     return render_template('StaffRegister.html')
 
-# Redirect to Validate Company page
-@app.route("/toValidateCompany")
-def toValidateCompany():
-    return render_template('ValidateCompany.html')
-
 # Redirect to Assign Student to Supervisors page
 @app.route("/toAssignStudent")
 def toAssignStudents():
@@ -439,16 +434,14 @@ def staff_data():
     return render_template('DisplayStaffs.html', staffs=staffs)
 
 # Validate Company function
-@app.route('/validateCompany', methods=['GET','POST'])
-def validate_comp_page():
-
+@app.route("/validateCompany", methods=['GET'])
+def validate_company():
     cursor = db_conn.cursor()
     cursor.execute("SELECT comp_id, comp_name, comp_industry, comp_address, comp_password, comp_status FROM company WHERE comp_status = 'Pending'")
-    companyDetails = cursor.fetchall()
+    pending_companies = cursor.fetchall()
     cursor.close()
 
-        # Render the HTML template with the fetched data
-    return render_template('ValidateCompany.html', pending_companies=companyDetails)
+    return render_template('ValidateCompany.html', pending_companies=pending_companies)
 
 # View Student Assigned to SuperVisor
 @app.route('/viewAssignedStudents', methods=['GET', 'POST'])
