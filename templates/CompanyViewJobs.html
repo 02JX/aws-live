@@ -45,12 +45,14 @@
                             <th>Job ID</th>
                             <th>Job Name</th>
                             <th>Job Description</th>
+                            <th>Job Status</th>
                         </tr>
                         {% for row in company_job_data %}
                         <tr>
                             <td>{{ row[1] }}</td>
                             <td>{{ row[2] }}</td>
                             <td>{{ row[3] }}</td>
+                            <td>{{ row[5] }}</td>
                         </tr>
                         {% endfor %}
                     </table>
