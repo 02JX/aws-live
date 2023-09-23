@@ -87,6 +87,11 @@ output = {}
 def home():
     return render_template('HomePage.html')
 
+# Home page
+@app.route("/toHomePage")
+def toHome():
+    return render_template('HomePage.html')
+
 # START CODING HERE
 
 #------------------------------------------------------------------------------Student Sign Up
