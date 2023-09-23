@@ -345,9 +345,9 @@ def toStaffLogin():
 def toViewAssigned():
     return render_template('ViewAssign.html')
 
-@app.route("/supervisorData")
-def supervisorData():
-    return render_template('DisplaySupervisors.html')
+# @app.route("/supervisorData")
+# def supervisorData():
+#     return render_template('DisplaySupervisors.html')
 
 # Redirect to Staff register page
 @app.route("/toStaffRegister")
