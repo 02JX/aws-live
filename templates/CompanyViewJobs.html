@@ -34,24 +34,26 @@
 <center>
     <font color="black" size="4" style="font-family: avenir">
         <h1 style="color: DodgerBlue">View Current Job Posts</h1>
-        <body bgcolor="lightgrey">
-            <form action="/viewJobs" autocomplete="on" method="GET" enctype="multipart/form-data">
-                <!-- Display the Company ID immediately -->
-                Company ID: 
-                <strong id="company_id_display">{{ company_log_id }}</strong><br><br>
-
-                <!-- Job posting form fields -->
-                Job Name:<br>
-                <input style="height: 25px; font-size: 14pt; color: grey;" type="text" name="job_id"><br><br>
-                Job Name:<br>
-                <input style="height: 25px; font-size: 14pt; color: grey;" type="text" name="job_name"><br><br>
-                Job Description:<br>
-                <input style="height: 300px; font-size: 14pt; color: grey;" type="text" name="job_desc"><br><br>
-				Job Img:<br>
-				<input style="position: center; font-size: 10t; color: grey;" type="file" name="job_img"><br><br> <!-- Added name="job_img" -->
-                <!-- Submit button for posting the job -->
-                <button type="submit" name="submit_job" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font: oblique;">Post Job</button>
-            </form>
+        <body>
+            <center>
+                <font color="black" size="4" style="font-family: avenir">
+                    <h1 style="color: DodgerBlue">View Job Details</h1>
+                    <table border="1">
+                        <tr>
+                            <th>Job ID</th>
+                            <th>Job Name</th>
+                            <th>Job Description</th>
+                        </tr>
+                        {% for job in job_data %}
+                        <tr>
+                            <td>{{ job.job_id }}</td>
+                            <td>{{ job.job_name }}</td>
+                            <td>{{ job.job_description }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </font>
+            </center>
         </body>
     </font>
 </center>
