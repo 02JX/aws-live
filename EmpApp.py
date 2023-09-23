@@ -648,7 +648,7 @@ def display_staffs():
 
     cursor.close()
     print("Staffs:", staffs)
-    return render_template('DisplayStaff.html', staffs=staffs)
+    return render_template('DisplayStaffs.html', staffs=staffs)
 
 
 
