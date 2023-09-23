@@ -167,6 +167,9 @@ def student_signin():
                 return("Wrong details 1")
     return("Wrong details 2")
 
+
+    
+
     # return render_template('StudentHomePage.html')
 
     #     # Check if the student exists in the dictionary (for demonstration purposes)
