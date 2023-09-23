@@ -311,7 +311,7 @@ def update_job_status():
     cursor = db_conn.cursor()
 
     # Determine the new status
-    new_status = 'INACTIVE' if current_status == 'HIRING' else 'HIRING'
+    new_status = 'INACTIVE' if current_status == 'ACTIVE' else 'ACTIVE'
 
     # Update the job status in the database
     sql_query = "UPDATE internship SET job_status = %s WHERE comp_id = %s AND job_id = %s"
@@ -341,7 +341,7 @@ def job_posting():
             job_files = request.files.get('job_files')
 
             job_id = str(company_log_id) + "_" + str(job_name)
-            job_status = "HIRING"
+            job_status = "ACTIVE"
 
             job_img_file_name = str(company_log_id) + "_" + str(job_id) + "_file.pdf"
 
