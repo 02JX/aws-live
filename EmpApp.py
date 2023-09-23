@@ -215,10 +215,19 @@ def comp_signup():
         'company_status' : company_status
     }
 
-    insert_sql_comp = "INSERT INTO company VALUES (%s, %s, %s, %s, %s, %s)"
+    # Check if the company ID already exists in the database
+    select_sql_comp = "SELECT * FROM company WHERE comp_id = %s"
     cursor = db_conn.cursor()
 
     try:
+        cursor.execute(select_sql_comp, (company_id,))
+        existing_company = cursor.fetchone()
+
+        if existing_company:
+            return render_template('CompanyRegister.html', error_message="Company ID already exists. Please choose a different ID.")
+
+        # If the company ID is unique, proceed with registration
+        insert_sql_comp = "INSERT INTO company VALUES (%s, %s, %s, %s, %s, %s)"
         cursor.execute(insert_sql_comp, (company_id, company_name, company_industry, company_address, company_password, company_status))
         db_conn.commit()
 
@@ -299,10 +308,12 @@ def job_posting():
             show_company_id = True
 
         elif 'submit_job' in request.form:
-            job_id = request.form.get('job_id')
+            # job_id = request.form.get('job_id')
             job_name = request.form.get('job_name')
             job_description = request.form.get('job_desc')
             job_files = request.files.get('job_files')
+
+            job_id = str(company_log_id) + "_" + str(job_name)
 
             job_img_file_name = str(company_log_id) + "_" + str(job_id) + "_file.pdf"
 
@@ -317,6 +328,7 @@ def job_posting():
             cursor = db_conn.cursor()
 
             if job_files.filename == "":
+                job_img_file_name = None
                 try:
                     cursor.execute(insert_sql_comp, (company_log_id, job_id, job_name, job_description, job_img_file_name))
                     db_conn.commit()
@@ -689,8 +701,16 @@ def supervisorregister():
     return render_template('StaffHomePage.html')
 
 
+# Display Intern Application
+@app.route("/internData", methods=['GET'])
+def intern_data():
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT std_id, std_first_name FROM studentInformation")
+    interns = cursor.fetchall()
 
+    cursor.close()
 
+    return render_template('InternApplication.html', interns=interns)
 
 
 #--------------------------------------------END OF SUPERVISOR-------------------------------------

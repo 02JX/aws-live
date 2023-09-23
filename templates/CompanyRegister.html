@@ -88,6 +88,14 @@
 						<br><br>
 						<a href="/toHomePage">Go Back to Login Portal</a>
 						<br><br>
+
+						{% if error_message %}
+						<script>
+							// Display the error message as a pop-up
+							alert("{{ error_message }}");
+						</script>
+						{% endif %}
+
 					</body>
 
 			</font>

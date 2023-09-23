@@ -40,95 +40,35 @@
 		<body bgcolor="lightgrey">
 
 			
-			<form action="/acceptIntern" autocomplete="on" method = "POST" enctype="multipart/form-data">
-				<form action="/rejectIntern" autocomplete="on" method = "POST" enctype="multipart/form-data"></form>
-			<div style="display: flex; flex-wrap: wrap; justify-content: center;">
-
-				<!-- First Table -->
-				<div style="border: 1px solid #ccc; padding: 100px; margin: 10px; width: 400px; text-align: center;">
-				  <div>
-					Student ID:<br> {{ std_id }} <br><br>
-					First Name:<br> {{ std_first_name }} <br><br>
-					Last Name:<br> {{ std_last_name }} <br><br>
-				  </div>
-				  <a href="/toPortfolioEricTan">View Resume</a><br/><br/>
-				  <button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Accept</a></button><br/><br/>
-				  <button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Reject</a></button><br/><br/>
-				</div>
-				<!-- Second Table -->
-				<div style="border: 1px solid #ccc; padding: 100px; margin: 10px; width: 400px; text-align: center;">
-					<div>
-					  Student ID:<br> {{ std_id }} <br><br>
-					  First Name:<br> {{ std_first_name }} <br><br>
-					  Last Name:<br> {{ std_last_name }} <br><br>
-					</div>
-					<a href="/toPortfolioEricTan">View Resume</a><br/><br/>
-					<button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Accept</a></button><br/><br/>
-				  	<button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Reject</a></button><br/><br/>
-				  </div>
-			  
-				<!-- Third Table -->
-				<div style="border: 1px solid #ccc; padding: 100px; margin: 10px; width: 400px; text-align: center;">
-					<div>
-					  Student ID:<br> {{ std_id }} <br><br>
-					  First Name:<br> {{ std_first_name }} <br><br>
-					  Last Name:<br> {{ std_last_name }} <br><br>
-					</div>
-					<a href="/toPortfolioEricTan">View Resume</a><br/><br/>
-					<button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Accept</a></button><br/><br/>
-				  	<button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Reject</a></button><br/><br/>
-				  </div>
-			  
-				<!-- Fourth Table -->
-				<div style="border: 1px solid #ccc; padding: 100px; margin: 10px; width: 400px; text-align: center;">
-					<div>
-					  Student ID:<br> {{ std_id }} <br><br>
-					  First Name:<br> {{ std_first_name }} <br><br>
-					  Last Name:<br> {{ std_last_name }} <br><br>
-					</div>
-					<a href="/toPortfolioEricTan">View Resume</a><br/><br/>
-					<button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Accept</a></button><br/><br/>
-				  	<button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Reject</a></button><br/><br/>
-				  </div>
-			  
-				<!-- Fifth Table -->
-				<div style="border: 1px solid #ccc; padding: 100px; margin: 10px; width: 400px; text-align: center;">
-					<div>
-					  Student ID:<br> {{ std_id }} <br><br>
-					  First Name:<br> {{ std_first_name }} <br><br>
-					  Last Name:<br> {{ std_last_name }} <br><br>
-					</div>
-					<a href="/toPortfolioEricTan">View Resume</a><br/><br/>
-					<button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Accept</a></button><br/><br/>
-				  	<button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Reject</a></button><br/><br/>
-				  </div>
-			  
-				<!-- Sixth Table -->
-				<div style="border: 1px solid #ccc; padding: 100px; margin: 10px; width: 400px; text-align: center;">
-					<div>
-					  Student ID:<br> {{ std_id }} <br><br>
-					  First Name:<br> {{ std_first_name }} <br><br>
-					  Last Name:<br> {{ std_last_name }} <br><br>
-					</div>
-					<a href="/toPortfolioEricTan">View Resume</a><br/><br/>
-					<button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Accept</a></button><br/><br/>
-				  	<button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Reject</a></button><br/><br/>
-				  </div>
-			  
-				
-			  
-			  </div>
-			  
-			  </div>
-			  
-		
-			  
-			  
-				  
-			</form>
-
+			<table class="table table-bordered" autocomplete="on" method = "GET" enctype="multipart/form-data">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Company ID</th>
+                        <th>Company Name</th>
+						<th>Intern Status</th>
+						<th>Letter A</th>
+						<th>Letter B</th>
+						<th>Decision</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in interns %}
+                        <tr>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                            <!-- <td>{{ row[2] }}</td>
+							<td>{{ row[3] }}</td>
+                            <td>{{ row[4] }}</td>
+							<td>{{ row[5] }}</td> -->
+							<td><button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Accept</a></button><br/><br/>
+								<button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Reject</a></button><br/><br/>
+							</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 		</body>
-
 	</font>
 </center>
 </html>
