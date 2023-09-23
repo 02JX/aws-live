@@ -216,7 +216,7 @@ def comp_signup():
     }
 
     # Check if the company ID already exists in the database
-    select_sql_comp = "SELECT * FROM company WHERE company_id = %s"
+    select_sql_comp = "SELECT * FROM company WHERE comp_id = %s"
     cursor = db_conn.cursor()
 
     try:
