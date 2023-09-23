@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session, redirect, send_file
 from pymysql import connections
 import os
 import boto3
+import botocore
 from config import *
 
 app = Flask(__name__)
@@ -579,14 +580,19 @@ def download_job_file():
     s3_bucket = custombucket
     s3_key = job_file_name
     # Use Boto3 to download the file from S3
+    s3 = boto3.client('s3')
     s3_resource = boto3.resource('s3')  # Use resource, not client
 
     try:
-        s3_resource.Bucket(s3_bucket).download_file(s3_key)
+        s3_resource.Bucket(s3_bucket).download_file(s3_key, job_file_name)
         return "Success Download"
-    except Exception as e:
-        print(f"Error downloading file: {str(e)}")
-        return "File download failed"
+    except botocore.exceptions.NoCredentialsError:
+        return "AWS credentials not found."
+    except botocore.exceptions.ClientError as e:
+        if e.response['Error']['Code'] == "404":
+            return "File not found."
+        else:
+            return f"Error downloading file: {str(e)}", 500
 
 #--------------------------------------------END OF COMPANY PAGE-----------------------------------
 
