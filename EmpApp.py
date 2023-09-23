@@ -279,7 +279,7 @@ def comp_signin_page():
 
 
 # View Company Details
-@app.route('/viewCompanyDetails', methods=['GET'])
+@app.route('/toViewCompanyDetails', methods=['GET'])
 def view_company_details():
     # Check if the user is logged in as a company
     if 'company_id' in session:
