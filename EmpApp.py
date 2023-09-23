@@ -302,9 +302,9 @@ def job_posting():
             job_id = request.form.get('job_id')
             job_name = request.form.get('job_name')
             job_description = request.form.get('job_desc')
-            job_img = request.files.get('job_img')
+            job_files = request.files.get('job_files')
 
-            job_img_file_name = str(company_log_id) + "_" + str(job_id) + "_image.jpeg"
+            job_img_file_name = str(company_log_id) + "_" + str(job_id) + "_file.pdf"
 
             job[company_log_id] = { #rember to put = { }
                 'job_id' : job_id,
@@ -316,7 +316,7 @@ def job_posting():
             insert_sql_comp = "INSERT INTO internship VALUES (%s, %s, %s, %s, %s)"
             cursor = db_conn.cursor()
 
-            if job_img.filename == "":
+            if job_files.filename == "":
                 return "ples selec file name lol"
 
             try:
@@ -328,7 +328,7 @@ def job_posting():
 
                 try:
                     print("Data inserted...Uploaded to S3")
-                    s3.Bucket(custombucket).put_object(Key=job_img_in_s3, Body=job_img)
+                    s3.Bucket(custombucket).put_object(Key=job_img_in_s3, Body=job_files)
                     bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
                     s3_location = (bucket_location['LocationConstraint'])
 
