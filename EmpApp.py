@@ -617,9 +617,16 @@ def toPortfolioEricTan():
     return render_template('PortfolioEricTan.html')
 
 # Redirect to viewSupervisorList
-@app.route("/toDisplaySupervisors")
-def toDisplaySupervisors():
-    return render_template('DisplaySupervisors.html')
+@app.route("/toDisplaySupervisors", methods=['GET'])
+def display_supervisors():
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT spv_id, spv_name, spv_pass, spv_contact, spv_email FROM supervisorInformation")
+    supervisors = cursor.fetchall()
+
+    cursor.close()
+    print("Supervisors:", supervisors)
+    return render_template('DisplaySupervisors.html', supervisors=supervisors)
+
 # Redirect to viewStudentList
 @app.route("/toViewStudent")
 def toViewStudent():
