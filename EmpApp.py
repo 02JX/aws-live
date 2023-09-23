@@ -701,6 +701,16 @@ def supervisorregister():
     return render_template('StaffHomePage.html')
 
 
+# Display Intern Application
+@app.route("/internData", methods=['GET'])
+def intern_data():
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT std_id, cmp_id, cmp_name, intern_status, student_letter_A, student_letter_B FROM student")
+    interns = cursor.fetchall()
+
+    cursor.close()
+
+    return render_template('InternApplication.html', interns=interns)
 
 
 
