@@ -582,7 +582,7 @@ def download_job_file():
     s3_resource = boto3.resource('s3')  # Use resource, not client
 
     try:
-        s3_resource.Bucket(s3_bucket).download_file(s3_key, 'test_file')
+        s3_resource.Bucket(s3_bucket).download_file(s3_key)
         return "Success Download"
     except Exception as e:
         print(f"Error downloading file: {str(e)}")
