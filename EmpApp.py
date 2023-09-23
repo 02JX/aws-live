@@ -584,8 +584,15 @@ def download_job_file():
     s3_resource = boto3.resource('s3')  # Use resource, not client
 
     try:
-        s3_resource.Bucket(s3_bucket).download_file(s3_key, job_file_name)
-        return "Success Download"
+
+        # Download the file from S3 to a temporary location
+        tmp_file_path = f"/tmp/{job_file_name}"
+        
+        s3_resource.Bucket(s3_bucket).download_file(s3_key, tmp_file_path)
+        
+        # Return the file to the user for download
+        return send_file(tmp_file_path, as_attachment=True, attachment_filename=job_file_name)
+
     except botocore.exceptions.NoCredentialsError:
         return "AWS credentials not found."
     except botocore.exceptions.ClientError as e:
