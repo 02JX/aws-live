@@ -299,10 +299,12 @@ def job_posting():
             show_company_id = True
 
         elif 'submit_job' in request.form:
-            job_id = request.form.get('job_id')
+            # job_id = request.form.get('job_id')
             job_name = request.form.get('job_name')
             job_description = request.form.get('job_desc')
             job_files = request.files.get('job_files')
+
+            job_id = str(company_log_id) + "_" + str(job_name)
 
             job_img_file_name = str(company_log_id) + "_" + str(job_id) + "_file.pdf"
 
