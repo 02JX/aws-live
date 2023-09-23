@@ -215,11 +215,12 @@ def comp_signup():
         'company_status' : company_status
     }
 
-    insert_sql_comp = "INSERT INTO company VALUES (%s, %s, %s, %s, %s, %s)"
+    # Check if the company ID already exists in the database
+    select_sql_comp = "SELECT * FROM company WHERE company_id = %s"
     cursor = db_conn.cursor()
 
     try:
-        cursor.execute(insert_sql_comp, (company_id,))
+        cursor.execute(select_sql_comp, (company_id,))
         existing_company = cursor.fetchone()
 
         if existing_company:
