@@ -159,9 +159,10 @@ def student_signin():
     password = request.args.get('std_lg_pass')
 
 
-    if student_id and dbPassword:
-        for row in students:
-            if row[0] == student_id and row[3] == password:
+    if student_id and password:
+        for row in dbPassword:
+            if row[0] == student_id and row[1] == password:
+                session['std_id'] = student_id  # Store student_id in the session for future uses
                 return("Login Success!")
 
 
@@ -642,12 +643,12 @@ def display_student():
 @app.route("/toDisplayStaffs", methods=['GET'])
 def display_staffs():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT stf_id, stf_name, stf_pass FROM staffInformation")
-    staff = cursor.fetchall()
+    cursor.execute("SELECT stf_id, stf_name, staff_pass FROM staffInformation")
+    staffs = cursor.fetchall()
 
     cursor.close()
-    print("Staff:", staff)
-    return render_template('DisplayStaff.html', staff=staff)
+    print("Staffs:", staffs)
+    return render_template('DisplayStaff.html', staffs=staffs)
 
 
 
