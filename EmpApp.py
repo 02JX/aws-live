@@ -539,7 +539,7 @@ def display_student_assignment():
             supervisorHandle.std_id, 
             studentInformation.std_first_name, 
             studentInformation.std_last_name, 
-            supervisorInformation.spv_name
+            COALESCE(supervisorInformation.spv_name, 'N/A') AS spv_name
         FROM supervisorHandle
         LEFT JOIN studentInformation ON supervisorHandle.std_id = studentInformation.std_id
         LEFT JOIN supervisorInformation ON supervisorHandle.spv_id = supervisorInformation.spv_id
