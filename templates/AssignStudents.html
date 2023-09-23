@@ -38,21 +38,25 @@
             <h1 style="color: DodgerBlue; margin-top: 20px;">Assign Students to Supervisor</h1>
 
             <body bgcolor="lightgrey">
-                <div>
-                    <form action="{{ url_for('assign_students') }}" method="post" style="text-align: center;">
-                        <label for="student_id">Enter Student ID:</label>
-                        <input type="text" name="student_id" id="student_id">
+                <form action="{{ url_for('assign_students') }}" method="post" style="text-align: center;">
+                    <div class="container" style="width: 40%; margin-top: 10px;">
+                        <h5>Enter Student ID:</h5>
+                        <div class="iq-input">
+                            <input class="first_input" type="text" name="student_id" id="student_id" style="text-transform: none;">
+                        </div>
                         
-                        <label for="supervisor_id">Enter Supervisor ID:</label>
-                        <input type="text" name="supervisor_id" id="supervisor_id">
+                        <h5>Enter Supervisor ID:</h5>
+                        <div class="iq-input">
+                            <input class="first_input" type="text" name="supervisor_id" id="supervisor_id" style="text-transform: none;">
+                        </div>
+                        
                         <br>
                         <br>
-                        <br>
-                        <button type="submit" class="btn btn-primary">Assign</button>
-                    </form>
-                </div>
+                        <button type="submit" class="iq_link_1">Assign</button>
+                    </div>
+                </form>
                 <br>
-                <a href="toStaffHomePage">Go Back to Menu</a>
+                <a href="toStaffHomePage" style="margin-bottom: 20px;">Go Back to Menu</a>
             </body>
         </div>
         
