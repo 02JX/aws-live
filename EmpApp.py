@@ -402,10 +402,6 @@ def toStaffLogin():
 def toStaffRegister():
     return render_template('StaffRegister.html')
 
-# Redirect to Assign Student to Supervisors page
-@app.route("/assignStudents")
-def toAssignStudents():
-    return render_template('AssignStudents.html')
     
 # Staff login function
 @app.route('/stafflogin', methods=['GET'])
@@ -536,17 +532,15 @@ def validate_company():
 @app.route("/assignmentsDisplay", methods=['GET'])
 def display_assignments():
     cursor = db_conn.cursor()
+
+    # Use a LEFT JOIN to include students with no assignments
     cursor.execute("""
-        SELECT studentInformation.std_id, 
-               studentInformation.std_first_name, 
-               studentInformation.std_last_name, 
-               supervisorInformation.spv_name 
-        FROM studentInformation 
-        LEFT JOIN supervisorHandle 
-               ON studentInformation.std_id = supervisorHandle.std_id 
-        LEFT JOIN supervisorInformation 
-               ON supervisorHandle.spv_id = supervisorInformation.spv_id
+        SELECT studentInformation.std_id, studentInformation.std_first_name, studentInformation.std_last_name, supervisorInformation.spv_name
+        FROM studentInformation
+        LEFT JOIN supervisorHandle ON studentInformation.std_id = supervisorHandle.std_id
+        LEFT JOIN supervisorInformation ON supervisorHandle.spv_id = supervisorInformation.spv_id
     """)
+
     assignments = cursor.fetchall()
     cursor.close()
 
