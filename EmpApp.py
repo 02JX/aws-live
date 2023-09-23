@@ -381,7 +381,7 @@ def toStaffRegister():
 
 # Redirect to Staff register page
 @app.route("/toDisplayStudent")
-def toDisplayStudent():
+def toViewStudent():
     return render_template('DisplayStudent.html')
 
 # Redirect to Assign Student to Supervisors page
