@@ -345,10 +345,6 @@ def toStaffLogin():
 def toViewAssigned():
     return render_template('ViewAssign.html')
 
-# @app.route("/supervisorData")
-# def supervisorData():
-#     return render_template('DisplaySupervisors.html')
-
 # Redirect to Staff register page
 @app.route("/toStaffRegister")
 def toStaffRegister():
@@ -431,6 +427,16 @@ def supervisor_data():
 
     return render_template('DisplaySupervisors.html', supervisors=supervisors)
 
+# Display Staffs
+@app.route("/staffData", methods=['GET'])
+def staff_data():
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT stf_id, stf_name, staff_pass FROM staffInformation")
+    staffs = cursor.fetchall()
+
+    cursor.close()
+
+    return render_template('DisplayStaffs.html', staffs=staffs)
 
 # Validate Company function
 @app.route('/validateCompany', methods=['GET','POST'])
