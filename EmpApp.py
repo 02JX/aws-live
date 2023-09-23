@@ -548,6 +548,7 @@ def display_student_assignment():
     """)
 
     assignments = cursor.fetchall()
+    print(assignments)
     cursor.close()
 
     return render_template('DisplayStudentAssignment.html', assignments=assignments)
