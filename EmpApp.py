@@ -349,8 +349,6 @@ def toViewAssigned():
 def supervisorData():
     return render_template('DisplaySupervisors.html')
 
-
-
 # Redirect to Staff register page
 @app.route("/toStaffRegister")
 def toStaffRegister():
@@ -420,6 +418,18 @@ def staffregister():
 
     print("Register successfully!")
     return render_template('StaffHomePage.html')
+
+
+# Display Supervisors
+@app.route("/supervisorData", methods=['GET'])
+def supervisor_data():
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT spv_id, spv_name, spv_pass, spv_contact, spv_email, spv_subject FROM supervisorInformation")
+    supervisors = cursor.fetchall()
+    cursor.close()
+
+    return render_template('supervisor_data.html', supervisors=supervisors)
+
 
 # Validate Company function
 @app.route('/validateCompany', methods=['GET','POST'])
