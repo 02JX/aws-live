@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, session, redirect, send_file
 from pymysql import connections
 import os
 import boto3
-import botocore
 from config import *
 
 app = Flask(__name__)
@@ -465,7 +464,7 @@ def download_job_file():
     job_file_name = request.args.get('job_file_name')
 
     # Ensure job_file_name is not empty
-    if job_file_name == None:
+    if job_file_name is None:
         return "File name not provided."
 
     # Define the S3 bucket and key for the file
@@ -478,11 +477,9 @@ def download_job_file():
         s3.Bucket(s3_bucket).download_file(s3_key, 'test_file')
 
 
-    except botocore.exceptions.ClientError as e:
-        if e.response['Error']['Code'] == "404":
-            print("The object does not exist.")
-        else:
-            raise
+    except Exception as e:
+        return str(e)
+    return "File downloaded successfully"
 
 #--------------------------------------------END OF COMPANY PAGE-----------------------------------
 
