@@ -471,53 +471,48 @@ def validate_company():
 
     return render_template('ValidateCompany.html', pending_companies=pending_companies)
 
-
-# View Student Assigned to SuperVisor
-@app.route('/viewAssignedStudents', methods=['GET', 'POST'])
-def viewAssignedStudents():
-
+# Route for displaying student assignments
+@app.route("/assignmentsDisplay", methods=['GET'])
+def display_assignments():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT spv_id, spv_name, spv_pass, spv_contact, spv_email, spv_subject FROM supervisorInformation")
-    supervisor = cursor.fetchall()
+    cursor.execute("SELECT studentInformation.std_id, studentInformation.std_first_name, studentInformation.std_last_name, supervisorInformation.spv_name FROM studentInformation LEFT JOIN supervisorHandle ON studentInformation.std_id = supervisorHandle.std_id LEFT JOIN supervisorInformation ON supervisorHandle.spv_id = supervisorInformation.spv_id")
+    assignments = cursor.fetchall()
     cursor.close()
 
-    spv_id = request.args.get('spv_id')
+    return render_template('DisplayStudentAssignment.html', assignments=assignments)
+
+# Route for assigning students to supervisors
+@app.route("/assignStudents", methods=['POST'])
+def assign_students():
+    if request.method == 'POST':
+        student_id = request.form.get('student_id')
+        supervisor_id = request.form.get('supervisor_id')
+
+        # Perform the assignment by inserting a new record in the supervisorHandle table
+        cursor = db_conn.cursor()
+        insert_sql = "INSERT INTO supervisorHandle (spv_id, std_id) VALUES (%s, %s)"
         
-    if spv_id:
-        for row in supervisor:
-            if row[0] == spv_id :
-                    session['spv_id'] = spv_id  # Store staff_log_id in the session
-                    return render_template('DisplayAssignedStudent.html', spv_id=spv_id)
-            else:
-                return "Account is not active"
-    return "No related staff found"
+        try:
+            cursor.execute(insert_sql, (supervisor_id, student_id))
+            db_conn.commit()
+        except Exception as e:
+            db_conn.rollback()
+            return str(e)
+        finally:
+            cursor.close()
 
-
-supervisor = {}
-
-@app.route('/displayAssignedStudent/<string:supervisor_name_display>', methods=['GET', 'POST'])
-def displayAssignedStudent(supervisor_name_display):
-    # Retrieve spv_id from the session
-    supervisor_id = session.get('spv_id')
-
+        # Redirect to a confirmation page or another relevant page
+        return redirect('/assignmentsDisplay')  # You can change this URL
+    
+    # Fetch students and supervisors for the dropdown lists
     cursor = db_conn.cursor()
-    print(supervisor_id )
-    cursor.execute("SELECT spv_id, spv_name, spv_pass, spv_contact, spv_email, spv_subject FROM supervisorInformation")
-    supervisor = cursor.fetchall()
+    cursor.execute("SELECT std_id, std_first_name, std_last_name FROM studentInformation")
+    students = cursor.fetchall()
+    cursor.execute("SELECT spv_id, spv_name FROM supervisorInformation")
+    supervisors = cursor.fetchall()
     cursor.close()
 
-    # cursor = db_conn.cursor()
-    # cursor.execute("SELECT comp_id, comp_name, comp_industry, comp_address, comp_password, comp_status FROM company")
-    # company = cursor.fetchall()
-    # cursor.close()
-
-    for row in supervisor:
-        if row[0] == supervisor_id:
-            return render_template(spv_name=supervisor_name_display)
-        else:
-            return "Incorrect login details"
-    return (supervisor_id)   
-
+    return render_template('AssignStudents.html', students=students, supervisors=supervisors)
 
 #--------------------------------------------END OF STAFF PAGE-------------------------------------
 

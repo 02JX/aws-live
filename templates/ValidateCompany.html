@@ -60,7 +60,7 @@
                     </tr>
                     {% endfor %}
                 </tbody>
-            </table>
+            </table><br/>
 
             <!-- Company selection form -->
             <form action="{{ url_for('approve_company') }}" method="post">
@@ -70,9 +70,10 @@
                     <option value="{{ company[0] }}">{{ company[1] }}</option>
                     {% endfor %}
                 </select>
+                <br/>
                 <button type="submit" name="action" value="approve" class="btn btn-success">Approve</button>
                 <button type="submit" name="action" value="reject" class="btn btn-danger">Reject</button>
-            </form>
+            </form><br/>
 
             <a href="toStaffHomePage">Go Back to Menu</a>
         </body>
