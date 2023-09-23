@@ -421,7 +421,7 @@ def staffregister():
 
 
 # Display Supervisors
-@app.route("/supervisorData")
+@app.route("/supervisorData", methods=['GET'])
 def supervisor_data(supervisors):
     cursor = db_conn.cursor()
     cursor.execute("SELECT * FROM supervisorInformation")
