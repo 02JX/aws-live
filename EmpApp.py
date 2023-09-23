@@ -471,10 +471,10 @@ def download_job_file():
     s3_bucket = custombucket
     s3_key = job_file_name
     # Use Boto3 to download the file from S3
-    s3 = boto3.client('s3')
+    s3_resource = boto3.resource('s3')  # Use resource, not client
 
     try:
-        s3.Bucket(s3_bucket).download_file(s3_key, 'test_file')
+        s3_resource.Bucket(s3_bucket).download_file(s3_key, 'test_file')
 
 
     except Exception as e:
