@@ -163,7 +163,9 @@ def student_signin():
         for row in students:
             if row[0] == student_id and row[3] == password:
                 return("Login Success!")
-
+            else:
+                return("Wrong details 1")
+    return("Wrong details 1")
 
     # return render_template('StudentHomePage.html')
 
