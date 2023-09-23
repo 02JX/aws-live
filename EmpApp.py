@@ -269,7 +269,7 @@ def comp_signin_page():
                     session['company_id'] = company_log_id  # Store company_log_id in the session
                     return render_template('CompanyHome.html', company_log_id=company_log_id)
                 else:
-                    return "Account is not active"
+                    return render_template('CompanyRegister.html', error_message="Your Company account has not been activated! Please contact Admin")
     return "Your login details are not correct lol"
 
 job = {}
