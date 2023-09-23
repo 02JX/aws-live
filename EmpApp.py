@@ -380,9 +380,9 @@ def toStaffRegister():
     return render_template('StaffRegister.html')
 
 # Redirect to Staff register page
-@app.route("/toStaffRegister")
-def toStaffRegister():
-    return render_template('StaffRegister.html')
+@app.route("/toDisplayStudent")
+def toDisplayStudent():
+    return render_template('DisplayStudent.html')
 
 # Redirect to Assign Student to Supervisors page
 @app.route("/assignStudents")
