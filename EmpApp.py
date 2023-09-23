@@ -317,6 +317,7 @@ def job_posting():
             cursor = db_conn.cursor()
 
             if job_files.filename == "":
+                job_img_file_name = None
                 try:
                     cursor.execute(insert_sql_comp, (company_log_id, job_id, job_name, job_description, job_img_file_name))
                     db_conn.commit()
