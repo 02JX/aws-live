@@ -108,7 +108,7 @@ def toStdSignUp():
     return render_template('StudentSignUp.html')
 
 # Redirect to login
-@app.route('/toStdLogin')
+@app.route('/toStudLogin')
 def toStdLogin():
     return render_template('StudLogin.html')
     
