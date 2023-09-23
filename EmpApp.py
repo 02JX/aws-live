@@ -540,10 +540,11 @@ def display_student_assignment():
     # Fetch data from supervisorHandle and join with studentInformation and supervisorInformation
     cursor.execute("""
         SELECT 
-            supervisorHandle.std_id, 
+            supervisorInformation.spv_id,
+            supervisorInformation.spv_name,
+            studentInformation.std_id,
             studentInformation.std_first_name, 
-            studentInformation.std_last_name, 
-            supervisorInformation.spv_id
+            studentInformation.std_last_name
         FROM supervisorHandle
         LEFT JOIN studentInformation ON supervisorHandle.std_id = studentInformation.std_id
         LEFT JOIN supervisorInformation ON supervisorHandle.spv_id = supervisorInformation.spv_id
@@ -553,6 +554,7 @@ def display_student_assignment():
     cursor.close()
 
     return render_template('DisplayStudentAssignment.html', assignments=assignments)
+
 
 @app.route("/assignStudents", methods=['GET', 'POST'])
 def assign_students():
