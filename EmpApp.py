@@ -645,11 +645,11 @@ def display_student():
 def display_staffs():
     cursor = db_conn.cursor()
     cursor.execute("SELECT stf_id, stf_name, staff_pass FROM staffInformation")
-    staff = cursor.fetchall()
+    staffs = cursor.fetchall()
 
     cursor.close()
-    print("Staff:", staff)
-    return render_template('DisplayStaffs.html', staff=staff)
+    print("Staff:", staffs)
+    return render_template('DisplayStaffs.html', staffs=staffs)
 
 
 
