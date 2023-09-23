@@ -353,7 +353,7 @@ def toStaffRegister():
 # Redirect to Validation Company page
 @app.route("/validateCompany")
 def validateCompany():
-    return render_template('ValidationCompany.html')
+    return render_template('ValidateCompany.html')
 
 
 # Redirect to Assign Student to Supervisors page
