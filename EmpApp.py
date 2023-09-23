@@ -711,7 +711,7 @@ def accept_intern(id):
 
 # Reject Intern
 @app.route("/rejectIntern/<string:id>", methods=['GET'])
-def accept_intern(id): 
+def reject_intern(id): 
     print(id)
     return render_template('SupervisorHomePage.html')
 
