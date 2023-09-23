@@ -38,24 +38,28 @@
 
         <body bgcolor="lightgrey">
 
-            <form action="{{ url_for('assign_students') }}" method="post" style="text-align: center;">
-                <label for="student_select">Select a Student:</label>
-                <select name="student_id" id="student_select">
-                    {% for student in students %}
-                        <option value="{{ student[0] }}">{{ student[1] }} {{ student[2] }}</option>
-                    {% endfor %}
-                </select>
+            <form action="{{ url_for('assign_students') }}" method="post">
+                <div class="form-group">
+                    <label for="student_select">Select a Student:</label>
+                    <select name="student_id" id="student_select" class="form-control">
+                        {% for student in students %}
+                            <option value="{{ student[0] }}">{{ student[1] }} {{ student[2] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
     
-                <label for="supervisor_select">Select a Supervisor:</label>
-                <select name="supervisor_id" id="supervisor_select">
-                    {% for supervisor in supervisors %}
-                        <option value="{{ supervisor[0] }}">{{ supervisor[1] }}</option>
-                    {% endfor %}
-                </select>
-                <br>
-                <br>
-                <br>
-                <button type="submit" class="btn btn-primary">Assign</button>
+                <div class="form-group">
+                    <label for="supervisor_select">Select a Supervisor:</label>
+                    <select name="supervisor_id" id="supervisor_select" class="form-control">
+                        {% for supervisor in supervisors %}
+                            <option value="{{ supervisor[0] }}">{{ supervisor[1] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+    
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Assign</button>
+                </div>
             </form>
             <br>
             <a href="toStaffHomePage">Go Back to Menu</a>
