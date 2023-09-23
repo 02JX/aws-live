@@ -87,6 +87,11 @@ output = {}
 def home():
     return render_template('HomePage.html')
 
+# Home page
+@app.route("/toHomePage")
+def toHome():
+    return render_template('HomePage.html')
+
 # START CODING HERE
 
 #------------------------------------------------------------------------------Student Sign Up
@@ -260,15 +265,6 @@ def company_home_get_id():
 
     # Render the template and pass the company_log_id and show_company_id to it
     return render_template('CompanyHome.html', company_log_id=company_log_id, show_company_id=show_company_id)
-
-# Route to reveal the Company ID
-@app.route('/revealCompanyID', methods=['POST'])
-def reveal_company_id():
-    # Set a session variable to indicate that the Company ID should be shown
-    session['show_company_id'] = True
-
-    # Redirect back to the Company Home page
-    return redirect('/jobPosting')
 
 
 # Company post internship
@@ -446,6 +442,32 @@ def supervisorregister():
 
 
 #--------------------------------------------END OF SUPERVISOR-------------------------------------
+
+#--------------------------------------------PORTFOLIO---------------------------------------------
+# Redirect to portfolio leejiaxuan
+@app.route("/toPFLeeJiaXuan")
+def toLJX():
+    return render_template('PortfolioLeeJiaXuan.html')
+
+# Redirect to portfolio tanjunchuan
+@app.route("/toPFTanJunChuan")
+def toTJC():
+    return render_template('PortfolioTanJunChuan.html')
+
+# Redirect to portfolio tamjiashun
+@app.route("/toPFTamJiaShun")
+def toTJS():
+    return render_template('PortfolioTamJiaShun.html')
+
+# Redirect to portfolio nguyenquanghien
+@app.route("/toPFNguyenQuangHien")
+def toNQH():
+    return render_template('PortfolioNguyenQuangHien.html')
+
+# Redirect to portfolio eric
+@app.route("/toPFEricTan")
+def toET():
+    return render_template('PortfolioEricTan.html')
 
 # END OF CODING
 # Establish connection
