@@ -168,6 +168,9 @@ def student_signin():
                 return("Wrong data 1")
     return("Wrong data 2")
 
+
+    
+
     # return render_template('StudentHomePage.html')
 
     #     # Check if the student exists in the dictionary (for demonstration purposes)
@@ -658,7 +661,7 @@ def display_student():
 
     cursor.close()
     print("Students:", students)
-    return render_template('DisplayStudents.html', students=students)
+    return render_template('DisplayStudent.html', students=students)
 
 # Redirect to viewStaffList
 @app.route("/toDisplayStaffs", methods=['GET'])
@@ -669,7 +672,7 @@ def display_staffs():
 
     cursor.close()
     print("Staffs:", staffs)
-    return render_template('DisplayStaff.html', staffs=staffs)
+    return render_template('DisplayStaffs.html', staffs=staffs)
 
 
 
