@@ -402,11 +402,6 @@ def toStaffLogin():
 def toStaffRegister():
     return render_template('StaffRegister.html')
 
-# Redirect to Display Student page
-@app.route("/studentData")
-def studentData():
-    return render_template('DisplayStudent.html')
-
 # Redirect to Assign Student to Supervisors page
 @app.route("/assignStudents")
 def toAssignStudents():
@@ -466,17 +461,6 @@ def staffregister():
 
     print("Register successfully!")
     return render_template('StaffHomePage.html')
-
-# Display Students
-@app.route("/studentData", methods=['GET'])
-def student_data():
-    cursor = db_conn.cursor()
-    cursor.execute("SELECT std_id, std_first_name, std_last_name, std_pass, assign_status FROM studentInformation")
-    students = cursor.fetchall()
-    cursor.close()
-
-    return render_template('DisplayStudent.html', students=students)
-
 
 # Display Supervisors
 @app.route("/supervisorData", methods=['GET'])
