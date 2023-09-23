@@ -639,7 +639,7 @@ def display_student():
 
     cursor.close()
     print("Students:", students)
-    return render_template('DisplayStudents.html', students=students)
+    return render_template('DisplayStudent.html', students=students)
 
 # Redirect to viewStaffList
 @app.route("/toDisplayStaffs", methods=['GET'])
