@@ -165,7 +165,7 @@ def student_signin():
                 return("Login Success!")
             else:
                 return("Wrong details 1")
-    return("Wrong details 1")
+    return("Wrong details 2")
 
     # return render_template('StudentHomePage.html')
 
