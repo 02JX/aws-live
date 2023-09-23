@@ -54,6 +54,7 @@
                             <th>Job Description</th>
                             <th>Job Status</th>
                             <th>Change Status</th>
+                            <th>Related Files</th>
                         </tr>
                         {% for row in company_job_data %}
                         <tr>
@@ -72,6 +73,12 @@
                                             Set ACTIVE
                                         {% endif %}
                                     </button>
+                                </form>
+                            </td>
+                            <td> 
+                                <form method="GET" action="/downloadJobFile">
+                                    <input type="hidden" name="job_file_name" value="{{ row[5] }}">
+                                    <button type="submit">Download</button>
                                 </form>
                             </td>
                         </tr>

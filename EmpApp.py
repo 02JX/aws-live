@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect, send_file
 from pymysql import connections
 import os
 import boto3
@@ -319,7 +319,7 @@ def comp_view_job_page():
     cursor = db_conn.cursor()
 
     # Modify the SQL query to filter by comp_id
-    sql_query = "SELECT comp_id, job_id, job_name, job_description, job_status FROM internship WHERE comp_id = %s"
+    sql_query = "SELECT comp_id, job_id, job_name, job_description, job_status, job_file_name FROM internship WHERE comp_id = %s"
     cursor.execute(sql_query, (company_log_id,))
 
     company_job_data = cursor.fetchall()
@@ -458,7 +458,36 @@ def job_posting():
     # Render the template and pass the company_log_id and show_company_id to it
     return render_template('CompanyHome.html', company_log_id=company_log_id, show_company_id=show_company_id)
 
+# Download Files in View Job 
+@app.route('/downloadJobFile', methods=['GET'])
+def download_job_file():
+    job_file_name = request.args.get('job_file_name')
 
+    # Ensure job_file_name is not empty
+    if not job_file_name:
+        return "File name not provided."
+
+    # You might want to add some security checks here to ensure the file exists and is accessible
+
+    # Define the S3 bucket and key for the file
+    s3_bucket = custombucket
+    s3_key = job_file_name
+
+    try:
+        # Use Boto3 to download the file from S3
+        s3 = boto3.client('s3')
+        file_object = s3.get_object(Bucket=s3_bucket, Key=s3_key)
+        
+        # Return the file as a download attachment
+        response = send_file(
+            file_object['Body'],
+            as_attachment=True,
+            attachment_filename=job_file_name
+        )
+        return response
+
+    except Exception as e:
+        return str(e)
 
 #--------------------------------------------END OF COMPANY PAGE-----------------------------------
 
