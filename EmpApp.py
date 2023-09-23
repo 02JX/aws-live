@@ -270,7 +270,7 @@ def toViewJobs():
     return render_template('CompanyViewJobs.html', company_log_id=company_log_id)
 
 
-@app.route('/viewCompanyJobPost', methods=['GET'])
+@app.route('/toViewJobs', methods=['GET'])
 def comp_view_job_page():
     company_log_id = session.get('company_id')
 
@@ -278,7 +278,7 @@ def comp_view_job_page():
     
     # Modify the SQL query to filter by comp_id
     sql_query = "SELECT comp_id, job_id, job_name, job_description FROM internship WHERE comp_id = %s"
-    cursor.execute(sql_query, (company_log_id,))
+    cursor.execute(sql_query, (company_log_id))
     
     company_job_data = cursor.fetchall()
 
