@@ -405,7 +405,7 @@ def validate_comp_page():
 def viewAssignedStudents():
 
     cursor = db_conn.cursor()
-    cursor.execute("SELECT spv_id FROM supervisorInformation")
+    cursor.execute("SELECT spv_id, spv_name, spv_pass, spv_contact, spv_email, spv_subject FROM supervisorInformation")
     supervisor = cursor.fetchall()
     cursor.close()
 
@@ -430,7 +430,7 @@ def displayAssignedStudent(supervisor_name_display):
 
     cursor = db_conn.cursor()
     print(supervisor_id )
-    cursor.execute("SELECT spv_id, spv_name FROM supervisorInformation")
+    cursor.execute("SELECT spv_id, spv_name, spv_pass, spv_contact, spv_email, spv_subject FROM supervisorInformation")
     supervisor = cursor.fetchall()
     cursor.close()
 
