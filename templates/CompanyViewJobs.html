@@ -58,10 +58,10 @@
                                     <input type="hidden" name="job_id" value="{{ row[1] }}">
                                     <input type="hidden" name="job_status" value="{{ row[4] }}">
                                     <button type="submit">
-                                        {% if row[4] == 'HIRING' %}
+                                        {% if row[4] == 'ACTIVE' %}
                                             Set INACTIVE
                                         {% else %}
-                                            Set HIRING
+                                            Set ACTIVE
                                         {% endif %}
                                     </button>
                                 </form>
