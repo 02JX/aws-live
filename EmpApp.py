@@ -602,6 +602,18 @@ def toInternApplication():
 def toPortfolioEricTan():
     return render_template('PortfolioEricTan.html')
 
+# Redirect to viewSupervisorList
+@app.route("/toDisplaySupervisors")
+def toDisplaySupervisors():
+    return render_template('DisplaySupervisors.html')
+# Redirect to viewStudentList
+@app.route("/toDisplayStudent")
+def toDisplayStudent():
+    return render_template('DisplayStudent.html')
+# Redirect to viewStaffList
+@app.route("/toDisplayStaffs")
+def toDisplayStaffs():
+    return render_template('DisplayStaffs.html')
 
 
 
