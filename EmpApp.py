@@ -628,8 +628,8 @@ def display_supervisors():
     return render_template('DisplaySupervisors.html', supervisors=supervisors)
 
 # Redirect to viewStudentList
-@app.route("/toDisplayStudents", methods=['GET'])
-def display_students():
+@app.route("/toDisplayStudent", methods=['GET'])
+def display_student():
     cursor = db_conn.cursor()
     cursor.execute("SELECT std_id, std_first_name, std_last_name, std_pass FROM studentInformation")
     students = cursor.fetchall()
@@ -639,8 +639,8 @@ def display_students():
     return render_template('DisplayStudents.html', students=students)
 
 # Redirect to viewStaffList
-@app.route("/toDisplayStaff", methods=['GET'])
-def display_staff():
+@app.route("/toDisplayStaffs", methods=['GET'])
+def display_staffs():
     cursor = db_conn.cursor()
     cursor.execute("SELECT stf_id, stf_name, stf_pass FROM staffInformation")
     staff = cursor.fetchall()
