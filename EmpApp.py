@@ -616,9 +616,9 @@ def toSupervisorHomePage():
     return render_template('SupervisorHomePage.html')
 
 # Redirect to Intern Application
-@app.route("/toInternApplication")
-def toInternApplication():
-    return render_template('InternApplication.html')
+#@app.route("/toInternApplication")
+#def toInternApplication():
+#    return render_template('InternApplication.html')
 
 # Redirect to PortFolioEricTan
 @app.route("/toPortfolioEricTan")
