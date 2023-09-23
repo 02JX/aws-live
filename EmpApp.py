@@ -263,11 +263,11 @@ def toJobPosting():
     company_log_id = session.get('company_id')
     return render_template('CompanyJobPosts.html', company_log_id=company_log_id)
 
-# Redirect to company view job post page
-@app.route('/toViewJobs')
-def toViewJobs():
-    company_log_id = session.get('company_id')
-    return render_template('CompanyViewJobs.html', company_log_id=company_log_id)
+# # Redirect to company view job post page
+# @app.route('/toViewJobs')
+# def toViewJobs():
+#     company_log_id = session.get('company_id')
+#     return render_template('CompanyViewJobs.html', company_log_id=company_log_id)
 
 
 @app.route('/toViewJobs', methods=['GET'])
