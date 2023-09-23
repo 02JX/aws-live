@@ -350,6 +350,12 @@ def toViewAssigned():
 def toStaffRegister():
     return render_template('StaffRegister.html')
 
+# Redirect to Validation Company page
+@app.route("/validateCompany")
+def validateCompany():
+    return render_template('ValidationCompany.html')
+
+
 # Redirect to Assign Student to Supervisors page
 @app.route("/toAssignStudent")
 def toAssignStudents():
@@ -433,7 +439,35 @@ def staff_data():
 
     return render_template('DisplayStaffs.html', staffs=staffs)
 
-# Validate Company function
+# Update the route for company approval and rejection
+@app.route("/approveCompany", methods=['POST'])
+def approve_company():
+    company_id = request.form.get('company_id')
+    action = request.form.get('action')
+
+    if action == 'approve':
+        update_status = 'Approved'
+    elif action == 'reject':
+        update_status = 'Rejected'
+    else:
+        return "Invalid action."
+
+    # Update the company status in the database
+    update_sql = "UPDATE company SET comp_status = %s WHERE comp_id = %s"
+    cursor = db_conn.cursor()
+    
+    try:
+        cursor.execute(update_sql, (update_status, company_id))
+        db_conn.commit()
+    except Exception as e:
+        db_conn.rollback()
+        return str(e)
+    finally:
+        cursor.close()
+
+    return redirect('/validateCompany')
+
+# Update the route for displaying pending companies
 @app.route("/validateCompany", methods=['GET'])
 def validate_company():
     cursor = db_conn.cursor()
@@ -442,6 +476,7 @@ def validate_company():
     cursor.close()
 
     return render_template('ValidateCompany.html', pending_companies=pending_companies)
+
 
 # View Student Assigned to SuperVisor
 @app.route('/viewAssignedStudents', methods=['GET', 'POST'])
