@@ -7,6 +7,8 @@
     <font color="black" size="4" style="font-family: avenir">
         <h1 style="color: DodgerBlue">Supervisor Information</h1>
         <body bgcolor="lightgrey">
+
+        <form action="/supervisorData" autocomplete="on" method="GET" enctype="multipart/form-data">
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -31,6 +33,7 @@
                     {% endfor %}
                 </tbody>
             </table>
+        </form>
 
             <a href="toStaffHomePage">Go Back to Menu</a>
         </body>
