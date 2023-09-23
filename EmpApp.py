@@ -616,9 +616,9 @@ def toSupervisorHomePage():
     return render_template('SupervisorHomePage.html')
 
 # Redirect to Intern Application
-#@app.route("/toInternApplication")
-#def toInternApplication():
-#    return render_template('InternApplication.html')
+@app.route("/toInternApplication")
+def toInternApplication():
+    return render_template('InternApplication.html')
 
 # Redirect to PortFolioEricTan
 @app.route("/toPortfolioEricTan")
@@ -705,7 +705,7 @@ def supervisorregister():
 @app.route("/toInternApplication", methods=['GET'])
 def intern_data():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT std_id, cmp_id, cmp_name, intern_status, student_letter_A, student_letter_B FROM student")
+    cursor.execute("SELECT std_id, std_first_name FROM studentInformation")
     interns = cursor.fetchall()
 
     cursor.close()
