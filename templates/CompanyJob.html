@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Company Home Page</title>
+    <link rel="icon" type="image/x-icon" href="static/images/logo4.png">
+    <!-- Bootstrap -->
+	<link href="static/css/bootstrap.css" rel="stylesheet">
+	<!-- DL Menu CSS -->
+	<link href="static/js/dl-menu/component.css" rel="stylesheet">
+	<!--SLICK SLIDER CSS-->
+	<link rel="stylesheet" type="text/css" href="static/css/slick.css" />
+	<!-- Font Awesome StyleSheet CSS -->
+	<link href="static/css/font-awesome.min.css" rel="stylesheet">
+	<!-- Font Awesome StyleSheet CSS -->
+	<link href="static/css/svg.css" rel="stylesheet">
+	<!-- Pretty Photo CSS -->
+	<link href="static/css/prettyPhoto.css" rel="stylesheet">
+	<!-- Shortcodes CSS -->
+	<link href="static/css/shortcodes.css" rel="stylesheet">
+	<!-- Widget CSS -->
+	<link href="static/css/widget.css" rel="stylesheet">
+	<!-- Typography CSS -->
+	<link href="static/css/typography.css" rel="stylesheet">
+	<!-- Custom Main StyleSheet CSS -->
+	<link href="static/style.css" rel="stylesheet">
+	<!-- Color CSS -->
+	<link href="static/css/color.css" rel="stylesheet">
+	<!-- Responsive CSS -->
+	<link href="static/css/responsive.css" rel="stylesheet">
+</head>
+<center>
+    <font color="black" size="4" style="font-family: avenir">
+        <h1 style="color: DodgerBlue">Internship Job Post</h1>
+        <body bgcolor="lightgrey">
+            <form action="/jobPosting" autocomplete="on" method="POST" enctype="multipart/form-data">
+                <!-- Display the Company ID immediately -->
+                Company ID: 
+                <strong id="company_id_display">{{ company_log_id }}</strong><br><br>
+
+                <!-- Job posting form fields -->
+                Job Name:<br>
+                <input style="height: 25px; font-size: 14pt; color: grey;" type="text" name="job_id"><br><br>
+                Job Name:<br>
+                <input style="height: 25px; font-size: 14pt; color: grey;" type="text" name="job_name"><br><br>
+                Job Description:<br>
+                <input style="height: 300px; font-size: 14pt; color: grey;" type="text" name="job_desc"><br><br>
+				Job Img:<br>
+				<input style="position: center; font-size: 10t; color: grey;" type="file" name="job_img"><br><br> <!-- Added name="job_img" -->
+                <!-- Submit button for posting the job -->
+                <button type="submit" name="submit_job" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font: oblique;">Post Job</button>
+            </form>
+        </body>
+    </font>
+</center>
+</html>
