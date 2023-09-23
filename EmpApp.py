@@ -162,10 +162,11 @@ def student_signin():
     if student_id and password:
         for row in dbPassword:
             if row[0] == student_id and row[1] == password:
+                session['std_id'] = student_id  # Store student_id in the session for future uses
                 return("Login Success!")
-            else:
-                return("Wrong details 1")
-    return("Wrong details 2")
+            else: 
+                return("Wrong data 1")
+    return("Wrong data 2")
 
 
     
@@ -545,11 +546,10 @@ def display_student_assignment():
     # Fetch data from supervisorHandle and join with studentInformation and supervisorInformation
     cursor.execute("""
         SELECT 
-            supervisorInformation.spv_id,
-            supervisorInformation.spv_name,
-            studentInformation.std_id,
+            supervisorHandle.std_id, 
             studentInformation.std_first_name, 
-            studentInformation.std_last_name
+            studentInformation.std_last_name, 
+            supervisorInformation.spv_id
         FROM supervisorHandle
         LEFT JOIN studentInformation ON supervisorHandle.std_id = studentInformation.std_id
         LEFT JOIN supervisorInformation ON supervisorHandle.spv_id = supervisorInformation.spv_id
@@ -559,7 +559,6 @@ def display_student_assignment():
     cursor.close()
 
     return render_template('DisplayStudentAssignment.html', assignments=assignments)
-
 
 @app.route("/assignStudents", methods=['GET', 'POST'])
 def assign_students():
@@ -643,7 +642,7 @@ def display_student():
 
     cursor.close()
     print("Students:", students)
-    return render_template('DisplayStudents.html', students=students)
+    return render_template('DisplayStudent.html', students=students)
 
 # Redirect to viewStaffList
 @app.route("/toDisplayStaffs", methods=['GET'])
@@ -653,7 +652,7 @@ def display_staffs():
     staffs = cursor.fetchall()
 
     cursor.close()
-    print("Staff:", staffs)
+    print("Staffs:", staffs)
     return render_template('DisplayStaffs.html', staffs=staffs)
 
 
