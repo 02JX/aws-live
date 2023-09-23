@@ -249,7 +249,7 @@ def comp_signin_page():
                 if row[5] == "Approved":
                     print ("Login successful")
                     session['company_id'] = company_log_id  # Store company_log_id in the session
-                    return render_template('CompanyHome.html')
+                    return render_template('CompanyHome.html', company_log_id=company_log_id)
                 else:
                     return "Account is not active"
     return "Your login details are not correct lol"
