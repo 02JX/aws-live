@@ -44,30 +44,26 @@
                 <thead>
                     <tr>
                         <th>Student ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-						<th>Intern Status</th>
-						<!-- <th>Letter A</th>
-						<th>Letter B</th> -->
-						<th>Decision</th>
-                    </tr>
+                        <th>Company ID</th>
+					</tr>
                 </thead>
                 <tbody>
+					<tr>
+						<td>TESTING1</td>
+						<td>TESTING2</td>
+					</tr>
                     {% for row in interns %}
                         <tr>
                             <td>{{ row[0] }}</td>
                             <td>{{ row[1] }}</td>
-                            <td>{{ row[2] }}</td>
-							<!-- <td>{{ row[3] }}</td> -->
-                            <td>{{ row[4] }}</td>
-							<!-- <td>{{ row[5] }}</td> -->
-							<td><button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Accept</a></button><br/><br/>
-								<button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Reject</a></button><br/><br/>
-							</td>
+							
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
+			<td><button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Accept</a></button><br/><br/>
+				<button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Reject</a></button><br/><br/>
+			</td>
 		</body>
 	</font>
 </center>

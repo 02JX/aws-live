@@ -689,12 +689,14 @@ def supervisorregister():
 @app.route("/internData", methods=['GET'])
 def intern_data():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT std_id, std_first_name, std_last_name, std_pass, assign_status FROM studentInformation")
+    cursor.execute("SELECT stf_id, stf_name FROM staffInformation")
     interns = cursor.fetchall()
 
     cursor.close()
 
     return render_template('InternApplication.html', interns=interns)
+
+
 
 
 #--------------------------------------------END OF SUPERVISOR-------------------------------------
