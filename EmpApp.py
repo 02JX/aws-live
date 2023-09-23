@@ -462,6 +462,16 @@ def staffregister():
     print("Register successfully!")
     return render_template('StaffHomePage.html')
 
+@app.route("/studentData", methods=['GET'])
+def student_data():
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT std_id, std_first_name, std_last_name, std_pass, assign_status FROM studentInformation")
+    students = cursor.fetchall()
+    cursor.close()
+
+    return render_template('DisplayStudent.html', students=students)
+
+
 # Display Supervisors
 @app.route("/supervisorData", methods=['GET'])
 def supervisor_data():
