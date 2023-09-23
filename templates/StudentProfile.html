@@ -1,35 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Student Profile</title>
-	<link rel="icon" type="image/x-icon" href="static/images/logo4.png">
-    <!-- Bootstrap -->
-	<link href="static/css/bootstrap.css" rel="stylesheet">
-	<!-- DL Menu CSS -->
-	<link href="static/js/dl-menu/component.css" rel="stylesheet">
-	<!--SLICK SLIDER CSS-->
-	<link rel="stylesheet" type="text/css" href="static/css/slick.css" />
-	<!-- Font Awesome StyleSheet CSS -->
-	<link href="static/css/font-awesome.min.css" rel="stylesheet">
-	<!-- Font Awesome StyleSheet CSS -->
-	<link href="static/css/svg.css" rel="stylesheet">
-	<!-- Pretty Photo CSS -->
-	<link href="static/css/prettyPhoto.css" rel="stylesheet">
-	<!-- Shortcodes CSS -->
-	<link href="static/css/shortcodes.css" rel="stylesheet">
-	<!-- Widget CSS -->
-	<link href="static/css/widget.css" rel="stylesheet">
-	<!-- Typography CSS -->
-	<link href="static/css/typography.css" rel="stylesheet">
-	<!-- Custom Main StyleSheet CSS -->
-	<link href="static/style.css" rel="stylesheet">
-	<!-- Color CSS -->
-	<link href="static/css/color.css" rel="stylesheet">
-	<!-- Responsive CSS -->
-	<link href="static/css/responsive.css" rel="stylesheet">
 </head>
 <center>
 	<font color="black" size="5" style="font-family: avenir">
@@ -38,24 +10,46 @@
 
 		<body bgcolor="lightgrey">
 
-			<form action="StudLogin.html" autocomplete="on" method = "POST" enctype="multipart/form-data">  
+			{% for stn_Infor in stnInfor %}<br><br>
+					Student ID:<br> {{ student_id }} <br><br>
+
+			  		First Name:<br> {{ stn_Infor[0] }} <br><br>
+
+			  		Last Name:<br> {{ stn_Infor[1] }} <br><br>
+
+
+
+			<table id="Intern Status">
+                <thead>
+                    <tr>
+                        <th>Company ID</th>
+                        <th>Company Name</th>
+                        <th>Intern Status</th>
+
+                    </tr>
+                    {% for cmpname in std_cmpDetails %}
+                    <tr>
+                        <td>{{cmpname[0]}}</td>
+                        <td>{{cmpname[1]}}</td>
+                        <td>{{cmpname[2]}}</td>
+
+                    </tr>
+                </thead>
+                <tbody id="showCompanyTable">
+                    <!-- Recorded data will be added here -->
+                </tbody>
+            </table>
+
+					
+			<form action="/studentprofile" autocomplete="on" method = "POST" enctype="multipart/form-data">  
 				<div>
-
-			  		Student ID:<br> {{ stdId }} <br><br>
-
-			  		First Name:<br> {{ stdFname }} <br><br>
-
-			  		Last Name:<br> {{ stdLname }} <br><br>
-
-                    Internship Status:<br> {{ internStatus }} <br><br>
 
                     Please name your upload file with this format"yourname_CompanyAcceptanceLetter"<br><br>
 
                     Upload your Company Acceptance Letter and Parent Acknowledgement form here:<br> <input type=file name="std_letter_A" style="height:25px;font-size:14pt;color:grey;"> <br><br>
                     Upload your Internship Progress Report and Supervisor evaluation form here:<br> <input type=file name="std_letter_B" style="height:25px;font-size:14pt;color:grey;"> <br><br>
 
-
-			  		
+					<button type="submit" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">Upload File</button><br><br>
 
 			  	</div>
 
