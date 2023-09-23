@@ -419,17 +419,6 @@ def staffregister():
     print("Register successfully!")
     return render_template('StaffHomePage.html')
 
-
-@app.route("/supervisorData", methods=['GET'])
-def supervisor_data():
-    cursor = db_conn.cursor()
-    cursor.execute("SELECT spv_id, spv_name, spv_pass, spv_contact, spv_email, spv_subject FROM supervisorInformation")
-    supervisors = cursor.fetchall()
-    cursor.close()
-
-    return render_template('supervisor_data.html', supervisors=supervisors)
-
-
 # Validate Company function
 @app.route('/validateCompany', methods=['GET','POST'])
 def validate_comp_page():
@@ -512,6 +501,11 @@ def toSupervisorRegister():
 def toInternApplication():
     return render_template('InternApplication.html')
 
+# Redirect to PortFolioEricTan
+@app.route("/toPortFolioEricTan")
+def toPortFolioEricTan():
+    return render_template('PortFolioEricTan.html')
+
 
 
 
@@ -574,6 +568,8 @@ def supervisorregister():
 
     print("Register successfully!")
     return render_template('StaffHomePage.html')
+
+
 
 
 #--------------------------------------------END OF SUPERVISOR-------------------------------------
