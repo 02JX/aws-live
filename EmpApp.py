@@ -314,6 +314,7 @@ def job_posting():
             job_files = request.files.get('job_files')
 
             job_id = str(company_log_id) + "_" + str(job_name)
+            job_status = "HIRING"
 
             job_img_file_name = str(company_log_id) + "_" + str(job_id) + "_file.pdf"
 
@@ -321,16 +322,17 @@ def job_posting():
                 'job_id' : job_id,
                 'job_name' : job_name,
                 'job_description' : job_description,
-                'job_file_name' : job_img_file_name
+                'job_file_name' : job_img_file_name,
+                'job_status' : job_status
             }
 
-            insert_sql_comp = "INSERT INTO internship VALUES (%s, %s, %s, %s, %s)"
+            insert_sql_comp = "INSERT INTO internship VALUES (%s, %s, %s, %s, %s, %s)"
             cursor = db_conn.cursor()
 
             if job_files.filename == "":
                 job_img_file_name = None
                 try:
-                    cursor.execute(insert_sql_comp, (company_log_id, job_id, job_name, job_description, job_img_file_name))
+                    cursor.execute(insert_sql_comp, (company_log_id, job_id, job_name, job_description, job_img_file_name, job_status))
                     db_conn.commit()
 
                 except Exception as e:
@@ -343,7 +345,7 @@ def job_posting():
             
             else:
                 try:
-                    cursor.execute(insert_sql_comp, (company_log_id, job_id, job_name, job_description, job_img_file_name))
+                    cursor.execute(insert_sql_comp, (company_log_id, job_id, job_name, job_description, job_img_file_name, job_status))
                     db_conn.commit()
                     # Upload image file in S3 
                     job_img_in_s3 = job_img_file_name
@@ -695,7 +697,7 @@ def supervisorregister():
 @app.route("/internData", methods=['GET'])
 def intern_data():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT stf_id, stf_name FROM staffInformation")
+    cursor.execute("SELECT std_id, cmp_id, cmp_name, student_letter_A, student_letter_B FROM student")
     interns = cursor.fetchall()
 
     cursor.close()
@@ -704,6 +706,12 @@ def intern_data():
 
 # Accept Intern
 @app.route("/acceptIntern/<string:id>", methods=['GET'])
+def accept_intern(id): 
+    print(id)
+    return render_template('SupervisorHomePage.html')
+
+# Reject Intern
+@app.route("/rejectIntern/<string:id>", methods=['GET'])
 def accept_intern(id): 
     print(id)
     return render_template('SupervisorHomePage.html')
