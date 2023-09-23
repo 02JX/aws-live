@@ -474,62 +474,45 @@ def validate_company():
 
     return render_template('ValidateCompany.html', pending_companies=pending_companies)
 
-# Route for displaying student assignments
-@app.route("/assignmentsDisplay", methods=['GET'])
-def display_assignments():
-    cursor = db_conn.cursor()
-    cursor.execute("SELECT studentInformation.std_id, studentInformation.std_first_name, studentInformation.std_last_name, supervisorInformation.spv_name FROM studentInformation LEFT JOIN supervisorHandle ON studentInformation.std_id = supervisorHandle.std_id LEFT JOIN supervisorInformation ON supervisorHandle.spv_id = supervisorInformation.spv_id")
-    assignments = cursor.fetchall()
-    cursor.close()
-
-    return render_template('DisplayStudentAssignment.html', assignments=assignments)
-
-# Route for assigning students to supervisors
+# Add this route to your Flask application
 @app.route("/assignStudents", methods=['GET', 'POST'])
 def assign_students():
-    # Fetch students for the dropdown list
+    if request.method == 'POST':
+        std_id = request.form.get('std_id')
+        spv_id = request.form.get('spv_id')
+
+        # Insert the assignment into the supervisorHandle database
+        insert_sql = "INSERT INTO supervisorHandle (spv_id, std_id) VALUES (%s, %s)"
+        cursor = db_conn.cursor()
+
+        try:
+            cursor.execute(insert_sql, (spv_id, std_id))
+            db_conn.commit()
+        except Exception as e:
+            db_conn.rollback()
+            return str(e)
+        finally:
+            cursor.close()
+
+    # Fetch students and supervisors for the form
     cursor = db_conn.cursor()
-    cursor.execute("SELECT std_id, std_first_name, std_last_name FROM studentInformation")
+    cursor.execute("SELECT std_id, std_first_name, std_last_name FROM studentInformation WHERE assign_status IS NULL")
     students = cursor.fetchall()
-    
-    # Fetch supervisors for the dropdown list
     cursor.execute("SELECT spv_id, spv_name FROM supervisorInformation")
     supervisors = cursor.fetchall()
     cursor.close()
 
-    if request.method == 'POST':
-        student_id = request.form.get('student_id')
-        supervisor_id = request.form.get('supervisor_id')
-
-        # Check if the student's assign_status is "Pending" before assigning
-        cursor = db_conn.cursor()
-        select_sql = "SELECT assign_status FROM studentInformation WHERE std_id = %s"
-        cursor.execute(select_sql, (student_id,))
-        status = cursor.fetchone()
-
-        if status and status[0] == 'Pending':
-            # Perform the assignment by inserting a new record in the supervisorHandle table
-            insert_sql = "INSERT INTO supervisorHandle (spv_id, std_id) VALUES (%s, %s)"
-            
-            try:
-                cursor.execute(insert_sql, (supervisor_id, student_id))
-                # Update the student's assign_status to "Assigned"
-                update_sql = "UPDATE studentInformation SET assign_status = 'Assigned' WHERE std_id = %s"
-                cursor.execute(update_sql, (student_id,))
-                db_conn.commit()
-            except Exception as e:
-                db_conn.rollback()
-                return str(e)
-            finally:
-                cursor.close()
-
-            # Redirect to a confirmation page or another relevant page
-            return redirect('/assignmentsDisplay')
-        else:
-            return "Student cannot be assigned. Please check the student's status."
-    
     return render_template('AssignStudents.html', students=students, supervisors=supervisors)
 
+# Add this route to your Flask application
+@app.route("/displayAssignments", methods=['GET'])
+def display_assignments():
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT s.std_id, s.std_first_name, s.std_last_name, sh.spv_id FROM studentInformation s LEFT JOIN supervisorHandle sh ON s.std_id = sh.std_id")
+    assignments = cursor.fetchall()
+    cursor.close()
+
+    return render_template('DisplayStudentAssignment.html', assignments=assignments)
 
 
 #--------------------------------------------END OF STAFF PAGE-------------------------------------
