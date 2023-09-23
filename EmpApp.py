@@ -314,6 +314,7 @@ def job_posting():
             job_files = request.files.get('job_files')
 
             job_id = str(company_log_id) + "_" + str(job_name)
+            job_status = "HIRING"
 
             job_img_file_name = str(company_log_id) + "_" + str(job_id) + "_file.pdf"
 
@@ -321,16 +322,17 @@ def job_posting():
                 'job_id' : job_id,
                 'job_name' : job_name,
                 'job_description' : job_description,
-                'job_file_name' : job_img_file_name
+                'job_file_name' : job_img_file_name,
+                'job_status' : job_status
             }
 
-            insert_sql_comp = "INSERT INTO internship VALUES (%s, %s, %s, %s, %s)"
+            insert_sql_comp = "INSERT INTO internship VALUES (%s, %s, %s, %s, %s, %s)"
             cursor = db_conn.cursor()
 
             if job_files.filename == "":
                 job_img_file_name = None
                 try:
-                    cursor.execute(insert_sql_comp, (company_log_id, job_id, job_name, job_description, job_img_file_name))
+                    cursor.execute(insert_sql_comp, (company_log_id, job_id, job_name, job_description, job_img_file_name, job_status))
                     db_conn.commit()
 
                 except Exception as e:
@@ -343,7 +345,7 @@ def job_posting():
             
             else:
                 try:
-                    cursor.execute(insert_sql_comp, (company_log_id, job_id, job_name, job_description, job_img_file_name))
+                    cursor.execute(insert_sql_comp, (company_log_id, job_id, job_name, job_description, job_img_file_name, job_status))
                     db_conn.commit()
                     # Upload image file in S3 
                     job_img_in_s3 = job_img_file_name
@@ -402,10 +404,6 @@ def toStaffLogin():
 def toStaffRegister():
     return render_template('StaffRegister.html')
 
-# Redirect to Assign Student to Supervisors page
-@app.route("/assignStudents")
-def toAssignStudents():
-    return render_template('AssignStudents.html')
     
 # Staff login function
 @app.route('/stafflogin', methods=['GET'])
@@ -532,25 +530,28 @@ def validate_company():
 
     return render_template('ValidateCompany.html', pending_companies=pending_companies)
 
-# Route for displaying student assignments
-@app.route("/assignmentsDisplay", methods=['GET'])
-def display_assignments():
+# Route for displaying student assignments with details
+@app.route("/assignmentDisplay", methods=['GET'])
+def display_student_assignment():
     cursor = db_conn.cursor()
+
+    # Fetch data from supervisorHandle and join with studentInformation and supervisorInformation
     cursor.execute("""
-        SELECT studentInformation.std_id, 
-               studentInformation.std_first_name, 
-               studentInformation.std_last_name, 
-               supervisorInformation.spv_name 
-        FROM studentInformation 
-        LEFT JOIN supervisorHandle 
-               ON studentInformation.std_id = supervisorHandle.std_id 
-        LEFT JOIN supervisorInformation 
-               ON supervisorHandle.spv_id = supervisorInformation.spv_id
+        SELECT 
+            supervisorHandle.std_id, 
+            studentInformation.std_first_name, 
+            studentInformation.std_last_name, 
+            COALESCE(supervisorInformation.spv_name, 'N/A') AS spv_name
+        FROM supervisorHandle
+        LEFT JOIN studentInformation ON supervisorHandle.std_id = studentInformation.std_id
+        LEFT JOIN supervisorInformation ON supervisorHandle.spv_id = supervisorInformation.spv_id
     """)
+
     assignments = cursor.fetchall()
     cursor.close()
 
     return render_template('DisplayStudentAssignment.html', assignments=assignments)
+
 
 
 @app.route("/assignStudents", methods=['GET', 'POST'])
@@ -582,7 +583,7 @@ def assign_students():
                 cursor.close()
 
             # Redirect to a confirmation page or another relevant page
-            return redirect('/assignmentsDisplay')
+            return redirect('/assignmentDisplay')
         else:
             return "Student cannot be assigned. Please check the student's status."
     
