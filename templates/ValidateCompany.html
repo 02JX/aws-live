@@ -35,7 +35,7 @@
 <center>
     <font color="black" size="4" style="font-family: avenir; margin-top: 20px; padding-top: 20px;">
 
-        <h1 style="color: DodgerBlue">Company Validation</h1>
+        <h1 style="color: DodgerBlue; margin-top: 20px;">Company Validation</h1>
 
         <body bgcolor="lightgrey">
             <div class="container" style="margin: 20px 0; width: 80%;">
@@ -65,7 +65,7 @@
                 <form action="{{ url_for('approve_company') }}" method="post">
                     <div>
                         <label for="company_select">Select a Company:</label>
-                        <select name="company_id" id="company_select" style="margin: 20px 0;">
+                        <select name="company_id" id="company_select">
                             {% for company in pending_companies %}
                             <option value="{{ company[0] }}">{{ company[1] }}</option>
                             {% endfor %}
