@@ -191,6 +191,16 @@ def toComLogin():
 def toComRegister():
     return render_template('CompanyRegister.html')
 
+# Redirect to company job posting page
+@app.route('/toJobPosting')
+def toJobPosting():
+    return render_template('CompanyJobPosts.html')
+
+# Redirect to company view job post page
+@app.route('/toViewJobs')
+def toViewJobs():
+    return render_template('CompanyViewJobs.html')
+
 @app.route("/companyRegis", methods=['POST'])
 def comp_signup():
     company_id = request.form.get('comp_id')
