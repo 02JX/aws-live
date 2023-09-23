@@ -321,7 +321,7 @@ def toAssignStudents():
 def staffLogin():
 
     cursor = db_conn.cursor()
-    cursor.execute("SELECT stf_id, stf_name, staff_password FROM staffInformation")
+    cursor.execute("SELECT stf_id, stf_name, staff_pass FROM staffInformation")
     staff = cursor.fetchall()
     cursor.close()
 
@@ -330,7 +330,7 @@ def staffLogin():
         
     if staff_log_id and staff_log_password:
         for row in staff:
-            if row['stf_id'] == staff_log_id and row['staff_password'] == staff_log_password:
+            if row['stf_id'] == staff_log_id and row['staff_pass'] == staff_log_password:
                 print ("Login successful")
                 return render_template('StaffHomePage.html')
             else:
