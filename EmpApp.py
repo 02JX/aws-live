@@ -306,7 +306,7 @@ def comp_view_job_page():
 def update_job_status():
     company_log_id = session.get('company_id')
     job_id = request.form.get('job_id')
-    current_status = request.form.get('current_status')
+    current_status = request.form.get('job_status')
 
     cursor = db_conn.cursor()
 
