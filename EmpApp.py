@@ -402,9 +402,9 @@ def toStaffLogin():
 def toStaffRegister():
     return render_template('StaffRegister.html')
 
-# Redirect to Staff register page
-@app.route("/toDisplayStudent")
-def toDisplayStudent():
+# Redirect to Display Student page
+@app.route("/studentData")
+def studentData():
     return render_template('DisplayStudent.html')
 
 # Redirect to Assign Student to Supervisors page
@@ -475,7 +475,7 @@ def student_data():
     students = cursor.fetchall()
     cursor.close()
 
-    return render_template('student_data.html', students=students)
+    return render_template('DisplayStudent.html', students=students)
 
 
 # Display Supervisors
