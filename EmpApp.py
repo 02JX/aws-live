@@ -151,7 +151,7 @@ def student_signin():
     # return render_template('StudLogin.html')
 
     cursor = db_conn.cursor()
-    cursor.execute("SELECT std_id, std_password FROM studentInformation")
+    cursor.execute("SELECT std_id, std_pass FROM studentInformation")
     dbPassword = cursor.fetchall()
     cursor.close()
 
