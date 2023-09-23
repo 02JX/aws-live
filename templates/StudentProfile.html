@@ -2,6 +2,31 @@
 <html>
 <head>
 	<title>Student Profile</title>
+    <style>
+        table {
+         border-collapse: collapse;
+         width: 80%;
+            margin: 20px auto;
+        }
+    
+        table, th, td {
+         border: 1px solid #ccc;
+        }
+    
+        th, td {
+         padding: 8px;
+            text-align: left;
+        }
+    
+        th {
+         background-color: #f2f2f2;
+        }
+    
+        tr:nth-child(even) {
+          background-color: #f2f2f2;
+        }
+    
+            </style>
 </head>
 <center>
 	<font color="black" size="5" style="font-family: avenir">
@@ -10,13 +35,14 @@
 
 		<body bgcolor="lightgrey">
 
-			{% for stn_Infor in stnInfor %}<br><br>
+			
 					Student ID:<br> {{ student_id }} <br><br>
+                    {% for stdInfor in stdInfor %}<br><br>
 
-			  		First Name:<br> {{ stn_Infor[0] }} <br><br>
+			  		First Name:<br> {{ stdInfor[0] }} <br><br>
 
-			  		Last Name:<br> {{ stn_Infor[1] }} <br><br>
-
+			  		Last Name:<br> {{ stdInfor[1] }} <br><br>
+                      {% endfor %}
 
 
 			<table id="Intern Status">
@@ -27,12 +53,13 @@
                         <th>Intern Status</th>
 
                     </tr>
-                    {% for cmpname in std_cmpDetails %}
+                    {% for cmpname in cmpName %}
                     <tr>
+                        <td>{{std_company_id}}</td>
                         <td>{{cmpname[0]}}</td>
                         <td>{{cmpname[1]}}</td>
-                        <td>{{cmpname[2]}}</td>
-
+                        {% endfor %}
+                        
                     </tr>
                 </thead>
                 <tbody id="showCompanyTable">
@@ -46,9 +73,13 @@
 
                     Please name your upload file with this format"yourname_CompanyAcceptanceLetter"<br><br>
 
-                    Upload your Company Acceptance Letter and Parent Acknowledgement form here:<br> <input type=file name="std_letter_A" style="height:25px;font-size:14pt;color:grey;"> <br><br>
-                    Upload your Internship Progress Report and Supervisor evaluation form here:<br> <input type=file name="std_letter_B" style="height:25px;font-size:14pt;color:grey;"> <br><br>
-
+                    Upload your Company Acceptance Letter and Parent Acknowledgement form here:<br>
+                    (This two file should combine in one pdf).
+                    <br> <input type=file name="std_letter_A" style="height:25px;font-size:14pt;color:grey;"> <br><br>
+                    Upload your Internship Progress Report and Supervisor evaluation form here:<br>
+                    (This two file should combine in one pdf).
+                    <br> <input type=file name="std_letter_B" style="height:25px;font-size:14pt;color:grey;"> <br><br>
+                    
 					<button type="submit" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">Upload File</button><br><br>
 
 			  	</div>
