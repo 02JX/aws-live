@@ -541,7 +541,7 @@ def display_student_assignment():
             supervisorHandle.std_id, 
             studentInformation.std_first_name, 
             studentInformation.std_last_name, 
-            COALESCE(supervisorInformation.spv_name, 'N/A') AS spv_name
+            supervisorInformation.spv_id
         FROM supervisorHandle
         LEFT JOIN studentInformation ON supervisorHandle.std_id = studentInformation.std_id
         LEFT JOIN supervisorInformation ON supervisorHandle.spv_id = supervisorInformation.spv_id
@@ -551,7 +551,6 @@ def display_student_assignment():
     cursor.close()
 
     return render_template('DisplayStudentAssignment.html', assignments=assignments)
-
 
 
 @app.route("/assignStudents", methods=['GET', 'POST'])
