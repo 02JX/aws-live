@@ -219,6 +219,14 @@ def comp_signup():
     cursor = db_conn.cursor()
 
     try:
+        cursor.execute(insert_sql_comp, (company_id,))
+        existing_company = cursor.fetchone()
+
+        if existing_company:
+            return "Company ID already exists. Please choose a different ID."
+
+        # If the company ID is unique, proceed with registration
+        insert_sql_comp = "INSERT INTO company VALUES (%s, %s, %s, %s, %s, %s)"
         cursor.execute(insert_sql_comp, (company_id, company_name, company_industry, company_address, company_password, company_status))
         db_conn.commit()
 
