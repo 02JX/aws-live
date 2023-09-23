@@ -42,6 +42,7 @@
                     
                     <form method="POST" action="/filterJobStatus">
                         <input type="hidden" name="company_id" value="{{ company_log_id }}">
+                        <button class="iq_link_1"><a href="/toCompanyHomePage" style="color: white;">Back</a></button><br/>
                         <button type="submit" name="status_filter" value="ACTIVE">Show ACTIVE Jobs</button>
                         <button type="submit" name="status_filter" value="INACTIVE">Show INACTIVE Jobs</button>
                     </form>
