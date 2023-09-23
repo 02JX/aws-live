@@ -202,7 +202,8 @@ def toComRegister():
 # Redirect to company home page
 @app.route('/toCompanyHomePage')
 def toCompanyHome():
-    return render_template('CompanyHome.html')
+    company_log_id = session.get('company_id')
+    return render_template('CompanyHome.html', company_log_id=company_log_id)
 
 
 @app.route("/companyRegis", methods=['POST'])
