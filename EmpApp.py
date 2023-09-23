@@ -151,7 +151,7 @@ def student_signin():
     # return render_template('StudLogin.html')
 
     cursor = db_conn.cursor()
-    cursor.execute("SELECT std_id, std_password FROM studentInformation")
+    cursor.execute("SELECT std_id, std_pass FROM studentInformation")
     dbPassword = cursor.fetchall()
     cursor.close()
 
@@ -163,7 +163,9 @@ def student_signin():
         for row in students:
             if row[0] == student_id and row[3] == password:
                 return("Login Success!")
-
+            else:
+                return("Wrong details 1")
+    return("Wrong details 2")
 
     # return render_template('StudentHomePage.html')
 
@@ -628,8 +630,8 @@ def display_supervisors():
     return render_template('DisplaySupervisors.html', supervisors=supervisors)
 
 # Redirect to viewStudentList
-@app.route("/toDisplayStudents", methods=['GET'])
-def display_students():
+@app.route("/toDisplayStudent", methods=['GET'])
+def display_student():
     cursor = db_conn.cursor()
     cursor.execute("SELECT std_id, std_first_name, std_last_name, std_pass FROM studentInformation")
     students = cursor.fetchall()
@@ -639,15 +641,15 @@ def display_students():
     return render_template('DisplayStudents.html', students=students)
 
 # Redirect to viewStaffList
-@app.route("/toDisplayStaff", methods=['GET'])
-def display_staff():
+@app.route("/toDisplayStaffs", methods=['GET'])
+def display_staffs():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT stf_id, stf_name, stf_pass FROM staffInformation")
+    cursor.execute("SELECT stf_id, stf_name, staff_pass FROM staffInformation")
     staff = cursor.fetchall()
 
     cursor.close()
     print("Staff:", staff)
-    return render_template('DisplayStaff.html', staff=staff)
+    return render_template('DisplayStaffs.html', staff=staff)
 
 
 

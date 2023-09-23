@@ -42,16 +42,16 @@
                 <thead>
                     <tr>
                         <th>Student ID</th>
+                        <th>Supervisor</th>
                         <th>Student Name</th>
-                        <th>Supervisor ID</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for assignment in assignments %}
                         <tr>
                             <td>{{ assignment[0] }}</td>
+                            <td>{{ assignment[3] }} - {{ assignment[2] }}</td>
                             <td>{{ assignment[1] }} {{ assignment[2] }}</td>
-                            <td>{{ assignment[3] }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
