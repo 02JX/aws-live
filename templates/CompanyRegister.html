@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Add Employee Information</title>
 	<!-- Bootstrap -->
 	<link href="static/css/bootstrap.css" rel="stylesheet">
@@ -28,27 +31,62 @@
 	<link href="static/css/responsive.css" rel="stylesheet">
 </head>
 <center>
-	<div class="iq_wrapper">
+	<div class="iq_wrapper" style="margin-top: 20px; margin-bottom: 20px;">
 		<div class="container">
 			<font color="black" size="4" style="font-family: avenir">
 
-					<h1 style="color: DodgerBlue">Company Register</h1>
+					<h1 style="color: DodgerBlue; padding-top: 20px;">Company Register</h1>
 
 					<body bgcolor="lightgrey">
 
 						<form action="/companyRegis" autocomplete="on" method = "POST" enctype="multipart/form-data">
+							<div class="container" style="width: 40%; margin-top: 10px;">
+								<h5>Company ID:</h5>
+								<div class="iq-input">
+									<input class="first_input" style="height:20px;font-size:14pt; color:grey;" type="text"name="comp_id">
+								</div>
+								<br><br>
 
-							Company ID:<br> <input style="height:25px;font-size:14pt; color:grey;" type="number" name="comp_id" autofocus size="40"><br><br>
-							Company Name:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="comp_name"><br><br>
-							Industry:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="comp_industry"><br><br>
-							Company Addess:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="comp_address"><br><br>
-							Password:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="comp_password"><br><br>
-							<!-- Confirm Password:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="comp_confirm_password"><br><br> -->
-							
-							<button type="submit" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">SIGN UP</button>
+								<h5>Company Name:</h5>
+								<div class="iq-input">
+									<input class="first_input" style="height:20px;font-size:14pt; color:grey;" type="text"name="comp_name">
+								</div>
+								<br><br>
+
+								<h5>Industry:</h5>
+								<div class="iq-input">
+									<input class="first_input" style="height:20px;font-size:14pt; color:grey;" type="text"name="comp_industry">
+								</div>
+								<br><br>
+								
+								<h5>Company Addess:</h5>
+								<div class="iq-input">
+									<input class="first_input" style="height:20px;font-size:14pt; color:grey;" type="text"name="comp_address">
+								</div>
+								<br><br>
+
+								<h5>Password:</h5>
+								<div class="iq-input">
+									<input class="first_input" style="height:20px;font-size:14pt; color:grey;" type="text"name="comp_password">
+								</div>
+								<br><br>
+
+								
+								<!-- Confirm Password:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="comp_confirm_password"><br><br> -->
+								<button type="submit" class="iq_link_1" style="height: 45px; width: 200px; color: white; size: 5;">Sign Up</button>
+							</div>
 
 						</form>
-			<a href="/toCompanyLogin">Sign In</a>
+						<br>
+						<div>
+							Already have an account?&nbsp;
+							<strong>
+								<a href="/toCompanyLogin">Sign In</a>
+							</strong>
+						</div>
+						<br><br>
+						<a href="/toHomePage">Go Back to Login Portal</a>
+						<br><br>
 					</body>
 
 			</font>

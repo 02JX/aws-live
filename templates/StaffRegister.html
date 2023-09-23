@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Staff Register</title>
 	<!-- Bootstrap -->
 	<link href="static/css/bootstrap.css" rel="stylesheet">
@@ -28,7 +31,7 @@
 	<link href="static/css/responsive.css" rel="stylesheet">
 </head>
 <center>
-	<div class="iq_wrapper">
+	<div class="iq_wrapper" style="margin-top: 20px; margin-bottom: 20px;">
 		<div class="container">
 			<font color="black" size="4" style="font-family: avenir">
 
@@ -38,20 +41,38 @@
 		
 					<form action="/staffregister" autocomplete="on" method = "POST" enctype="multipart/form-data">
 		
-						
+						<div class="container" style="width: 40%; margin-top: 10px;">
+							<h5>Staff ID:</h5>
+							<div class="iq-input">
+								<input class="first_input" style="height:20px;font-size:14pt; color:grey;" type="text"name="stf_register_id" placeholder="Enter staff ID as 'staff_XX'">
+							</div>
+							<br><br>
+
+							<h5>Staff Name:</h5>
+							<div class="iq-input">
+								<input class="first_input" style="height:20px;font-size:14pt; color:grey;" type="text"name="stf_register_name">
+							</div>
+							<br><br>
+
+							<h5>Password:</h5>
+							<div class="iq-input">
+								<input class="first_input" style="height:20px;font-size:14pt; color:grey;" type="text"name="stf_register_pass">
+							</div>
+							<br><br>
+
+							<h5>Confirm Password:</h5>
+							<div class="iq-input">
+								<input class="first_input" style="height:20px;font-size:14pt; color:grey;" type="text"name="stf_register_confirm_pass">
+							</div>
+							<br><br>
+
+							<button type="submit" class="iq_link_1" style="height: 45px; width: 200px; color: white; size: 5;">Sign In</button>
+						</div>
 		
-						Staff ID:<br/> <input style="height:25px;font-size:14pt; color:grey;" type="text" name="stf_register_id" placeholder="Enter staff ID as 'staff_XX'"><br/><br/>
-		
-						Staff Name:<br/> <input style="height:25px;font-size:14pt; color:grey;" type="text" name="stf_register_name"><br/><br/>
-		
-						  Password:<br/> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="stf_register_pass"><br/><br/>
-		
-						  Confirm Password:<br/> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="stf_register_confirm_pass"><br/><br/>		  		
-		
-						  <button type="submit" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">Sign In</button>
-		
-					</form><br/>
-					<a href="/toHomePage">Go Back</a>
+					</form>
+					<br>
+					<a href="/toStaffHomePage">Go Back</a>
+					<br><br>
 				</body>
 		
 			</font>
