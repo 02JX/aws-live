@@ -611,9 +611,9 @@ def toDisplaySupervisors():
 def toDisplayStudent():
     return render_template('DisplayStudent.html')
 # Redirect to viewStaffList
-@app.route("/toDisplayStaff")
-def toDisplayStaff():
-    return render_template('DisplayStaff.html')
+@app.route("/toDisplayStaffs")
+def toDisplayStaffs():
+    return render_template('DisplayStaffs.html')
 
 
 
