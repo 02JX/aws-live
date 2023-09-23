@@ -386,11 +386,6 @@ def validate_comp_page():
 
 supervisorInfo = {}
 
-# Redirect to View Supervisor page
-@app.route("/toViewSupervisor")
-def toViewSupervisor():
-    return render_template('ViewSupervisor.html')
-
 # Redirect to Supervisor login page
 @app.route("/toSupervisorLogin")
 def toSupervisorLogin():

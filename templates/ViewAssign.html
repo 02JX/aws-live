@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Assigned Students</title>
+</head>
+<center>
+    <font color="black" size="4" style="font-family: avenir">
+
+        <h1 style="color: DodgerBlue">View Assigned Students</h1>
+
+        <body bgcolor="lightgrey">
+
+            <form action="/viewAssignedStudents" method="POST">
+                <label for="supervisor">Select Supervisor:</label><br/>
+                <select id="supervisor" name="supervisor" required>
+                    <option value="supervisor1">Supervisor 1</option>
+                    <option value="supervisor2">Supervisor 2</option>
+                    <option value="supervisor3">Supervisor 3</option>
+                    <!-- Add more supervisor options as needed -->
+                </select><br/><br/>
+        
+                <!-- View Students button -->
+                <button type="submit">View Assigned Students</button>
+            </form>
+
+            <!-- Display the list of assigned students here -->
+            <div>
+                <h2>Assigned Students:</h2>
+                <ul>
+                    <li>Student 1</li>
+                    <li>Student 2</li>
+                    <li>Student 3</li>
+                    <!-- List the assigned students dynamically based on your application's data -->
+                </ul>
+            </div>
+
+        </body>
+
+    </font>
+</center>
+</html>
