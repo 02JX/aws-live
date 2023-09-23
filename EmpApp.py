@@ -232,27 +232,30 @@ def comp_signup():
     return render_template('CompanyLogin.html')
 
 # Company login function
-@app.route('/companyLogin', methods=['GET'])
+@app.route('/companyLogin', methods=['GET', 'POST'])  # Change the method to 'POST' to handle form submissions
 def comp_signin_page():
-
-    cursor = db_conn.cursor()
-    cursor.execute("SELECT comp_id, comp_name, comp_industry, comp_address, comp_password, comp_status FROM company")
-    company = cursor.fetchall()
-    cursor.close()
-
-    company_log_id = request.args.get('company_id')
-    company_log_password = request.args.get('company_password')
+    if request.method == 'POST':
+        company_log_id = request.form.get('company_id')  # Use request.form to retrieve data from the form
+        company_log_password = request.form.get('company_password')  # Use request.form to retrieve data from the form
         
-    if company_log_id and company_log_password:
+        cursor = db_conn.cursor()
+        cursor.execute("SELECT comp_id, comp_name, comp_industry, comp_address, comp_password, comp_status FROM company")
+        company = cursor.fetchall()
+        cursor.close()
+
         for row in company:
-            if row[0] == company_log_id and row[4] == company_log_password: #If row starts at 1, it's actually 0 because Python :) 
+            if row[0] == company_log_id and row[4] == company_log_password:
                 if row[5] == "Approved":
-                    print ("Login successful")
+                    print("Login successful")
                     session['company_id'] = company_log_id  # Store company_log_id in the session
-                    return render_template('CompanyHome.html')
+                    return render_template('CompanyHome.html', company_log_id=company_log_id)
                 else:
                     return "Account is not active"
-    return "Your login details are not correct lol"
+        return "Your login details are not correct lol"
+    
+    # This is the initial GET request for the login page
+    return render_template('login.html')  # Render a login form
+
 
 @app.route('/jobPosting', methods=['GET', 'POST'])
 def job_posting():
