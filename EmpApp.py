@@ -285,7 +285,7 @@ def comp_view_job_page():
     cursor = db_conn.cursor()
 
     # Modify the SQL query to filter by comp_id
-    sql_query = "SELECT comp_id, job_id, job_name, job_description FROM internship WHERE comp_id = %s"
+    sql_query = "SELECT comp_id, job_id, job_name, job_description, job_status FROM internship WHERE comp_id = %s"
     cursor.execute(sql_query, (company_log_id,))
 
     company_job_data = cursor.fetchall()
@@ -711,7 +711,7 @@ def accept_intern(id):
 
 # Reject Intern
 @app.route("/rejectIntern/<string:id>", methods=['GET'])
-def accept_intern(id): 
+def reject_intern(id): 
     print(id)
     return render_template('SupervisorHomePage.html')
 

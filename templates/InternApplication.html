@@ -48,6 +48,7 @@
 						<th>Company Name</th>
                         <th>Letter A</th>
 						<th>Letter B</th>
+						<th>Decision</th>
 					</tr>
                 </thead>
                 <tbody>
@@ -59,8 +60,8 @@
 							<td>{{ row[2] }}</td>
                             <td>{{ row[4] }}</td>
 							<td>{{ row[5] }}</td>
-							<td><button class="iq_link_1"><a id="{{ row[0] }}" href="/acceptIntern/{{ row[0] }}"style="color: white;">Accept</a></button><br/><br/>
-								<button class="iq_link_1"><a id="{{ row[0] }}" href="/rejectIntern/{{ row[0] }}"style="color: white;">Reject</a></button><br/><br/>
+							<td><button class="iq_link_1"><a href="/acceptIntern/{{ row[0] }}"style="color: white;">Accept</a></button><br/><br/>
+								<button class="iq_link_1"><a href="/rejectIntern/{{ row[0] }}"style="color: white;">Reject</a></button><br/><br/>
 							</td>
 							
                         </tr>
