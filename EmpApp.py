@@ -301,6 +301,10 @@ def toStaffHomePage():
 def toStaffLogin():
     return render_template('StaffLogin.html')
 
+@app.route("/toViewAssigned")
+def toViewAssigned():
+    return render_template('ViewAssign.html')
+
 # Redirect to Staff register page
 @app.route("/toStaffRegister")
 def toStaffRegister():
@@ -382,6 +386,26 @@ def validate_comp_page():
 
         # Render the HTML template with the fetched data
     return render_template('ValidateCompany.html', pending_companies=companyDetails)
+
+# View Student Assigned to SuperVisor
+@app.route('/viewAssignedStudents', methods=['GET', 'POST'])
+def viewAssignedStudents():
+
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT stf_id FROM staffInformation")
+    staff = cursor.fetchall()
+    cursor.close()
+
+    staff_id = request.args.get('stf_id')
+        
+    if staff_id:
+        for row in staff:
+            if row[0] == staff_id :
+                    session['staff_id'] = staff_id  # Store staff_log_id in the session
+                    return render_template('DisplayAssignedStudent.html', staff_id=staff_id)
+            else:
+                return "Account is not active"
+    return "No related staff found"
 
 
 #--------------------------------------------END OF STAFF PAGE-------------------------------------
