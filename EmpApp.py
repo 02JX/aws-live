@@ -603,10 +603,6 @@ def toSupervisorRegister():
 def toSupervisorHomePage():
     return render_template('SupervisorHomePage.html')
 
-# Redirect to Intern Application
-@app.route("/toInternApplication")
-def toInternApplication():
-    return render_template('InternApplication.html')
 
 # Redirect to PortFolioEricTan
 @app.route("/toPortfolioEricTan")
@@ -700,7 +696,17 @@ def intern_data():
     print("Interns:", interns)
     return render_template('InternApplication.html', interns=interns)
 
+# Accept Intern
+@app.route("/acceptIntern/<string:id>", methods=['GET'])
+def accept_intern(id): 
+    print(id)
+    return render_template('SupervisorHomePage.html')
 
+
+
+ 
+    
+   
 
 
 #--------------------------------------------END OF SUPERVISOR-------------------------------------

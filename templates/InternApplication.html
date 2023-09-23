@@ -48,22 +48,20 @@
 					</tr>
                 </thead>
                 <tbody>
-					<tr>
-						<td>TESTING1</td>
-						<td>TESTING2</td>
-					</tr>
+					
                     {% for row in interns %}
                         <tr>
                             <td>{{ row[0] }}</td>
                             <td>{{ row[1] }}</td>
+							<td><button class="iq_link_1"><a id="{{ row[0] }}" href="/acceptIntern/{{ row[0] }}"style="color: white;">Accept</a></button><br/><br/>
+								<button class="iq_link_1"><a id="{{ row[0] }}" href="/rejectIntern"style="color: white;">Reject</a></button><br/><br/>
+							</td>
 							
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-			<td><button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Accept</a></button><br/><br/>
-				<button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Reject</a></button><br/><br/>
-			</td>
+			
 		</body>
 	</font>
 </center>
