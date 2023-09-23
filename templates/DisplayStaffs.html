@@ -32,34 +32,36 @@
 	<link href="static/css/responsive.css" rel="stylesheet">
 </head>
 <center>
-    <font color="black" size="4" style="font-family: avenir; margin-top: 20px;">
-        <h1 style="color: DodgerBlue">Staffs Information</h1>
-        <body bgcolor="lightgrey">
-            <div class="container" style="width: 80%; margin-top: 20px;">
-                <table class="table table-bordered" autocomplete="on" method = "GET" enctype="multipart/form-data">
-                    <thead>
-                        <tr>
-                            <th>Staff ID</th>
-                            <th>Name</th>
-                            <th>Password</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for row in staffs %}
+    <div style="margin-top: 20px;">
+        <font color="black" size="4" style="font-family: avenir;">
+            <h1 style="color: DodgerBlue;">Staffs Information</h1>
+            <body bgcolor="lightgrey">
+                <div class="container" style="width: 80%; margin-top: 20px;">
+                    <table class="table table-bordered" autocomplete="on" method = "GET" enctype="multipart/form-data">
+                        <thead>
                             <tr>
-                                <td>{{ row[0] }}</td>
-                                <td>{{ row[1] }}</td>
-                                <td>{{ row[2] }}</td>
+                                <th>Staff ID</th>
+                                <th>Name</th>
+                                <th>Password</th>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div style="margin-bottom: 20px;">
-                <a href="toStaffHomePage">Go Back to Menu</a>
-            </div>
-        </body>
-    </font>
+                        </thead>
+                        <tbody>
+                            {% for row in staffs %}
+                                <tr>
+                                    <td>{{ row[0] }}</td>
+                                    <td>{{ row[1] }}</td>
+                                    <td>{{ row[2] }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <a href="toStaffHomePage">Go Back to Menu</a>
+                </div>
+            </body>
+        </font>
+    </div>
 </center>
 </html>
 

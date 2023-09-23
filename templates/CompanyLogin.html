@@ -44,13 +44,13 @@
 						<div class="container" style="width: 40%; margin-top: 10px;">
 							<h5>Company ID:</h5>
 							<div class="iq-input">
-								<input class="first_input" style="height:20px;font-size:14pt; color:grey;" type="text" name="company_id">
+								<input class="first_input" style="height:20px;font-size:14pt; color:grey; text-transform: none;" type="text" name="company_id">
 							</div>
 							<br><br>
 
 							<h5>Password:</h5>
 							<div class="iq-input">
-								<input class="first_input" style="height:20px;font-size:14pt; color:grey;" type="text" name="company_password">
+								<input class="first_input" style="height:20px;font-size:14pt; color:grey; text-transform: none;" type="text" name="company_password">
 							</div>
 							<br><br>
 
@@ -69,6 +69,14 @@
 					<br><br>
 					<a href="/toHomePage">Go Back to Login Portal</a>
 					<br><br>
+
+
+					{% if error_message %}
+					<script>
+						// Display the error message as a pop-up
+						alert("{{ error_message }}");
+					</script>
+					{% endif %}
 				</body>
 		
 			</font>

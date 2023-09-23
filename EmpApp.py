@@ -159,11 +159,17 @@ def student_signin():
     password = request.args.get('std_lg_pass')
 
 
-    if student_id and dbPassword:
-        for row in students:
-            if row[0] == student_id and row[3] == password:
+    if student_id and password:
+        for row in dbPassword:
+            if row[0] == student_id and row[1] == password:
+                session['std_id'] = student_id  # Store student_id in the session for future uses
                 return("Login Success!")
+            else: 
+                return("Wrong data 1")
+    return("Wrong data 2")
 
+
+    
 
     # return render_template('StudentHomePage.html')
 
@@ -192,6 +198,11 @@ def toComLogin():
 @app.route('/toCompanyRegister')
 def toComRegister():
     return render_template('CompanyRegister.html')
+
+# Redirect to company home page
+@app.route('/toCompanyHomePage')
+def toCompanyHome():
+    return render_template('CompanyHome.html')
 
 
 @app.route("/companyRegis", methods=['POST'])
@@ -263,7 +274,7 @@ def comp_signin_page():
                     session['company_id'] = company_log_id  # Store company_log_id in the session
                     return render_template('CompanyHome.html', company_log_id=company_log_id)
                 else:
-                    return "Account is not active"
+                    return render_template('CompanyRegister.html', error_message="Your Company account has not been activated! Please contact Admin")
     return "Your login details are not correct lol"
 
 job = {}
@@ -295,7 +306,49 @@ def comp_view_job_page():
 
     return render_template('CompanyViewJobs.html', company_log_id=company_log_id, company_job_data=company_job_data)
 
+# Filter Job Status
+@app.route('/filterJobStatus', methods=['POST'])
+def filter_job_status():
+    company_log_id = request.form.get('company_id')
+    status_filter = request.form.get('status_filter')
 
+    cursor = db_conn.cursor()
+
+    # Modify the SQL query to filter by comp_id and job_status
+    sql_query = "SELECT comp_id, job_id, job_name, job_description, job_status FROM internship WHERE comp_id = %s AND job_status = %s"
+    cursor.execute(sql_query, (company_log_id, status_filter))
+
+    filtered_job_data = cursor.fetchall()
+    cursor.close()
+
+    return render_template('CompanyViewJobs.html', company_log_id=company_log_id, company_job_data=filtered_job_data)
+
+
+# Change Job Status from ACTIVE to INACTIVE and vice versa
+@app.route('/updateJobStatus', methods=['POST'])
+def update_job_status():
+    company_log_id = session.get('company_id')
+    job_id = request.form.get('job_id')
+    current_status = request.form.get('job_status')
+
+    cursor = db_conn.cursor()
+
+    # Determine the new status
+    new_status = 'INACTIVE' if current_status == 'ACTIVE' else 'ACTIVE'
+
+    # Update the job status in the database
+    sql_query = "UPDATE internship SET job_status = %s WHERE comp_id = %s AND job_id = %s"
+    cursor.execute(sql_query, (new_status, company_log_id, job_id))
+    db_conn.commit()
+
+    # Modify the SQL query to filter by comp_id
+    sql_query = "SELECT comp_id, job_id, job_name, job_description, job_status FROM internship WHERE comp_id = %s"
+    cursor.execute(sql_query, (company_log_id,))
+
+    company_job_data = cursor.fetchall()
+    cursor.close()
+
+    return render_template('CompanyViewJobs.html', company_log_id=company_log_id, company_job_data=company_job_data)
 
 @app.route('/jobPosting', methods=['GET', 'POST'])
 def job_posting():
@@ -316,7 +369,7 @@ def job_posting():
             job_files = request.files.get('job_files')
 
             job_id = str(company_log_id) + "_" + str(job_name)
-            job_status = "HIRING"
+            job_status = "ACTIVE"
 
             job_img_file_name = str(company_log_id) + "_" + str(job_id) + "_file.pdf"
 
@@ -636,18 +689,18 @@ def display_student():
 
     cursor.close()
     print("Students:", students)
-    return render_template('DisplayStudents.html', students=students)
+    return render_template('DisplayStudent.html', students=students)
 
 # Redirect to viewStaffList
 @app.route("/toDisplayStaffs", methods=['GET'])
 def display_staffs():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT stf_id, stf_name, stf_pass FROM staffInformation")
-    staff = cursor.fetchall()
+    cursor.execute("SELECT stf_id, stf_name, staff_pass FROM staffInformation")
+    staffs = cursor.fetchall()
 
     cursor.close()
-    print("Staff:", staff)
-    return render_template('DisplayStaff.html', staff=staff)
+    print("Staffs:", staffs)
+    return render_template('DisplayStaffs.html', staffs=staffs)
 
 
 

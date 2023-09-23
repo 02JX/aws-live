@@ -32,43 +32,48 @@
 	<link href="static/css/responsive.css" rel="stylesheet">
 </head>
 <center>
-	<font color="black" size="5" style="font-family: avenir">
+	<div style="margin-top: 20px;">
+		<font color="black" size="5" style="font-family: avenir">
 
-		<h1 style="color: DodgerBlue">Intern Information</h1>
-		<button class="iq_link_1"><a href="/toSupervisorHomePage"style="color: white;">Home</a></button><br/><br/>
-    
-		<body bgcolor="lightgrey">
-
-			
-			<table class="table table-bordered" autocomplete="on" method = "GET" enctype="multipart/form-data">
-                <thead>
-                    <tr>
-                        <th>Student ID</th>
-                        <th>Company ID</th>
-						<th>Company Name</th>
-                        
-						<th>Decision</th>
-					</tr>
-                </thead>
-                <tbody>
-					
-                    {% for row in interns %}
-                        <tr>
-                            <td>{{ row[0] }}</td>
-                            <td>{{ row[1] }}</td>
-							<td>{{ row[2] }}</td>
-                            
-							<td><button class="iq_link_1"><a href="/acceptIntern/{{ row[0] }}"style="color: white;">Accept</a></button><br/><br/>
-								<button class="iq_link_1"><a href="/rejectIntern/{{ row[0] }}"style="color: white;">Reject</a></button><br/><br/>
-							</td>
+			<h1 style="color: DodgerBlue">Intern Information</h1>
+		
+			<body bgcolor="lightgrey">
+	
+				<div class="container" style="width: 80%; margin-top: 20px;">
+					<table class="table table-bordered" autocomplete="on" method = "GET" enctype="multipart/form-data">
+						<thead>
+							<tr>
+								<th>Student ID</th>
+								<th>Company ID</th>
+								<th>Company Name</th>
+								
+								<th>Decision</th>
+							</tr>
+						</thead>
+						<tbody>
 							
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-			
-		</body>
-	</font>
+							{% for row in interns %}
+								<tr>
+									<td>{{ row[0] }}</td>
+									<td>{{ row[1] }}</td>
+									<td>{{ row[2] }}</td>
+									
+									<td>
+										<button class="iq_link_1"><a href="/acceptIntern/{{ row[0] }}"style="color: white;">Accept</a></button>
+										<button class="iq_link_1"><a href="/rejectIntern/{{ row[0] }}"style="color: white;">Reject</a></button>
+									</td>
+									
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<div style="margin-bottom: 20px;">
+                    <a href="/toSupervisorHomePage">Home</a>
+                </div>
+			</body>
+		</font>
+	</div>
 </center>
 </html>
 

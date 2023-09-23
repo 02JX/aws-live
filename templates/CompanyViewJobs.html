@@ -39,6 +39,12 @@
                 <font color="black" size="4" style="font-family: avenir">
                     Company ID: 
                     <strong id="company_id_display">{{ company_log_id }}</strong><br><br>
+                    
+                    <form method="POST" action="/filterJobStatus">
+                        <input type="hidden" name="company_id" value="{{ company_log_id }}">
+                        <button type="submit" name="status_filter" value="ACTIVE">Show ACTIVE Jobs</button>
+                        <button type="submit" name="status_filter" value="INACTIVE">Show INACTIVE Jobs</button>
+                    </form>
 
                     <table border="1">
                         <tr>
@@ -46,6 +52,7 @@
                             <th>Job Name</th>
                             <th>Job Description</th>
                             <th>Job Status</th>
+                            <th>Change Status</th>
                         </tr>
                         {% for row in company_job_data %}
                         <tr>
@@ -53,6 +60,19 @@
                             <td>{{ row[2] }}</td>
                             <td>{{ row[3] }}</td>
                             <td>{{ row[4] }}</td>
+                            <td>
+                                <form method="POST" action="/updateJobStatus">
+                                    <input type="hidden" name="job_id" value="{{ row[1] }}">
+                                    <input type="hidden" name="job_status" value="{{ row[4] }}">
+                                    <button type="submit">
+                                        {% if row[4] == 'ACTIVE' %}
+                                            Set INACTIVE
+                                        {% else %}
+                                            Set ACTIVE
+                                        {% endif %}
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                         {% endfor %}
                     </table>
