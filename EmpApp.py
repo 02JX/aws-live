@@ -191,15 +191,6 @@ def toComLogin():
 def toComRegister():
     return render_template('CompanyRegister.html')
 
-# Redirect to company job posting page
-@app.route('/toJobPosting')
-def toJobPosting():
-    return render_template('CompanyJobPosts.html')
-
-# Redirect to company view job post page
-@app.route('/toViewJobs')
-def toViewJobs():
-    return render_template('CompanyViewJobs.html')
 
 @app.route("/companyRegis", methods=['POST'])
 def comp_signup():
@@ -265,6 +256,19 @@ def comp_signin_page():
     return "Your login details are not correct lol"
 
 job = {}
+
+# Redirect to company job posting page
+@app.route('/toJobPosting')
+def toJobPosting():
+    company_log_id = request.args.get('company_id')
+    return render_template('CompanyJobPosts.html', company_log_id=company_log_id)
+
+# Redirect to company view job post page
+@app.route('/toViewJobs')
+def toViewJobs():
+    company_log_id = request.args.get('company_id')
+    return render_template('CompanyViewJobs.html', company_log_id=company_log_id)
+
 
 @app.route('/viewCompanyJobPost', methods=['GET'])
 def comp_view_job_page():
