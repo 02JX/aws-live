@@ -530,16 +530,20 @@ def validate_company():
 
     return render_template('ValidateCompany.html', pending_companies=pending_companies)
 
-# Route for displaying student assignments
-@app.route("/assignmentsDisplay", methods=['GET'])
-def display_assignments():
+# Route for displaying student assignments with details
+@app.route("/assignmentDisplay", methods=['GET'])
+def display_student_assignment():
     cursor = db_conn.cursor()
 
-    # Use a LEFT JOIN to include students with no assignments
+    # Fetch data from supervisorHandle and join with studentInformation and supervisorInformation
     cursor.execute("""
-        SELECT studentInformation.std_id, studentInformation.std_first_name, studentInformation.std_last_name, supervisorInformation.spv_name
-        FROM studentInformation
-        LEFT JOIN supervisorHandle ON studentInformation.std_id = supervisorHandle.std_id
+        SELECT 
+            supervisorHandle.std_id, 
+            studentInformation.std_first_name, 
+            studentInformation.std_last_name, 
+            COALESCE(supervisorInformation.spv_name, 'N/A') AS spv_name
+        FROM supervisorHandle
+        LEFT JOIN studentInformation ON supervisorHandle.std_id = studentInformation.std_id
         LEFT JOIN supervisorInformation ON supervisorHandle.spv_id = supervisorInformation.spv_id
     """)
 
@@ -547,6 +551,7 @@ def display_assignments():
     cursor.close()
 
     return render_template('DisplayStudentAssignment.html', assignments=assignments)
+
 
 
 @app.route("/assignStudents", methods=['GET', 'POST'])
@@ -578,7 +583,7 @@ def assign_students():
                 cursor.close()
 
             # Redirect to a confirmation page or another relevant page
-            return redirect('/assignmentsDisplay')
+            return redirect('/assignmentDisplay')
         else:
             return "Student cannot be assigned. Please check the student's status."
     
