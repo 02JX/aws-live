@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supervisor Login Page</title>
+	<title>Supervisor Login</title>
 </head>
-<body>
-    
-</body>
+<center>
+	<font color="black" size="4" style="font-family: avenir">
+
+		<h1 style="color: DodgerBlue">Supervisor Sign In</h1>
+
+		<body bgcolor="lightgrey">
+
+			<form action="/supervisorLogin" autocomplete="on" method = "GET" enctype="multipart/form-data">
+
+				Supervisor ID:<br> <input style="height:25px;font-size:14pt; color:grey;" type="number" name="spv_id" autofocus size="40"><br><br>
+				
+				Password:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="spv_pass"><br><br>
+
+		  		<button type="submit" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">SIGN IN</button>
+
+			</form>
+<a href="/toSupervisorRegister">Sign Up</a>
+		</body>
+
+	</font>
+</center>
 </html>
