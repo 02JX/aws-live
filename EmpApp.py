@@ -488,11 +488,22 @@ def validate_company():
 @app.route("/assignmentsDisplay", methods=['GET'])
 def display_assignments():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT studentInformation.std_id, studentInformation.std_first_name, studentInformation.std_last_name, supervisorInformation.spv_name FROM studentInformation LEFT JOIN supervisorHandle ON studentInformation.std_id = supervisorHandle.std_id LEFT JOIN supervisorInformation ON supervisorHandle.spv_id = supervisorInformation.spv_id")
+    cursor.execute("""
+        SELECT studentInformation.std_id, 
+               studentInformation.std_first_name, 
+               studentInformation.std_last_name, 
+               supervisorInformation.spv_name 
+        FROM studentInformation 
+        LEFT JOIN supervisorHandle 
+               ON studentInformation.std_id = supervisorHandle.std_id 
+        LEFT JOIN supervisorInformation 
+               ON supervisorHandle.spv_id = supervisorInformation.spv_id
+    """)
     assignments = cursor.fetchall()
     cursor.close()
 
     return render_template('DisplayStudentAssignment.html', assignments=assignments)
+
 
 @app.route("/assignStudents", methods=['GET', 'POST'])
 def assign_students():
