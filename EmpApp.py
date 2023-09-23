@@ -682,7 +682,7 @@ def supervisorregister():
 
 
 # Display Intern Application
-@app.route("/internData", methods=['GET'])
+@app.route("/tointernData", methods=['GET'])
 def intern_data():
     cursor = db_conn.cursor()
     cursor.execute("SELECT stf_id, stf_name FROM staffInformation")
