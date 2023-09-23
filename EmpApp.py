@@ -260,17 +260,17 @@ job = {}
 # Redirect to company job posting page
 @app.route('/toJobPosting')
 def toJobPosting():
-    company_log_id = request.args.get('company_id')
+    company_log_id = session.get('company_id')
     return render_template('CompanyJobPosts.html', company_log_id=company_log_id)
 
-# Redirect to company view job post page
-@app.route('/toViewJobs')
-def toViewJobs():
-    company_log_id = request.args.get('company_id')
-    return render_template('CompanyViewJobs.html', company_log_id=company_log_id)
+# # Redirect to company view job post page
+# @app.route('/toViewJobs')
+# def toViewJobs():
+#     company_log_id = session.get('company_id')
+#     return render_template('CompanyViewJobs.html', company_log_id=company_log_id)
 
 
-@app.route('/viewCompanyJobPost', methods=['GET'])
+@app.route('/toViewJobs', methods=['GET'])
 def comp_view_job_page():
     company_log_id = session.get('company_id')
 
