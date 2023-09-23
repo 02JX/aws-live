@@ -63,13 +63,15 @@
                 </table>
                 <!-- Company selection form -->
                 <form action="{{ url_for('approve_company') }}" method="post">
-                    <label for="company_select">Select a Company:</label>
-                    <select name="company_id" id="company_select" style="margin: 20px 0;">
-                        {% for company in pending_companies %}
-                        <option value="{{ company[0] }}">{{ company[1] }}</option>
-                        {% endfor %}
-                    </select>
                     <div>
+                        <label for="company_select">Select a Company:</label>
+                        <select name="company_id" id="company_select" style="margin: 20px 0;">
+                            {% for company in pending_companies %}
+                            <option value="{{ company[0] }}">{{ company[1] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div style="margin-top: 10px;">
                         <button type="submit" name="action" value="approve" class="btn btn-success">Approve</button>
                         <button type="submit" name="action" value="reject" class="btn btn-danger">Reject</button>
                     </div>
