@@ -64,13 +64,19 @@
 		<body bgcolor="lightgrey">
 
 			<h5>
-                Student ID:<br> {{ student_id }}
+                Student ID:<br> 
+                {{ student_id }}
+                <br>
             </h5>
 			
             <h5>
                 {% for stdInfor in stdInfor %}
 
-                First Name:<br> {{ stdInfor[0] }} 
+                First Name:<br>
+                 {{ stdInfor[0] }} 
+
+                <br>
+                <br>
 
                 Last Name:<br> {{ stdInfor[1] }}
                     {% endfor %}
@@ -102,29 +108,29 @@
 
 					
 			<form action="/studentprofile" autocomplete="on" method = "POST" enctype="multipart/form-data">  
-				<div>
-                    <h6>
+				<div style="margin-bottom: 20px;">
+                    <h5>
                         Please name your upload file with this format"yourname_CompanyAcceptanceLetter"
-                    </h6>
+                    </h5>
                     
-                    <h6>
+                    <h5>
                         Upload your Company Acceptance Letter and Parent Acknowledgement form here:
                         <br>
                         (This two file should combine in one pdf).
                         <br> 
                         <input type=file name="std_letter_A">
-                    </h6>
+                    </h5>
 
-                    <h6>
+                    <h5>
                         Upload your Internship Progress Report and Supervisor evaluation form here:
                         <br>
                         (This two file should combine in one pdf).
                         <br> 
                         <input type=file name="std_letter_B">
-                    </h6>
+                    </h5>
                     
                     
-					<button type="submit"  class="iq_link_1">Upload File</button><br><br>
+					<button type="submit" style="margin-top: 20px;" class="iq_link_1">Upload File</button><br><br>
 
 			  	</div>
 
