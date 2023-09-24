@@ -42,53 +42,56 @@
                     
                     <form method="POST" action="/filterJobStatus">
                         <input type="hidden" name="company_id" value="{{ company_log_id }}">
-                        <button class="iq_link_1"><a href="/toCompanyHomePage" style="color: white;">Back</a></button><br/>
+                        <button class="iq_link_1" style="margin-bottom: 20px;"><a href="/toCompanyHomePage" style="color: white;">Back</a></button><br/>
                         <button type="submit" name="status_filter" value="ACTIVE">Show ACTIVE Jobs</button>
                         <button type="submit" name="status_filter" value="INACTIVE">Show INACTIVE Jobs</button>
                     </form>
 
-                    <table border="1">
-                        <tr>
-                            <th>Job ID</th>
-                            <th>Job Name</th>
-                            <th>Job Description</th>
-                            <th>Job Status</th>
-                            <th>Change Status</th>
-                            <th>Related Files</th>
-                        </tr>
-                        {% for row in company_job_data %}
-                        <tr>
-                            <td>{{ row[1] }}</td>
-                            <td>{{ row[2] }}</td>
-                            <td>{{ row[3] }}</td>
-                            <td>{{ row[4] }}</td>
-                            <td>
-                                <form method="POST" action="/updateJobStatus">
-                                    <input type="hidden" name="job_id" value="{{ row[1] }}">
-                                    <input type="hidden" name="job_status" value="{{ row[4] }}">
-                                    <button type="submit">
-                                        {% if row[4] == 'ACTIVE' %}
-                                            Set INACTIVE
-                                        {% else %}
-                                            Set ACTIVE
-                                        {% endif %}
-                                    </button>
-                                </form>
-                            </td>
-                            <td> 
-                                <div style="display: flex; align-items: center;">
-                                    <!-- Display related file name -->
-                                    <span>{{ row[5] }}</span>
-                                    <!-- Download button -->
-                                    <form method="GET" action="/downloadJobFile">
-                                        <input type="hidden" name="job_file_name" value="{{ row[5] }}">
-                                        <button type="submit">Download</button>
+                    <div class="container" style="width: 80%;">
+                        <table border="1">
+                            <tr>
+                                <th>Job ID</th>
+                                <th>Job Name</th>
+                                <th>Job Description</th>
+                                <th>Job Status</th>
+                                <th>Change Status</th>
+                                <th>Related Files</th>
+                            </tr>
+                            {% for row in company_job_data %}
+                            <tr>
+                                <td>{{ row[1] }}</td>
+                                <td>{{ row[2] }}</td>
+                                <td>{{ row[3] }}</td>
+                                <td>{{ row[4] }}</td>
+                                <td>
+                                    <form method="POST" action="/updateJobStatus">
+                                        <input type="hidden" name="job_id" value="{{ row[1] }}">
+                                        <input type="hidden" name="job_status" value="{{ row[4] }}">
+                                        <button type="submit">
+                                            {% if row[4] == 'ACTIVE' %}
+                                                Set INACTIVE
+                                            {% else %}
+                                                Set ACTIVE
+                                            {% endif %}
+                                        </button>
                                     </form>
-                                </div>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </table>
+                                </td>
+                                <td> 
+                                    <div style="display: flex; align-items: center;">
+                                        <!-- Display related file name -->
+                                        <span>{{ row[5] }}</span>
+                                        <!-- Download button -->
+                                        <form method="GET" action="/downloadJobFile">
+                                            <input type="hidden" name="job_file_name" value="{{ row[5] }}">
+                                            <button type="submit">Download</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    
                 </font>
             </center>
         </body>

@@ -32,7 +32,7 @@
 	<link href="static/css/responsive.css" rel="stylesheet">
 </head>
 <center>
-	<div class="iq_wrapper">
+	<div class="iq_wrapper" style="margin-top: 20px; margin-bottom: 20px;">
 		<div class="container">
 			<font color="black" size="4" style="font-family: avenir">
 
@@ -60,14 +60,17 @@
 		
 					</form>
 					
-					<div>
+					<div style="margin-bottom: 20px;">
 						Not registered yet?&nbsp;
 						<strong>
-							<a href="{{url_for('toStdSignUp')}}"><button class="btn btn--primary btn--small u-fullwidth">SignUp here</button></a>
+							<a href="{{url_for('toStdSignUp')}}"><button class="iq_link_1">Sign Up here</button></a>
 						</strong>
 					</div>
-
-					<a href="/toHomePage" style="margin-bottom: 20px;">Go Back to Login Portal</a>
+					<br>
+					<div style="margin-bottom: 20px;">
+						<a href="/toHomePage">Go Back to Login Portal</a>
+					</div>
+					
 				</body>
 		
 			</font>
