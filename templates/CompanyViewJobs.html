@@ -47,7 +47,7 @@
                         <button type="submit" name="status_filter" value="INACTIVE">Show INACTIVE Jobs</button>
                     </form>
 
-                    <div class="container" style="width: 80%; font-size: small; margin-bottom: 20px;">
+                    <div class="container" style="font-size: small; margin-bottom: 20px;">
                         <table border="1">
                             <tr>
                                 <th>Job ID</th>
@@ -81,6 +81,7 @@
                                         <!-- Display related file name -->
                                         <span>{{ row[5] }}</span>
                                         <!-- Download button -->
+                                        &nbsp;
                                         <form method="GET" action="/downloadJobFile">
                                             <input type="hidden" name="job_file_name" value="{{ row[5] }}">
                                             <button type="submit">Download</button>
