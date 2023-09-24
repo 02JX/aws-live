@@ -43,8 +43,9 @@
                     <form method="POST" action="/filterJobStatus">
                         <input type="hidden" name="company_id" value="{{ company_log_id }}">
                         <button class="iq_link_1" style="margin-bottom: 20px;"><a href="/toCompanyHomePage" style="color: white;">Back</a></button><br/>
-                        <button type="submit" name="status_filter" value="ACTIVE">Show ACTIVE Jobs</button>
-                        <button type="submit" name="status_filter" value="INACTIVE">Show INACTIVE Jobs</button>
+                        <button type="submit" style="background-color: #3dec55;" name="status_filter" value="ACTIVE">Show ACTIVE Jobs</button>
+                        &nbsp;&nbsp;
+                        <button type="submit" style="background-color: #E3242B;" name="status_filter" value="INACTIVE">Show INACTIVE Jobs</button>
                     </form>
 
                     <div class="container" style="font-size: small; margin-bottom: 20px;">
@@ -81,7 +82,7 @@
                                         <!-- Display related file name -->
                                         <span>{{ row[5] }}</span>
                                         <!-- Download button -->
-                                        &nbsp;
+                                        &nbsp;&nbsp;
                                         <form method="GET" action="/downloadJobFile">
                                             <input type="hidden" name="job_file_name" value="{{ row[5] }}">
                                             <button type="submit">Download</button>
