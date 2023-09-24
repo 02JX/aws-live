@@ -57,62 +57,69 @@
         </style>
 </head>
 <center>
-	<font color="black" size="5" style="font-family: avenir">
+    <div class="iq_wrapper" style="margin-top: 20px; margin-bottom: 20px;">
+		<div class="container">
+            <font color="black" size="5" style="font-family: avenir">
 
-		<h1 style="color: DodgerBlue">Internship</h1>
-
-		<body bgcolor="lightgrey">
-
-			<form action="/std_homepage" autocomplete="on" method="POST">
-                <h4>{{student_id}} is logged in.</h4>
-
-                <div class="container" style="margin-top: 20px; align-items: center;">
-                    <h5 style="color: grey; margin-top: 10px;">Enter Company ID to Fetch info</h5>
-
-                    <h5>Company ID:</h5>
-
-                </div>
-                <div class="iq-input" style="width: 50%; align-items: center;">
-                    <input class="first_input" style="text-transform: none;" type="text" name="cmp_id">
-                </div>
-				<div style="margin-top: 10px;">
-                    <button type="submit" class="iq_link_1" style="color: white;">FETCH INFO</button><br><br>
-                </div>
-		  		
-			</form>
-
-            <table id="Company List" style="font-size: small;">
-                <thead>
-                    <tr>
-                        <th>Company ID</th>
-                        <th>Job ID</th>
-                        <th>Job Name</th>
-                        <th>Job Description</th>
-
-                    </tr>
-                    {% for jobName in jobName %}
-                    <tr>
-                        <td>{{jobName[0]}}</td>
-                        <td>{{jobName[1]}}</td>
-                        <td>{{jobName[2]}}</td>
-                        <td>{{jobName[3]}}</td>
-                        {% endfor %}
+                <h1 style="color: DodgerBlue">Internship</h1>
+        
+                <body bgcolor="lightgrey">
+        
+                    <form action="/std_homepage" autocomplete="on" method="POST">
+                        <div class="container">
+                            <h4>{{student_id}} is logged in.</h4>
+        
+                            <div class="container" style="margin-top: 20px; align-items: center;">
+                                <h5 style="color: grey; margin-top: 10px;">Enter Company ID to Fetch info</h5>
+        
+                                <h5>Company ID:</h5>
+        
+                            </div>
+                            <div class="iq-input" style="width: 50%; align-items: center;">
+                                <input class="first_input" style="text-transform: none;" type="text" name="cmp_id">
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <button type="submit" class="iq_link_1" style="color: white;">FETCH INFO</button><br><br>
+                            </div>
+                        </div>
                         
-                    </tr>
-                </thead>
-                <tbody id="showCompanyTable">
-                    <!-- Recorded data will be added here -->
-                </tbody>
-            </table>
-
-            <form action="/viewProfile" autocomplete="on" method="POST">
-
-		  		<button type="submit" class="iq_link_1" style="color: white;">Student Profile</button><br><br>
-
-			</form>
-
-		</body>
-	</font>
+                          
+                    </form>
+        
+                    <table id="Company List" style="font-size: small;">
+                        <thead>
+                            <tr>
+                                <th>Company ID</th>
+                                <th>Job ID</th>
+                                <th>Job Name</th>
+                                <th>Job Description</th>
+        
+                            </tr>
+                            {% for jobName in jobName %}
+                            <tr>
+                                <td>{{jobName[0]}}</td>
+                                <td>{{jobName[1]}}</td>
+                                <td>{{jobName[2]}}</td>
+                                <td>{{jobName[3]}}</td>
+                                {% endfor %}
+                                
+                            </tr>
+                        </thead>
+                        <tbody id="showCompanyTable">
+                            <!-- Recorded data will be added here -->
+                        </tbody>
+                    </table>
+        
+                    <form action="/viewProfile" autocomplete="on" method="POST">
+        
+                          <button type="submit" class="iq_link_1" style="color: white;">Student Profile</button><br><br>
+        
+                    </form>
+        
+                </body>
+            </font>
+        </div>
+    </div>
 </center>
 </html>
 
