@@ -63,18 +63,18 @@
 
 		<body bgcolor="lightgrey">
 
-			<h4>
-                Student ID:<br> {{ student_id }} <br><br>
-            </h4>
+			<h5>
+                Student ID:<br> {{ student_id }}
+            </h5>
 			
-            <h4>
-                {% for stdInfor in stdInfor %}<br><br>
+            <h5>
+                {% for stdInfor in stdInfor %}
 
-                First Name:<br> {{ stdInfor[0] }} <br><br>
+                First Name:<br> {{ stdInfor[0] }} 
 
-                Last Name:<br> {{ stdInfor[1] }} <br><br>
+                Last Name:<br> {{ stdInfor[1] }}
                     {% endfor %}
-            </h4>
+            </h5>
                     
 
 
@@ -103,25 +103,25 @@
 					
 			<form action="/studentprofile" autocomplete="on" method = "POST" enctype="multipart/form-data">  
 				<div>
-                    <p>
+                    <h6>
                         Please name your upload file with this format"yourname_CompanyAcceptanceLetter"
-                    </p>
+                    </h6>
                     
-                    <p>
+                    <h6>
                         Upload your Company Acceptance Letter and Parent Acknowledgement form here:
                         <br>
                         (This two file should combine in one pdf).
                         <br> 
-                        <input type=file name="std_letter_A" style="height:25px;font-size:14pt;color:grey;">
-                    </p>
+                        <input type=file name="std_letter_A">
+                    </h6>
 
-                    <p>
+                    <h6>
                         Upload your Internship Progress Report and Supervisor evaluation form here:
                         <br>
                         (This two file should combine in one pdf).
                         <br> 
-                        <input type=file name="std_letter_B" style="height:25px;font-size:14pt;color:grey;">
-                    </p>
+                        <input type=file name="std_letter_B">
+                    </h6>
                     
                     
 					<button type="submit"  class="iq_link_1">Upload File</button><br><br>
