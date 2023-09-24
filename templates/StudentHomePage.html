@@ -66,18 +66,21 @@
 			<form action="/std_homepage" autocomplete="on" method="POST">
                 <h4>{{student_id}} is logged in.</h4>
 
-				<h5 style="color: grey; margin-top: 10px;">Enter Company ID to Fetch info</h5>
-                <br><br>
+                <div>
+                    <h5 style="color: grey; margin-top: 10px;">Enter Company ID to Fetch info</h5>
 
-		  		Company ID:<br> 
-                
-                <div class="iq-input" style="width: 50%;">
-                    <input class="first_input" style="height:25px;font-size:14pt; text-transform: none;" type="text" name="cmp_id" autofocus size="40">
+                    <h5>Company ID:</h5>
+                    
+                    <div class="iq-input" style="width: 50%;">
+                        <input class="first_input" style="height:25px;font-size:14pt; text-transform: none;" type="text" name="cmp_id" autofocus size="40">
+                    </div>
+
+                    <div>
+                        <button type="submit" class="iq_link_1" style="height: 45px; width: 200px; color: white; size: 5;">FETCH INFO</button><br><br>
+                    </div>
                 </div>
-
-
-		  		<button type="submit" class="iq_link_1" style="height: 45px; width: 200px; color: white; size: 5;">FETCH INFO</button><br><br>
-
+				
+		  		
 			</form>
 
             <table id="Company List" style="font-size: small;">
